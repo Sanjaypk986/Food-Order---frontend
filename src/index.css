@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.primary-text{
+    color: #EB0029;
+}
+.primary-bg{
+    background-color: #EB0029;
+}
+.primary-bg:hover{
+    background-color: #dd1335;
+}

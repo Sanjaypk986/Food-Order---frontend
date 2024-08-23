@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import logo from "../assets/logo.png";
-import ThemeUi from "./ui/ThemeUi";
+import logo from "../../assets/logo.png"
+import ThemeUi from "../ui/ThemeUi";
+import { ShoppingBag } from "lucide-react";
 
-const Header = () => {
+const UserHeader = () => {
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -14,15 +15,32 @@ const Header = () => {
     <header>
       <nav className="py-2 px-2 border-gray-200 shadow-lg">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-          <Link to="/" className="flex items-center space-x-3 rtl:space-x-reverse">
+          <Link to="/" className="flex items-center gap-1">
             <img src={logo} className="h-10" alt="logo" />
-            <span className="self-center text-2xl font-bold whitespace-nowrap primary-text">
+            <span className="self-center text-xl sm:text-2xl font-bold whitespace-nowrap">
               Spicezy
             </span>
           </Link>
           <div className="relative flex items-center md:order-2 space-x-3 rtl:space-x-reverse">
-            <div className="hidden md:flex mr-6">
+            <div className="flex justify-center items-center gap-2 sm:gap-6">
+            <div className="hidden md:flex">
               <ThemeUi />
+            </div>
+            <ShoppingBag />
+            <button
+              type="button"
+              className="flex text-sm  bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300"
+              id="user-menu-button"
+              aria-expanded={isDropdownOpen}
+              onClick={toggleDropdown}
+            >
+              <span className="sr-only">Open user menu</span>
+              <img
+                className="w-8 h-8 rounded-full"
+                src="https://flowbite.com/docs/images/people/profile-picture-3.jpg"
+                alt="user photo"
+              />
+            </button>
             </div>
             {isDropdownOpen && (
               <div
@@ -68,42 +86,38 @@ const Header = () => {
             </button>
           </div>
           <div
-            className={`w-full items-center justify-center md:w-auto ${
+            className={`w-full md:w-auto ${
               isNavOpen ? "block" : "hidden"
             } md:block md:flex md:items-center`}
             id="navbar-user"
           >
-            <ul className="font-medium flex flex-col p-4 mt-4  rounded-lg md:flex-row gap-3 md:mt-0 md:border-0 md:bg-transparent">
+            <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-transparent">
               <li>
-                <Link to="/" className="block py-1 px-3 font-semibold primary-text relative after:absolute after:left-0 after:bottom-0 after:w-0 after:rounded after:h-[3px] after:bg-[#EB0029] after:transition-[width] after:duration-500 hover:after:w-full">
+                <Link to="/" className="block py-2 px-3 font-semibold rounded hover:bg-gray-100 md:p-0 primary-text">
                   Why Spicezy?
                 </Link>
               </li>
               <li>
-                <Link to="/order" className="relative block py-1 px-3 after:absolute after:left-0 after:bottom-0 after:w-0 after:rounded after:h-[3px] after:bg-[#EB0029] after:transition-[width] after:duration-500 hover:after:w-full">
+                <Link to="/order" className="block py-2 px-3 rounded hover:bg-gray-100 md:p-0">
                   Order Now
                 </Link>
               </li>
               <li>
-  <Link
-    to="/help"
-    className="relative block py-1 px-3 after:absolute after:left-0 after:bottom-0 after:w-0 after:rounded after:h-[3px] after:bg-[#EB0029] after:transition-[width] after:duration-500 hover:after:w-full"
-  >
-    Help
-  </Link>
-</li>
-
+                <Link to="/my-orders" className="block py-2 px-3 rounded hover:bg-gray-100 md:p-0">
+                  My Orders
+                </Link>
+              </li>
               <li>
-                <Link to="/contact" className="relative block py-1 px-3 after:absolute after:left-0 after:bottom-0 after:w-0 after:rounded after:h-[3px] after:bg-[#EB0029] after:transition-[width] after:duration-500 hover:after:w-full">
+                <Link to="/help" className="block py-2 px-3 rounded hover:bg-gray-100 md:p-0">
+                  Help
+                </Link>
+              </li>
+              <li>
+                <Link to="/contact" className="block py-2 px-3 rounded hover:bg-gray-100 md:p-0">
                   Contact
                 </Link>
-              </li >
-              <li>
-              <Link to="/signup" className="block text-center py-1 px-6 text-white font-semibold rounded-full primary-bg">
-              Signup
-              </Link>
               </li>
-              <li className="flex items-center justify-center md:hidden">
+              <li className="flex md:hidden">
                 <ThemeUi />
               </li>
             </ul>
@@ -114,4 +128,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default UserHeader;
