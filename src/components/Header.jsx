@@ -94,10 +94,10 @@ const Header = () => {
               </li>
               <li>
                 <Link
-                  to="/signup"
+                  to="/login"
                   className="block text-center py-1 px-6 text-white font-semibold rounded-full primary-bg"
                 >
-                  Signup
+                  Login
                 </Link>
               </li>
               <li className="flex items-center justify-center md:hidden">
