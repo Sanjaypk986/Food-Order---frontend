@@ -14,7 +14,10 @@ const Header = () => {
     <header>
       <nav className="py-2 px-2 border-gray-200 shadow-lg">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-          <Link to="/" className="flex items-center space-x-3 rtl:space-x-reverse">
+          <Link
+            to="/"
+            className="flex items-center space-x-3 rtl:space-x-reverse"
+          >
             <img src={logo} className="h-10" alt="logo" />
             <span className="self-center text-2xl font-bold whitespace-nowrap primary-text">
               Spicezy
@@ -24,24 +27,6 @@ const Header = () => {
             <div className="hidden md:flex mr-6">
               <ThemeUi />
             </div>
-            {isDropdownOpen && (
-              <div
-                className="absolute top-8 right-5 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg"
-                id="user-dropdown"
-              >
-                <div className="px-2 py-2">
-                  <span className="block text-sm text-gray-900">Bonnie Green</span>
-                  <span className="block text-sm text-gray-500 truncate">name@flowbite.com</span>
-                </div>
-                <ul className="py-2">
-                  <li>
-                    <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                      Logout
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            )}
             <button
               type="button"
               className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
@@ -75,33 +60,45 @@ const Header = () => {
           >
             <ul className="font-medium flex flex-col p-4 mt-4  rounded-lg md:flex-row gap-3 md:mt-0 md:border-0 md:bg-transparent">
               <li>
-                <Link to="/" className="block py-1 px-3 font-semibold primary-text relative after:absolute after:left-0 after:bottom-0 after:w-0 after:rounded after:h-[3px] after:bg-[#EB0029] after:transition-[width] after:duration-500 hover:after:w-full">
+                <Link
+                  to="/"
+                  className="block py-1 px-3 font-semibold primary-text relative after:absolute after:left-0 after:bottom-0 after:w-0 after:rounded after:h-[3px] after:bg-[#EB0029] after:transition-[width] after:duration-500 hover:after:w-full"
+                >
                   Why Spicezy?
                 </Link>
               </li>
               <li>
-                <Link to="/order" className="relative block py-1 px-3 after:absolute after:left-0 after:bottom-0 after:w-0 after:rounded after:h-[3px] after:bg-[#EB0029] after:transition-[width] after:duration-500 hover:after:w-full">
+                <Link
+                  to="/order-now"
+                  className="relative block py-1 px-3 after:absolute after:left-0 after:bottom-0 after:w-0 after:rounded after:h-[3px] after:bg-[#EB0029] after:transition-[width] after:duration-500 hover:after:w-full"
+                >
                   Order Now
                 </Link>
               </li>
               <li>
-  <Link
-    to="/help"
-    className="relative block py-1 px-3 after:absolute after:left-0 after:bottom-0 after:w-0 after:rounded after:h-[3px] after:bg-[#EB0029] after:transition-[width] after:duration-500 hover:after:w-full"
-  >
-    Help
-  </Link>
-</li>
+                <Link
+                  to="/help"
+                  className="relative block py-1 px-3 after:absolute after:left-0 after:bottom-0 after:w-0 after:rounded after:h-[3px] after:bg-[#EB0029] after:transition-[width] after:duration-500 hover:after:w-full"
+                >
+                  Help
+                </Link>
+              </li>
 
               <li>
-                <Link to="/contact" className="relative block py-1 px-3 after:absolute after:left-0 after:bottom-0 after:w-0 after:rounded after:h-[3px] after:bg-[#EB0029] after:transition-[width] after:duration-500 hover:after:w-full">
+                <Link
+                  to="/contact"
+                  className="relative block py-1 px-3 after:absolute after:left-0 after:bottom-0 after:w-0 after:rounded after:h-[3px] after:bg-[#EB0029] after:transition-[width] after:duration-500 hover:after:w-full"
+                >
                   Contact
                 </Link>
-              </li >
+              </li>
               <li>
-              <Link to="/signup" className="block text-center py-1 px-6 text-white font-semibold rounded-full primary-bg">
-              Signup
-              </Link>
+                <Link
+                  to="/signup"
+                  className="block text-center py-1 px-6 text-white font-semibold rounded-full primary-bg"
+                >
+                  Signup
+                </Link>
               </li>
               <li className="flex items-center justify-center md:hidden">
                 <ThemeUi />

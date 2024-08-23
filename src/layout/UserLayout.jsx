@@ -1,13 +1,12 @@
 import React from 'react'
 import Footer from '../components/Footer'
 import { Outlet } from 'react-router-dom'
-import Header from '../components/Header'
-import UserLayout from './UserLayout'
+import UserHeader from '../components/user/userHeader'
 
-const RootLayout = () => {
+const UserLayout = () => {
   return (
     <>
-    <UserLayout/>
+    <UserHeader />
     <div className='min-h-96'>
     <Outlet />
     </div>
@@ -16,4 +15,4 @@ const RootLayout = () => {
   )
 }
 
-export default RootLayout
+export default UserLayout
