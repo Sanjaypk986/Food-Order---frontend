@@ -18,65 +18,50 @@ export const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
-        path: "/",
+        path: "",
         element: <HomePage />,
       },
       {
-        path: "/order-now",
+        path: "order-now",
         element: < OrderNow/>,
       },
       {
-        path: "/order-now",
+        path: "order-now",
         element: < OrderNow/>,
       },
       {
-        path: "/help",
+        path: "help",
         element: <HelpPage/>,
       },
       {
-        path: "/contact",
+        path: "contact",
         element: <ContactPage/>,
       },
       {
-        path: "/signup",
+        path: "signup",
         element: <SignupPage/>,
       },
       {
-        path: "/login",
+        path: "login",
         element: <LoginPage/>,
       },
     ],
   },
   {
+    path :"user",
     element: <UserLayout />,
     errorElement: <ErrorPage />,
     children: [
       {
-        path: "/",
+        path: "",
         element: <HomePage />,
       },
       {
-        path: "/order-now",
-        element: < OrderNow/>,
-      },
-      {
-        path: "/order-now",
-        element: < OrderNow/>,
-      },
-      {
-        path: "/help",
-        element: <HelpPage/>,
-      },
-      {
-        path: "/contact",
-        element: <ContactPage/>,
-      },
-      {
-        path: "/my-orders",
+        path: "my-orders",
         element: <MyOrders/>,
       },
       {
-        path: "/cart",
+        path: "cart",
         element: <CartPage/>,
       },
     ],

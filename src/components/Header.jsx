@@ -12,7 +12,7 @@ const Header = () => {
 
   return (
     <header>
-      <nav className="py-2 px-2 border-gray-200 shadow-lg">
+      <nav className="px-2 border-gray-200 shadow-lg">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
           <Link
             to="/"

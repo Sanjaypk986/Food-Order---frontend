@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body{
+    font-family: "Poppins", system-ui;
+}
+
 .primary-text{
     color: #EB0029;
 }
@@ -11,3 +15,7 @@
 .primary-bg:hover{
     background-color: #dd1335;
 }
+/* .loginSection{
+    background-image: url('https://t3.ftcdn.net/jpg/01/92/18/30/360_F_192183071_p6rjtz3bJSC7lKeZyfRofJKKegf8DoGt.jpg');
+    
+} */

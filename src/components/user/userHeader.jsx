@@ -26,7 +26,7 @@ const UserHeader = () => {
             <div className="hidden md:flex">
               <ThemeUi />
             </div>
-            <Link to={'/cart'}>
+            <Link to={'/user/cart'}>
             <ShoppingBag />
             </Link>
             <button
@@ -36,7 +36,6 @@ const UserHeader = () => {
               aria-expanded={isDropdownOpen}
               onClick={toggleDropdown}
             >
-              <span className="sr-only">Open user menu</span>
               <img
                 className="w-8 h-8 rounded-full"
                 src="https://flowbite.com/docs/images/people/profile-picture-3.jpg"
@@ -69,7 +68,7 @@ const UserHeader = () => {
               aria-controls="navbar-user"
               aria-expanded={isNavOpen}
             >
-              <span className="sr-only">Open main menu</span>
+
               <svg
                 className="w-5 h-5"
                 aria-hidden="true"
@@ -105,7 +104,7 @@ const UserHeader = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/my-orders" className="block py-2 px-3 rounded hover:bg-gray-100 md:p-0">
+                <Link to="/user/my-orders" className="block py-2 px-3 rounded hover:bg-gray-100 md:p-0">
                   My Orders
                 </Link>
               </li>
