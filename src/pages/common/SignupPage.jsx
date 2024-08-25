@@ -15,9 +15,9 @@ const SignupPage = () => {
             </div>
             <div className="card bg-base-100 w-full max-w-2xl mx-auto shadow-2xl p-4">
               <SignupForm />
-              <p className="text-sm text-center mb-2 text-blue-500">
+              <p className="text-sm text-center my-2 text-blue-500">
                 Already have an account?{" "}
-                <Link className="primary-text" to={'/login'}>
+                <Link className="primary-text" to={"/login"}>
                   Login
                 </Link>
               </p>
