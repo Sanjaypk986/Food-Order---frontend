@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
+
 const SignupForm = () => {
   const navigate = useNavigate();
   const {
@@ -40,6 +41,7 @@ const SignupForm = () => {
           },
         }
       );
+      
       navigate("/user");
     } catch (error) {
       console.log("Error Message:", error);

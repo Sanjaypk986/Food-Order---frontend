@@ -10,6 +10,7 @@ import SignupPage from "../pages/common/SignupPage";
 import LoginPage from "../pages/common/LoginPage";
 import MyOrders from "../pages/user/myOrders";
 import CartPage from "../pages/user/cartPage";
+import UserAuth from "./proectedRoutes/userAuth";
 
 export const router = createBrowserRouter([
   {
@@ -23,30 +24,33 @@ export const router = createBrowserRouter([
       },
       {
         path: "order-now",
-        element: < OrderNow/>,
+        element: <OrderNow />,
       },
       {
         path: "help",
-        element: <HelpPage/>,
+        element: <HelpPage />,
       },
       {
         path: "contact",
-        element: <ContactPage/>,
+        element: <ContactPage />,
       },
       {
         path: "signup",
-        element: <SignupPage/>,
+        element: <SignupPage />,
       },
       {
         path: "login",
-        element: <LoginPage/>,
+        element: <LoginPage />,
       },
     ],
   },
   {
-    path :"user",
-    element: <UserLayout />,
-    errorElement: <ErrorPage />,
+    path: "user",
+    element: (
+      <UserAuth>
+        <UserLayout />
+      </UserAuth>
+    ),
     children: [
       {
         path: "",
@@ -54,23 +58,23 @@ export const router = createBrowserRouter([
       },
       {
         path: "my-orders",
-        element: <MyOrders/>,
+        element: <MyOrders />,
       },
       {
         path: "cart",
-        element: <CartPage/>,
+        element: <CartPage />,
       },
       {
         path: "order-now",
-        element: < OrderNow/>,
+        element: <OrderNow />,
       },
       {
         path: "help",
-        element: <HelpPage/>,
+        element: <HelpPage />,
       },
       {
         path: "contact",
-        element: <ContactPage/>,
+        element: <ContactPage />,
       },
     ],
   },

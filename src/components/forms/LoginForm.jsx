@@ -2,6 +2,8 @@ import axios from "axios";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import toast from 'react-hot-toast';
+import { userLogin } from "../../services/userApi";
 
 const LoginForm = () => {
   const navigate = useNavigate();
@@ -13,14 +15,12 @@ const LoginForm = () => {
 
   const onSubmit = async (data) => {
     try {
-      const response = await axios.post(
-        "http://localhost:4500/api/v1/user/login",
-        data,
-        { withCredentials: true }
-      );
+        const response = await userLogin(data)
+      toast.success('Login successfull')
       navigate("/user");
     } catch (error) {
       console.log(error);
+      toast.error('Login failed')
     }
   };
 
