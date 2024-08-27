@@ -6,11 +6,12 @@ import UserLayout from "../layout/UserLayout";
 import OrderNow from "../pages/common/OrderNow";
 import HelpPage from "../pages/common/helpPage";
 import ContactPage from "../pages/common/contactPage";
-import SignupPage from "../pages/common/SignupPage";
-import LoginPage from "../pages/common/LoginPage";
 import MyOrders from "../pages/user/myOrders";
 import CartPage from "../pages/user/cartPage";
 import UserAuth from "./proectedRoutes/userAuth";
+import SignupPage from "../pages/user/signupPage";
+import LoginPage from "../pages/user/loginPage";
+import LogoutPage from "../pages/user/LogoutPage";
 
 export const router = createBrowserRouter([
   {
@@ -75,6 +76,10 @@ export const router = createBrowserRouter([
       {
         path: "contact",
         element: <ContactPage />,
+      },
+      {
+        path: "logout",
+        element: <LogoutPage/>,
       },
     ],
   },
