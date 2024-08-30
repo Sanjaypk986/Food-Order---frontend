@@ -5,13 +5,13 @@ import UserHeader from '../components/user/userHeader'
 
 const UserLayout = () => {
   return (
-    <>
+    <div className="flex flex-col min-h-screen">
     <UserHeader />
-    <div className='min-h-96'>
-    <Outlet />
+    <div className="flex-grow">
+      <Outlet />
     </div>
     <Footer />
-    </>
+  </div>
   )
 }
 

@@ -1,5 +1,4 @@
-import axios from "axios";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import toast from 'react-hot-toast';
@@ -7,6 +6,7 @@ import { userLogin } from "../../services/userApi";
 
 const LoginForm = () => {
   const navigate = useNavigate();
+  const [loading,setLoading]=useState(false)
   const {
     register,
     handleSubmit,
@@ -15,14 +15,22 @@ const LoginForm = () => {
 
   const onSubmit = async (data) => {
     try {
-        const response = await userLogin(data)
-      toast.success('Login successfull')
+        setLoading(true)
+      const response = await userLogin(data);
+  
+      if (!response.success) {
+        throw new Error(response.message || "Login failed");
+      }
+      setLoading(false)
+      toast.success('Login successful');
       navigate("/user");
     } catch (error) {
+        setLoading(false)
       console.log(error);
-      toast.error('Login failed')
+      toast.error('Login failed');
     }
   };
+  
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="card-body">
@@ -80,7 +88,10 @@ const LoginForm = () => {
           type="submit"
           className="btn primary-bg text-white font-semibold"
         >
-          Login
+            {
+                loading?<span className="loading loading-dots loading-lg"></span>: "Login"
+            }
+          
         </button>
       </div>
     </form>
