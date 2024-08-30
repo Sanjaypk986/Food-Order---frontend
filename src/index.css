@@ -2,41 +2,37 @@
 @tailwind components;
 @tailwind utilities;
 
-body{
-    font-family: "Poppins", system-ui;
+body {
+  font-family: "Poppins", system-ui;
 }
 
-.primary-text{
-    color: #EB0029;
+.primary-text {
+  color: #eb0029;
 }
-.primary-bg{
-    background-color: #EB0029;
+.primary-bg {
+  background-color: #eb0029;
 }
-.primary-bg:hover{
-    background-color: #dd1335;
+.primary-bg:hover {
+  background-color: #dd1335;
 }
-.secondary-bg{
-    background-color: #ffff;
-    color: #EB0029;
-    border: 2px solid #EB0029;
+.secondary-bg {
+  background-color: #ffff;
+  color: #eb0029;
+  border: 2px solid #eb0029;
 }
-.secondary-bg:hover{
-    background-color: #f5f5f5;
-    border: 2px solid #EB0029;
-    
+.secondary-bg:hover {
+  background-color: #f5f5f5;
+  border: 2px solid #eb0029;
 }
 
-/* Define theme styles */
 [data-theme="light"] {
-    --text-color: #000; /* Example color for light mode */
-  }
-  
-  [data-theme="halloween"] {
-    --text-color: #fff; /* Example color for halloween mode */
-  }
-  
-  /* Use the variable in your styles */
-  h2 {
-    color: var(--text-color);
-  }
-  
+  --text-color: #333;
+}
+
+[data-theme="halloween"] {
+  --text-color: #f5f5f5;
+}
+
+h2,h3 {
+  color: var(--text-color);
+}
