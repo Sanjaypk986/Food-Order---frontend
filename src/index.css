@@ -15,7 +15,28 @@ body{
 .primary-bg:hover{
     background-color: #dd1335;
 }
-/* .loginSection{
-    background-image: url('https://t3.ftcdn.net/jpg/01/92/18/30/360_F_192183071_p6rjtz3bJSC7lKeZyfRofJKKegf8DoGt.jpg');
+.secondary-bg{
+    background-color: #ffff;
+    color: #EB0029;
+    border: 2px solid #EB0029;
+}
+.secondary-bg:hover{
+    background-color: #f5f5f5;
+    border: 2px solid #EB0029;
     
-} */
+}
+
+/* Define theme styles */
+[data-theme="light"] {
+    --text-color: #000; /* Example color for light mode */
+  }
+  
+  [data-theme="halloween"] {
+    --text-color: #fff; /* Example color for halloween mode */
+  }
+  
+  /* Use the variable in your styles */
+  h2 {
+    color: var(--text-color);
+  }
+  

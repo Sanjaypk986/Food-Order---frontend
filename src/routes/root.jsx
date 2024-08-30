@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import ErrorPage from "../error-page";
 import RootLayout from "../layout/rootLayout";
-import HomePage from "../pages/common/HomePage";
+import HomePage from "../pages/common/home/HomePage";
 import UserLayout from "../layout/UserLayout";
 import OrderNow from "../pages/common/OrderNow";
 import HelpPage from "../pages/common/helpPage";
