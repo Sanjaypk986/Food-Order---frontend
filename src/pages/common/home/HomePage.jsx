@@ -2,6 +2,7 @@ import React from "react";
 import Banner from "./Banner";
 import FoodItems from "./FoodItems";
 import TopRestaurants from "./TopRestaurants";
+import FoodCarousel from "./FoodCarousel";
 
 const HomePage = () => {
   return (
@@ -14,6 +15,9 @@ const HomePage = () => {
       </section>
       <section>
         <TopRestaurants />
+      </section>
+      <section>
+        <FoodCarousel />
       </section>
     </main>
   );
