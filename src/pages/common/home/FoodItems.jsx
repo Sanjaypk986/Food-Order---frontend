@@ -30,7 +30,7 @@ const foodItems = [
 const FoodItems = () => {
   return (
     <div className="p-4 md:p-8 mb-8 mt-8">
-      <h3 className="font-semibold text-2xl my-3">What's on your mind?</h3>
+      <h3 className="font-semibold text-2xl mb-5">What's on your mind?</h3>
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6">
         {foodItems.map((item, index) => (
           <div key={index} className="flex flex-col justify-center items-center gap-2">

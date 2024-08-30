@@ -5,13 +5,13 @@ import HomePage from "../pages/common/home/HomePage";
 import UserLayout from "../layout/UserLayout";
 import OrderNow from "../pages/common/OrderNow";
 import HelpPage from "../pages/common/helpPage";
-import ContactPage from "../pages/common/contactPage";
 import MyOrders from "../pages/user/myOrders";
 import CartPage from "../pages/user/cartPage";
 import UserAuth from "./proectedRoutes/userAuth";
 import SignupPage from "../pages/user/signupPage";
 import LoginPage from "../pages/user/loginPage";
 import LogoutPage from "../pages/user/LogoutPage";
+import ContactPage from "../pages/common/contactPage";
 
 export const router = createBrowserRouter([
   {
