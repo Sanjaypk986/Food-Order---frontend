@@ -33,9 +33,9 @@ const FoodItems = () => {
       <h3 className="font-semibold text-2xl mb-5">What's on your mind?</h3>
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6">
         {foodItems.map((item, index) => (
-          <div key={index} className="flex flex-col justify-center items-center gap-2">
+          <div key={index} className="flex flex-col justify-center items-center gap-2 ">
             <img
-              className="rounded-lg w-24 h-24 md:w-32 md:h-32 shadow-md"
+              className="rounded-lg w-24 h-24 md:w-32 md:h-32 shadow-md "
               src={item.src}
               alt={item.name}
             />

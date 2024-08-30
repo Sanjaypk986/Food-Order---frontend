@@ -2,7 +2,7 @@ import React from "react";
 import Banner from "./Banner";
 import FoodItems from "./FoodItems";
 import TopRestaurants from "./TopRestaurants";
-import FoodCarousel from "./FoodCarousel";
+import Features from "./Features";
 
 const HomePage = () => {
   return (
@@ -16,8 +16,8 @@ const HomePage = () => {
       <section>
         <TopRestaurants />
       </section>
-      <section>
-        <FoodCarousel />
+      <section className="my-10">
+    <Features />
       </section>
     </main>
   );
