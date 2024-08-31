@@ -12,6 +12,7 @@ import SignupPage from "../pages/user/signupPage";
 import LoginPage from "../pages/user/loginPage";
 import LogoutPage from "../pages/user/LogoutPage";
 import ContactPage from "../pages/common/contactPage";
+import FoodDetails,{loader as foodLoader} from "../pages/common/FoodDetails";
 
 export const router = createBrowserRouter([
   {
@@ -26,6 +27,11 @@ export const router = createBrowserRouter([
       {
         path: "order-now",
         element: <OrderNow />,
+      },
+      {
+        path: "order-now/:foodId",
+        element: <FoodDetails />,
+        loader : foodLoader
       },
       {
         path: "help",
@@ -68,6 +74,11 @@ export const router = createBrowserRouter([
       {
         path: "order-now",
         element: <OrderNow />,
+      },
+      {
+        path: "order-now/:foodId",
+        element: <FoodDetails />,
+        loader : foodLoader
       },
       {
         path: "help",

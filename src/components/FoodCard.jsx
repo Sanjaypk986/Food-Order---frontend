@@ -1,8 +1,10 @@
 import { IndianRupee } from "lucide-react";
 import React from "react";
+import { Link } from "react-router-dom";
 
 const FoodCard = ({foods}) => {
   return (
+    <Link to={`/order-now/${foods._id}`}>
     <div className="border border-gray-200 bg-white rounded-lg shadow-md p-4 grid grid-cols-2 gap-4">
       <img
         src={foods.image}
@@ -17,6 +19,7 @@ const FoodCard = ({foods}) => {
         <p className="text-lg font-semibold  primary-text">{foods.price} <span className="text-base text-gray-700">/ ₹</span></p>
       </div>
     </div>
+    </Link>
   );
 };
 
