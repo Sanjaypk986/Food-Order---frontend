@@ -17,7 +17,7 @@ const HomePage = () => {
         <TopRestaurants />
       </section>
       <section className="my-10">
-    <Features />
+        <Features />
       </section>
     </main>
   );
