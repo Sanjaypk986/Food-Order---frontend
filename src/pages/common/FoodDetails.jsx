@@ -15,11 +15,11 @@ const {food} = useLoaderData()
   return (
     <main className='container mx-auto p-4 md:p-8'>
       <section className=' rounded-lg shadow-lg my-8 p-6'>
-        <div className='flex flex-col md:flex-row md:space-x-8'>
+        <div className='flex flex-col lg:flex-row md:space-x-8'>
           <div className='flex-1 flex justify-center'>
             <img
-              className=' object-cover rounded-lg shadow-md'
-              src="http://res.cloudinary.com/du0bpdpzb/image/upload/v1723884281/xiduzeca7gsy2no93stx.avif"
+              className=' object-cover max-h-80 rounded-lg shadow-md md:mb-3'
+              src={food.image}
               alt="Food"
             />
           </div>
@@ -43,7 +43,7 @@ const {food} = useLoaderData()
       </section>
       <section className='mt-10 p-6'>
       <h2 className='text-2xl font-bold mb-4 text-center'>Restaurant Overview</h2>
-      <div className='relative bg-cover bg-center bg-gray-50 rounded-lg shadow-lg p-4 ' style={{ backgroundImage: "url('https://t3.ftcdn.net/jpg/03/24/73/92/360_F_324739203_keeq8udvv0P2h1MLYJ0GLSlTBagoXS48.jpg')" }}>
+      <div className='relative bg-cover bg-center bg-gray-50 rounded-lg shadow-lg p-4 ' style={{ backgroundImage: `url('${food.restaurant.image}')` }}>
   <div className='absolute inset-0 bg-black bg-opacity-40'></div>
   <div className='relative z-10 max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-md'>
     
@@ -51,7 +51,7 @@ const {food} = useLoaderData()
       <div className='md:col-span-1'>
         <img
           className='w-full h-48 object-cover rounded-lg shadow-md'
-          src="https://t3.ftcdn.net/jpg/03/24/73/92/360_F_324739203_keeq8udvv0P2h1MLYJ0GLSlTBagoXS48.jpg"
+          src={food.restaurant.image}
           alt="Restaurant"
         />
       </div>

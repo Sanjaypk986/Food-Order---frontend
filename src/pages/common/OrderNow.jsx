@@ -113,7 +113,7 @@ const OrderNow = () => {
             <option value="Non-veg">Non-veg</option>
             <option value="Kerala">Kerala</option>
             <option value="veg">Veg</option>
-            <option value="chineese">Chineese</option>
+            <option value="chinese">Chinese</option>
           </select>
         </div>
       </section>
