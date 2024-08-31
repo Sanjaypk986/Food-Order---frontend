@@ -16,7 +16,7 @@ const HomePage = () => {
       <section>
         <TopRestaurants />
       </section>
-      <section className="my-10">
+      <section className="my-10" id="why-spicezy">
         <Features />
       </section>
     </main>

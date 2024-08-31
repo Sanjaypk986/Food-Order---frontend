@@ -93,7 +93,7 @@ const UserHeader = () => {
           >
             <ul className="font-medium flex flex-col p-4 lg:p-0 mt-4 border rounded-lg lg:flex-row lg:space-x-8 lg:mt-0 lg:border-0 lg:bg-transparent">
               <li>
-                <Link to="/user" className="block py-2 px-3 font-semibold rounded hover:bg-gray-100 lg:p-0 primary-text">
+                <Link to="/#why-spicezy" className="block py-2 px-3 font-semibold rounded hover:bg-gray-100 lg:p-0 primary-text">
                   Why Spicezy?
                 </Link>
               </li>

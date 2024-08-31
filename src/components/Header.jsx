@@ -61,7 +61,7 @@ const Header = () => {
             <ul className="font-medium flex flex-col p-4 mt-4  rounded-lg md:flex-row gap-3 md:mt-0 md:border-0 md:bg-transparent">
               <li>
                 <Link
-                  to="/"
+                  to="/#why-spicezy"
                   className="block py-1 px-3 font-semibold primary-text relative after:absolute after:left-0 after:bottom-0 after:w-0 after:rounded after:h-[3px] after:bg-[#EB0029] after:transition-[width] after:duration-500 hover:after:w-full"
                 >
                   Why Spicezy?
