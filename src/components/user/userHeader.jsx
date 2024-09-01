@@ -1,17 +1,38 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import ThemeUi from "../ui/ThemeUi";
 import { ShoppingBag } from "lucide-react";
+import { useDispatch, useSelector } from "react-redux";
+import { userProfile } from "../../services/userApi";
+import { setUser } from "../../features/user/userSlice";
 
 const UserHeader = () => {
+    const dispatch = useDispatch()
+    const user = useSelector((state) => state.user.user);
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
+  useEffect(() => {
+   const fetchProfile = async ()=>{
+    try {
+        const response = await userProfile()       
+        dispatch(setUser(response.data))
+    } catch (error) {
+        console.log(error);
+        
+    }
+   }
+   fetchProfile()
+  }, [])
+  
+
   const toggleNav = () => setIsNavOpen(!isNavOpen);
   const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
+  
 
   return (
+
     <header>
       <nav className="py-2 px-2 border-gray-200 shadow-lg">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -38,7 +59,7 @@ const UserHeader = () => {
               >
                 <img
                   className="w-8 h-8 rounded-full"
-                  src="https://flowbite.com/docs/images/people/profile-picture-3.jpg"
+                  src={user.profilePic}
                   alt="user photo"
                 />
               </button>
@@ -49,8 +70,8 @@ const UserHeader = () => {
                 id="user-dropdown"
               >
                 <div className="px-2 py-2">
-                  <span className="block text-sm text-gray-900">Bonnie Green</span>
-                  <span className="block text-sm text-gray-500 truncate">name@flowbite.com</span>
+                  <span className="block text-sm text-gray-900">{user.name}</span>
+                  <span className="block text-sm text-gray-500 truncate">{user.email}</span>
                 </div>
                 <ul className="py-2">
                   <li>

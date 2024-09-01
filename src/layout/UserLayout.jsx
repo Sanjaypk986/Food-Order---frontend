@@ -3,9 +3,9 @@ import Footer from '../components/Footer'
 import { Outlet } from 'react-router-dom'
 import UserHeader from '../components/user/userHeader'
 import useSmoothScroll from '../hooks/scrollView'
-import useScrollToTop from '../hooks/scrollTop'
+import useScrollToTop from '../hooks/useScrollTop'
 
-const UserLayout = () => {
+const UserLayout = () => {  
     useScrollToTop();
     useSmoothScroll();
   return (

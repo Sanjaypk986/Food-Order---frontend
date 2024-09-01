@@ -1,12 +1,17 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import toast from 'react-hot-toast';
+import toast from "react-hot-toast";
 import { userLogin } from "../../services/userApi";
+import { useDispatch} from "react-redux";
+import { setUser } from "../../features/user/userSlice";
+
 
 const LoginForm = () => {
   const navigate = useNavigate();
-  const [loading,setLoading]=useState(false)
+  const dispatch = useDispatch();
+
+  const [loading, setLoading] = useState(false);
   const {
     register,
     handleSubmit,
@@ -15,22 +20,23 @@ const LoginForm = () => {
 
   const onSubmit = async (data) => {
     try {
-        setLoading(true)
+      setLoading(true);
       const response = await userLogin(data);
-  
+
       if (!response.success) {
         throw new Error(response.message || "Login failed");
       }
-      setLoading(false)
-      toast.success('Login successful');
+      
+      setLoading(false);
+      toast.success("Login successful");         
+      dispatch(setUser(response.data));
       navigate("/user");
     } catch (error) {
-        setLoading(false)
+      setLoading(false);
       console.log(error);
-      toast.error('Login failed');
+      toast.error("Login failed");
     }
   };
-  
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="card-body">
@@ -88,10 +94,11 @@ const LoginForm = () => {
           type="submit"
           className="btn primary-bg text-white font-semibold"
         >
-            {
-                loading?<span className="loading loading-dots loading-lg"></span>: "Login"
-            }
-          
+          {loading ? (
+            <span className="loading loading-dots loading-lg"></span>
+          ) : (
+            "Login"
+          )}
         </button>
       </div>
     </form>

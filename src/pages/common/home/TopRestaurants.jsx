@@ -2,14 +2,17 @@ import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import RestaurantCard from "../../../components/restaurant/RestaurantCard";
 import { fetchAllRestaurant } from "../../../services/restaurantApi";
+import { setAllRestaurants } from "../../../features/restaurant/restaurantSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const TopRestaurants = () => {
-  const [restaurants, setRestaurants] = useState([]);
+  const dispatch = useDispatch();
+  const restaurants = useSelector((state) => state.restaurant.data);
   useEffect(() => {
     const fetchRestaurants = async () => {
       try {
         const response = await fetchAllRestaurant();
-        setRestaurants(response.data);
+        dispatch(setAllRestaurants(response.data));
       } catch (error) {
         console.log(error);
       }

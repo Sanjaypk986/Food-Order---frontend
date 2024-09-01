@@ -3,13 +3,16 @@ import React, { useEffect, useState } from "react";
 import FoodCard from "../../components/FoodCard";
 import { fetchAllFoods, fetchFoodsBySearch } from "../../services/foodApi";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { setAllFoods } from "../../features/food/foodSlice";
 
 const OrderNow = () => {
   const [sortOption, setSortOption] = useState("");
   const [category, setCategory] = useState("");
   const [search, setSearch] = useState("");
-  const [foods, setFoods] = useState([]);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const foods = useSelector((state) => state.food.data);
 
   // Fetch foods based on parameters
   useEffect(() => {
@@ -18,10 +21,12 @@ const OrderNow = () => {
         if (sortOption || category || search) {
           const params = { sort: sortOption, category, search };
           const response = await fetchFoodsBySearch(params);
-          setFoods(response);
+          dispatch(setAllFoods(response));
+          
         } else {
           const response = await fetchAllFoods();
-          setFoods(response);
+          dispatch(setAllFoods(response));
+          
         }
       } catch (error) {
         console.log("Error fetching foods:", error.message);
