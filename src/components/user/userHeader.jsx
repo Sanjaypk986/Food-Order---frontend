@@ -93,27 +93,27 @@ const UserHeader = () => {
           >
             <ul className="font-medium flex flex-col p-4 lg:p-0 mt-4 border rounded-lg lg:flex-row lg:space-x-8 lg:mt-0 lg:border-0 lg:bg-transparent">
               <li>
-                <Link to="/#why-spicezy" className="block py-2 px-3 font-semibold rounded hover:bg-gray-100 lg:p-0 primary-text">
+                <Link to="/user/#why-spicezy" className="block py-1 px-3 font-semibold primary-text relative after:absolute after:left-0 after:bottom-0 after:w-0 after:rounded after:h-[3px] after:bg-[#EB0029] after:transition-[width] after:duration-500 hover:after:w-full">
                   Why Spicezy?
                 </Link>
               </li>
               <li>
-                <Link to="/user/order-now" className="block py-2 px-3 rounded hover:bg-gray-100 lg:p-0">
+                <Link to="/user/order-now" className="relative block py-1 px-3 after:absolute after:left-0 after:bottom-0 after:w-0 after:rounded after:h-[3px] after:bg-[#EB0029] after:transition-[width] after:duration-500 hover:after:w-full">
                   Order Now
                 </Link>
               </li>
               <li>
-                <Link to="/user/my-orders" className="block py-2 px-3 rounded hover:bg-gray-100 lg:p-0">
+                <Link to="/user/my-orders" className="relative block py-1 px-3 after:absolute after:left-0 after:bottom-0 after:w-0 after:rounded after:h-[3px] after:bg-[#EB0029] after:transition-[width] after:duration-500 hover:after:w-full">
                   My Orders
                 </Link>
               </li>
               <li>
-                <Link to="/user/help" className="block py-2 px-3 rounded hover:bg-gray-100 lg:p-0">
+                <Link to="/user/help" className="relative block py-1 px-3 after:absolute after:left-0 after:bottom-0 after:w-0 after:rounded after:h-[3px] after:bg-[#EB0029] after:transition-[width] after:duration-500 hover:after:w-full">
                   Help
                 </Link>
               </li>
               <li>
-                <Link to="/user/contact" className="block py-2 px-3 rounded hover:bg-gray-100 lg:p-0">
+                <Link to="/user/contact" className="relative block py-1 px-3 after:absolute after:left-0 after:bottom-0 after:w-0 after:rounded after:h-[3px] after:bg-[#EB0029] after:transition-[width] after:duration-500 hover:after:w-full">
                   Contact
                 </Link>
               </li>
