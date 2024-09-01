@@ -120,7 +120,7 @@ const OrderNow = () => {
 
       <section className="mt-8">
         {foods.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid lg:w-3/4 mx-auto grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {foods.map((food) => (
               <FoodCard key={food._id} foods={food} />
             ))}
