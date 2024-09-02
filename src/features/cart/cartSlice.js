@@ -9,7 +9,6 @@ export const cartSlice = createSlice({
   reducers: {
     // Action to set all cart in the state
     getCart: (state, action) => {
-        console.log('Action Payload:', action.payload); 
       // set items and total
       state.items = action.payload.items;
       state.total = action.payload.total;
@@ -22,13 +21,25 @@ export const cartSlice = createSlice({
         (total, item) => total + item.food.price * item.quantity,
         0
       );
-      console.log("Updated items:", state.items); // Log updated items
-  console.log("Updated total:", state.total);
     },
+    incrementItem: (state, action) => {
+        const item = state.items.find(item => item.food._id === action.payload);
+        if (item) {
+          item.quantity += 1;
+          state.total += item.food.price; // Update total price
+        }
+      },
+      decrementItem: (state, action) => {
+        const item = state.items.find(item => item.food._id === action.payload);
+        if (item && item.quantity > 1) {
+          item.quantity -= 1;
+          state.total -= item.food.price; // Update total price
+        }
+      }
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { getCart, removeItem } = cartSlice.actions;
+export const { getCart, removeItem , incrementItem , decrementItem } = cartSlice.actions;
 
 export default cartSlice.reducer;

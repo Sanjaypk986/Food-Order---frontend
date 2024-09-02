@@ -1,6 +1,15 @@
-import React from 'react';
+import React from "react";
 
-const CartCard = ({ item, onRemove }) => {
+const CartCard = ({ item, onRemove, onIncrement, onDecrement }) => {
+  const handleIncrement = () => {
+    const newQuantity = item.quantity + 1;
+    onIncrement(item.food._id, newQuantity);
+  };
+  const handleDecrement = () => {
+    const newQuantity = item.quantity - 1;
+    onDecrement(item.food._id, newQuantity);
+  };
+
   return (
     <div className="flex items-center justify-between border-b pb-4">
       <img
@@ -14,9 +23,19 @@ const CartCard = ({ item, onRemove }) => {
           ₹{item.food.price} x {item.quantity}
         </p>
         <div className="flex gap-2 mt-2">
-          <button className="px-2 py-1 border rounded">-</button>
+          <button
+            onClick={() => handleDecrement(item.food._id, item.quantity)}
+            className="px-2 py-1 border rounded"
+          >
+            -
+          </button>
           <span>{item.quantity}</span>
-          <button className="px-2 py-1 border rounded">+</button>
+          <button
+            onClick={() => handleIncrement(item.food._id, item.quantity)}
+            className="px-2 py-1 border rounded"
+          >
+            +
+          </button>
         </div>
       </div>
       <button
