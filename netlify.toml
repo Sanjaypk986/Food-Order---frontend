@@ -1,0 +1,11 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "16" # or the version your project requires
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
