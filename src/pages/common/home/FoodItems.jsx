@@ -13,7 +13,6 @@ const FoodItems = () => {
       try {
         const response = await fetchAllFoods();
         dispatch(setAllFoods(response));
-        console.log(response);
       } catch (error) {
         console.log(error);
       }
