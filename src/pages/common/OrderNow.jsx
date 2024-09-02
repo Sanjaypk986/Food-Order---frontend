@@ -13,7 +13,7 @@ const OrderNow = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const foods = useSelector((state) => state.food.data);
-
+  const user = useSelector((state) => state.user.user);
   // Fetch foods based on parameters
   useEffect(() => {
     const fetchFoods = async () => {
@@ -22,11 +22,11 @@ const OrderNow = () => {
           const params = { sort: sortOption, category, search };
           const response = await fetchFoodsBySearch(params);
           dispatch(setAllFoods(response));
-          
+
         } else {
           const response = await fetchAllFoods();
           dispatch(setAllFoods(response));
-          
+
         }
       } catch (error) {
         console.log("Error fetching foods:", error.message);
@@ -40,29 +40,55 @@ const OrderNow = () => {
   const handleSortChange = (e) => {
     const value = e.target.value;
     setSortOption(value);
-    navigate(`/order-now?search=${search}&category=${category}&sort=${value}`);
+    if (user) {
+        navigate(`/user/order-now?search=${search}&category=${category}&sort=${value}`);
+    }else{
+        navigate(`/order-now?search=${search}&category=${category}&sort=${value}`);
+    }
+    
   };
 
   const handleCategoryChange = (e) => {
     const value = e.target.value;
     setCategory(value);
-    navigate(
-      `/order-now?search=${search}&category=${value}&sort=${sortOption}`
-    );
+    if (user) {
+        navigate(
+            `/user/order-now?search=${search}&category=${value}&sort=${sortOption}`
+          );
+    } else {
+        navigate(
+            `/order-now?search=${search}&category=${value}&sort=${sortOption}`
+          );
+    }
+    
   };
 
   const handleSearchChange = (e) => {
     setSearch(e.target.value);
-    navigate(
-      `/order-now?search=${search}&category=${category}&sort=${sortOption}`
-    );
+    if (user) {
+        navigate(
+            `/user/order-now?search=${search}&category=${category}&sort=${sortOption}`
+          );
+    } else {
+        navigate(
+            `/order-now?search=${search}&category=${category}&sort=${sortOption}`
+          );
+    }
+    
   };
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
-    navigate(
-      `/order-now?search=${search}&category=${category}&sort=${sortOption}`
-    );
+    if (user) {
+        navigate(
+            `/user/order-now?search=${search}&category=${category}&sort=${sortOption}`
+          );
+    } else {
+        navigate(
+            `/order-now?search=${search}&category=${category}&sort=${sortOption}`
+          );
+    }
+    
   };
 
   return (

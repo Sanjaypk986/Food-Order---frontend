@@ -4,8 +4,12 @@ import { Link } from "react-router-dom";
 
 const FoodCard = ({ foods }) => {
     const user = useSelector((state) => state.user.user);
+    // Check if user is authenticated or not
+  const isUserLoggedIn = user && Object.keys(user).length > 0;
+
+    
   return (
-    <Link to={user?`/user/order-now/${foods._id}`:`/order-now/${foods._id}`} className="block w-full max-w-xs mx-auto">
+    <Link to={isUserLoggedIn?`/user/order-now/${foods._id}`:`/order-now/${foods._id}`} className="block w-full max-w-xs mx-auto">
       <div className="border border-gray-200 bg-white rounded-lg shadow-md p-4 flex flex-col items-center h-80">
         <img
           src={foods.image}

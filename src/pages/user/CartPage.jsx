@@ -25,7 +25,7 @@ const CartPage = () => {
     try {
       await removeCartItem(foodId);
       dispatch(removeItem(foodId));
-      // Refetch cart after removal
+      // Refetch cart after remove
       const response = await viewCartDetails();
       dispatch(getCart({ items: response.data.items, total: response.data.total }));
     } catch (error) {
@@ -45,7 +45,7 @@ const CartPage = () => {
             <div className="text-right">
               <p className="font-bold">Total: ₹{cartTotal}</p>
             </div>
-            <Link to="/checkout" className="bg-blue-500 text-white py-2 px-4 rounded text-center">
+            <Link to="/checkout" className="primary-bg font-semibold text-white py-2 px-4 rounded text-center">
               Proceed to Checkout
             </Link>
           </div>

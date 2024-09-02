@@ -21,7 +21,7 @@ const CartCard = ({ item, onRemove }) => {
       </div>
       <button
         onClick={() => onRemove(item.food._id)}
-        className="text-red-500 hover:underline"
+        className="primary-text hover:underline"
       >
         Remove
       </button>

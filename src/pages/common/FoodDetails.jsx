@@ -1,23 +1,36 @@
 import React from "react";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import { fetchFoodsById } from "../../services/foodApi";
 import { addToCart } from "../../services/cartApi";
 import toast from "react-hot-toast";
+import { useSelector } from "react-redux";
 
+// loader
 export async function loader({ params }) {
   const response = await fetchFoodsById(params.foodId);
   const food = response;
   return { food };
 }
+
 const FoodDetails = () => {
+    
+    const user = useSelector((state) => state.user.user);
+    const isUserLoggedIn = user && Object.keys(user).length > 0;
+    const navigate = useNavigate()
+
   const handleAddToCart = async (foodId) => {
     try {
-      const quantity = 1;
-      const response = await addToCart(foodId, quantity);
-      toast.success("Item added successfully");
-      console.log(response);
+        if (isUserLoggedIn) {
+            const quantity = 1;
+            const response = await addToCart(foodId, quantity);
+            toast.success(response.message);
+            console.log();
+        }else{
+            navigate('/login')
+        }
+     
     } catch (error) {
-      console.log(error);
+      console.log(error.message);
     }
   };
 
