@@ -1,17 +1,17 @@
 import { createBrowserRouter } from "react-router-dom";
 import ErrorPage from "../error-page";
-import RootLayout from "../layout/rootLayout";
+import RootLayout from "../layout/RootLayout";
 import HomePage from "../pages/common/home/HomePage";
 import UserLayout from "../layout/UserLayout";
 import OrderNow from "../pages/common/OrderNow";
-import HelpPage from "../pages/common/helpPage";
-import MyOrders from "../pages/user/myOrders";
-import CartPage from "../pages/user/cartPage";
-import UserAuth from "./proectedRoutes/userAuth";
-import SignupPage from "../pages/user/signupPage";
-import LoginPage from "../pages/user/loginPage";
+import HelpPage from "../pages/common/HelpPage";
+import MyOrders from "../pages/user/MyOrders";
+import CartPage from "../pages/user/CartPage";
+import UserAuth from "./proectedRoutes/UserAuth";
+import SignupPage from "../pages/user/SignupPage";
+import LoginPage from "../pages/user/LoginPage";
 import LogoutPage from "../pages/user/LogoutPage";
-import ContactPage from "../pages/common/contactPage";
+import ContactPage from "../pages/common/ContactPage";
 import FoodDetails,{loader as foodLoader} from "../pages/common/FoodDetails";
 
 export const router = createBrowserRouter([
