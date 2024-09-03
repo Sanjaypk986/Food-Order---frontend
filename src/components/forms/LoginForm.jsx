@@ -22,22 +22,22 @@ const LoginForm = () => {
     try {
       setLoading(true);
       const response = await userLogin(data);
+      console.log("Login response:", response); // Debug: Log response
 
       if (!response.success) {
         throw new Error(response.message || "Login failed");
       }
-      
+
       setLoading(false);
-      toast.success("Login successful");         
+      toast.success("Login successful");
       dispatch(setUser(response.data));
       navigate("/user");
     } catch (error) {
       setLoading(false);
-      console.log(error);
+      console.error("Login error:", error); // Debug: Log error
       toast.error("Login failed");
     }
   };
-
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="card-body">
       <div className="form-control">
