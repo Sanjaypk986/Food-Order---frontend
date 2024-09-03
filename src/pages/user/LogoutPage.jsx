@@ -2,15 +2,21 @@ import React, { useEffect } from "react";
 import { userLogout } from "../../services/userApi";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { resetUser } from "../../features/user/userSlice";
 
 const LogoutPage = () => {
-    const navigate = useNavigate()
+  const navigate = useNavigate();
+  const dispatch = useDispatch()
   useEffect(() => {
     const logOut = async () => {
       try {
         const response = await userLogout();
-        toast.success("Logout successfull");
-        navigate('/')
+        if (response.success) {
+          dispatch(resetUser()); // Clear the user state in Redux
+          toast.success("Logout successful");
+          navigate("/");
+        }
       } catch (error) {
         console.log(error);
       }
