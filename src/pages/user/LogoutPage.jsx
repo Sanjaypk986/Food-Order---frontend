@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import Cookies from "js-cookie";
 import { userLogout } from "../../services/userApi";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
@@ -8,22 +9,17 @@ import { resetUser } from "../../features/user/userSlice";
 const LogoutPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  
+
   useEffect(() => {
     const logOut = async () => {
       try {
         const response = await userLogout();
         console.log("Logout API response:", response);
 
-        if (response.success) {
-          // Debug: Log current cookies
-          console.log("Cookies before clearing:", document.cookie);
-          
-          document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
-          
-          // Debug: Log cookies after clearing
-          console.log("Cookies after clearing:", document.cookie);
-          
+        if (response.success) {         
+          // Clear cookie using js-cookie
+          Cookies.remove('token', { path: '/' });
+    
           dispatch(resetUser()); // Clear the user state in Redux
           toast.success("Logout successful");
           navigate("/");
