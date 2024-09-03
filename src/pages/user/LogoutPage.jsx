@@ -14,22 +14,28 @@ const LogoutPage = () => {
     const logOut = async () => {
       try {
         const response = await userLogout();
-        console.log("Logout API response:", response); // Debug: Log response
+        console.log("Logout API response:", response);
 
         if (response.success) {
-          // Clear cookie using js-cookie
-          Cookies.remove("token", { path: "/" });
-          console.log("Token cookie removed"); // Debug: Log cookie removal
+          // Check if the token cookie exists before attempting to remove it
+          const token = Cookies.get("token");
+          if (token) {
+            console.log("Token cookie before removal:", token);
+            // Clear cookie using js-cookie
+            Cookies.remove("token", { path: "/" });
+            console.log("Token cookie removed");
+          } else {
+            console.log("No token cookie to remove");
+          }
 
           dispatch(resetUser()); // Clear the user state in Redux
           toast.success("Logout successful");
           navigate("/");
         } else {
-          console.error("Logout failed:", response); // Debug: Log failure reason
           toast.error("Logout failed");
         }
       } catch (error) {
-        console.error("Logout error:", error); // Debug: Log error
+        console.error("Logout error:", error);
         toast.error("An error occurred during logout");
       }
     };
