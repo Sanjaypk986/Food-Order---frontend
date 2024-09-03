@@ -14,6 +14,7 @@ const OrderNow = () => {
   const dispatch = useDispatch();
   const foods = useSelector((state) => state.food.data);
   const user = useSelector((state) => state.user.user);
+  const isUserLoggedIn = user && Object.keys(user).length > 0;
   // Fetch foods based on parameters
   useEffect(() => {
     const fetchFoods = async () => {
@@ -40,7 +41,7 @@ const OrderNow = () => {
   const handleSortChange = (e) => {
     const value = e.target.value;
     setSortOption(value);
-    if (user) {
+    if (isUserLoggedIn) {
         navigate(`/user/order-now?search=${search}&category=${category}&sort=${value}`);
     }else{
         navigate(`/order-now?search=${search}&category=${category}&sort=${value}`);
@@ -51,7 +52,7 @@ const OrderNow = () => {
   const handleCategoryChange = (e) => {
     const value = e.target.value;
     setCategory(value);
-    if (user) {
+    if (isUserLoggedIn) {
         navigate(
             `/user/order-now?search=${search}&category=${value}&sort=${sortOption}`
           );
@@ -65,7 +66,7 @@ const OrderNow = () => {
 
   const handleSearchChange = (e) => {
     setSearch(e.target.value);
-    if (user) {
+    if (isUserLoggedIn) {
         navigate(
             `/user/order-now?search=${search}&category=${category}&sort=${sortOption}`
           );
@@ -79,7 +80,7 @@ const OrderNow = () => {
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
-    if (user) {
+    if (isUserLoggedIn) {
         navigate(
             `/user/order-now?search=${search}&category=${category}&sort=${sortOption}`
           );
