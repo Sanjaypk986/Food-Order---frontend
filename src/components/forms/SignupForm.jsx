@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import toast from "react-hot-toast";
+import { userCreate } from "../../services/userApi";
 
 const SignupForm = () => {
   const navigate = useNavigate();
@@ -19,48 +19,32 @@ const SignupForm = () => {
   const onSubmit = async (data) => {
     setLoading(true);
     const formData = new FormData();
-
-    // Append other form fields to the FormData object
+  
+    // Append form fields to the FormData object
     formData.append("name", data.name);
     formData.append("email", data.email);
     formData.append("mobile", data.mobile);
     formData.append("password", data.password);
     formData.append("confirmPassword", data.confirmPassword);
-
-    // Append file to the FormData object if it exists
+  
+    // Append file if it exists
     if (data.image && data.image[0]) {
       formData.append("userImage", data.image[0]);
     }
-
+  
     try {
-      const response = await axios.post(
-        "http://localhost:4500/api/v1/user/create",
-        formData,
-        {
-          withCredentials: true,
-          headers: {
-            "Content-Type": "multipart/form-data", // Ensure the Content-Type is correct for file uploads
-          },
-        }
-      );
+      const response = await userCreate(formData);
       setLoading(false);
-      if (response.data.success) {
-        // Show success message from the backend
-        toast.success(response.data.message || "Signup successful");
+      if (response.success) {
+        toast.success(response.message || "Signup successful");
         navigate("/user");
       } else {
-        // Show error message from the backend
-        toast.error(response.data.message || "Signup failed");
+        toast.error(response.message || "Signup failed");
       }
     } catch (error) {
       setLoading(false);
-      // Log error for debugging
       console.error(error);
-
-      const errorMessage = error.response
-        ? error.response.data.message
-        : "Signup failed";
-
+      const errorMessage = error.response ? error.response.data.message : "Signup failed";
       toast.error(errorMessage);
     }
   };
