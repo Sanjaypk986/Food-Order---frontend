@@ -25,14 +25,22 @@ body {
   background-color: #da8312;
 }
 
+/* Light Mode */
 [data-theme="light"] {
   --text-color: #333;
+  --food-card-bg-color: #F5F5F5; 
 }
 
+/* Dark Mode */
 [data-theme="halloween"] {
-  --text-color: #f5f5f5d0;
+  --text-color: #f5f5f5;
+  --food-card-bg-color: #2E2E2E; 
 }
 
-h2,h3,h5 {
+h2, h3, h5 {
   color: var(--text-color);
+}
+
+.food-card {
+  background-color: var(--food-card-bg-color);
 }

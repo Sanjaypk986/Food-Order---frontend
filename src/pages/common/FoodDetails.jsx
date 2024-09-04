@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import { fetchFoodsById } from "../../services/foodApi";
 import { addToCart } from "../../services/cartApi";
@@ -13,7 +13,7 @@ export async function loader({ params }) {
 }
 
 const FoodDetails = () => {
-    
+  const [loading, setLoading] = useState(false);
     const user = useSelector((state) => state.user.user);
     const isUserLoggedIn = user && Object.keys(user).length > 0;
     const navigate = useNavigate()
@@ -21,11 +21,14 @@ const FoodDetails = () => {
   const handleAddToCart = async (foodId) => {
     try {
         if (isUserLoggedIn) {
+          setLoading(true)
             const quantity = 1;
             const response = await addToCart(foodId, quantity);
+            setLoading(false)
             toast.success(response.message);
             console.log();
         }else{
+          setLoading(false)
             navigate('/login')
         }
      
@@ -37,7 +40,13 @@ const FoodDetails = () => {
   const { food } = useLoaderData();
   return (
     <main className="container mx-auto p-4 md:p-8">
-      <section className=" rounded-lg shadow-lg my-8 p-6">
+      <section className=" rounded-lg shadow md:my-10 p-8">
+      <button
+          onClick={() => navigate(-1)}
+          className="mb-4 text-primary hover:underline my-2"
+        >
+          &lt; Back
+        </button>
         <div className="flex flex-col lg:flex-row md:space-x-8">
           <div className="flex-1 flex justify-center">
             <img
@@ -62,7 +71,11 @@ const FoodDetails = () => {
                 onClick={() => handleAddToCart(food._id)}
                 className="secondary-bg  font-semibold text-white px-6 py-3 rounded-lg shadow-md  transition duration-300"
               >
-                Add to Cart
+                {loading ? (
+            <span className="loading loading-dots loading-md"></span>
+          ) : (
+            "Add to Cart"
+          )}
               </button>
               <button className="primary-bg  font-semibold text-white px-6 py-3 rounded-lg shadow-md  transition duration-300">
                 Buy Now

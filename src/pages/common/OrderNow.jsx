@@ -1,5 +1,5 @@
 import { Search } from "lucide-react";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import FoodCard from "../../components/FoodCard";
 import { fetchAllFoods, fetchFoodsBySearch } from "../../services/foodApi";
 import { useNavigate } from "react-router-dom";
@@ -10,96 +10,86 @@ const OrderNow = () => {
   const [sortOption, setSortOption] = useState("");
   const [category, setCategory] = useState("");
   const [search, setSearch] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [actionLoading, setActionLoading] = useState(false);
+  const [debouncedSearch, setDebouncedSearch] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const debounceTimeout = useRef(null);
   const foods = useSelector((state) => state.food.data);
   const user = useSelector((state) => state.user.user);
   const isUserLoggedIn = user && Object.keys(user).length > 0;
-  // Fetch foods based on parameters
+
   useEffect(() => {
     const fetchFoods = async () => {
+      setLoading(true);
       try {
-        if (sortOption || category || search) {
-          const params = { sort: sortOption, category, search };
-          const response = await fetchFoodsBySearch(params);
-          dispatch(setAllFoods(response));
-
-        } else {
-          const response = await fetchAllFoods();
-          dispatch(setAllFoods(response));
-
-        }
+        const params = {
+          sort: sortOption,
+          category,
+          search: debouncedSearch,
+        };
+        const response = await (sortOption || category || debouncedSearch
+          ? fetchFoodsBySearch(params)
+          : fetchAllFoods());
+        dispatch(setAllFoods(response));
       } catch (error) {
-        console.log("Error fetching foods:", error.message);
-        setFoods([]);
+        console.error("Error fetching foods:", error.message);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchFoods();
-  }, [sortOption, category, search]);
+  }, [sortOption, category, debouncedSearch, dispatch]);
+
+  const navigateWithParams = () => {
+    const basePath = isUserLoggedIn ? "/user/order-now" : "/order-now";
+    navigate(
+      `${basePath}?search=${search}&category=${category}&sort=${sortOption}`
+    );
+  };
 
   const handleSortChange = (e) => {
-    const value = e.target.value;
-    setSortOption(value);
-    if (isUserLoggedIn) {
-        navigate(`/user/order-now?search=${search}&category=${category}&sort=${value}`);
-    }else{
-        navigate(`/order-now?search=${search}&category=${category}&sort=${value}`);
-    }
-    
+    setSortOption(e.target.value);
+    navigateWithParams();
   };
 
   const handleCategoryChange = (e) => {
-    const value = e.target.value;
-    setCategory(value);
-    if (isUserLoggedIn) {
-        navigate(
-            `/user/order-now?search=${search}&category=${value}&sort=${sortOption}`
-          );
-    } else {
-        navigate(
-            `/order-now?search=${search}&category=${value}&sort=${sortOption}`
-          );
-    }
-    
+    setCategory(e.target.value);
+    navigateWithParams();
   };
 
   const handleSearchChange = (e) => {
     setSearch(e.target.value);
-    if (isUserLoggedIn) {
-        navigate(
-            `/user/order-now?search=${search}&category=${category}&sort=${sortOption}`
-          );
-    } else {
-        navigate(
-            `/order-now?search=${search}&category=${category}&sort=${sortOption}`
-          );
+    setActionLoading(true);
+
+    if (debounceTimeout.current) {
+      clearTimeout(debounceTimeout.current);
     }
-    
+
+    debounceTimeout.current = setTimeout(() => {
+      setDebouncedSearch(e.target.value);
+      setActionLoading(false);
+    }, 500); 
   };
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
-    if (isUserLoggedIn) {
-        navigate(
-            `/user/order-now?search=${search}&category=${category}&sort=${sortOption}`
-          );
-    } else {
-        navigate(
-            `/order-now?search=${search}&category=${category}&sort=${sortOption}`
-          );
-    }
-    
+    navigateWithParams();
   };
 
   return (
     <main className="p-4 md:p-8 container mx-auto">
+      {loading && (
+        <div className="flex justify-center items-center min-h-96">
+          <span className="loading loading-ring loading-lg"></span>
+          <p className="ml-4">Loading...</p>
+        </div>
+      )}
       <section>
         <div className="flex md:w-1/2 mx-auto items-center space-x-2 border border-gray-300 rounded-lg p-2">
-          <form
-            onSubmit={handleSearchSubmit}
-            className="flex w-full items-center space-x-2"
-          >
+          <form onSubmit={handleSearchSubmit} className="flex w-full items-center space-x-2">
             <input
               type="text"
               value={search}
@@ -116,9 +106,7 @@ const OrderNow = () => {
 
       <section className="mt-4 flex flex-wrap justify-between items-center md:w-1/2 mx-auto space-y-2 md:space-y-0">
         <div className="flex items-center space-x-2">
-          <label htmlFor="sort" className="text-sm font-semibold">
-            Sort by:
-          </label>
+          <label htmlFor="sort" className="text-sm font-semibold">Sort by:</label>
           <select
             id="sort"
             value={sortOption}
@@ -132,9 +120,7 @@ const OrderNow = () => {
         </div>
 
         <div className="flex items-center space-x-2">
-          <label htmlFor="category" className="text-sm font-semibold">
-            Category:
-          </label>
+          <label htmlFor="category" className="text-sm font-semibold">Category:</label>
           <select
             id="category"
             value={category}
@@ -150,17 +136,26 @@ const OrderNow = () => {
         </div>
       </section>
 
-      <section className="mt-8">
-        {foods.length > 0 ? (
-          <div className="grid lg:w-3/4 mx-auto grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {foods.map((food) => (
-              <FoodCard key={food._id} foods={food} />
-            ))}
-          </div>
-        ) : (
-          <div className="text-center text-gray-500">Food item not found.</div>
-        )}
-      </section>
+      {actionLoading && (
+        <div className="flex justify-center items-center my-8">
+          <span className="loading loading-ring loading-lg"></span>
+          <p className="ml-4">Items loading...</p>
+        </div>
+      )}
+
+      {!loading && (
+        <section className="mt-8">
+          {foods.length > 0 ? (
+            <div className="grid lg:w-3/4 mx-auto grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {foods?.map((food) => (
+                <FoodCard key={food._id} foods={food} />
+              ))}
+            </div>
+          ) : (
+            <div className="text-center text-gray-500">Food item not found.</div>
+          )}
+        </section>
+      )}
     </main>
   );
 };

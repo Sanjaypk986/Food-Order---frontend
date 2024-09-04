@@ -11,8 +11,8 @@ import UserAuth from "./proectedRoutes/UserAuth";
 import SignupPage from "../pages/user/SignupPage";
 import LoginPage from "../pages/user/LoginPage";
 import LogoutPage from "../pages/user/LogoutPage";
-import FoodDetails,{loader as foodLoader} from "../pages/common/FoodDetails";
-import ContactPage from './../pages/common/ContactPage';
+import FoodDetails, { loader as foodLoader } from "../pages/common/FoodDetails";
+import ContactPage from "./../pages/common/ContactPage";
 
 export const router = createBrowserRouter([
   {
@@ -31,7 +31,7 @@ export const router = createBrowserRouter([
       {
         path: "order-now/:foodId",
         element: <FoodDetails />,
-        loader : foodLoader
+        loader: foodLoader,
       },
       {
         path: "help",
@@ -78,7 +78,7 @@ export const router = createBrowserRouter([
       {
         path: "order-now/:foodId",
         element: <FoodDetails />,
-        loader : foodLoader
+        loader: foodLoader,
       },
       {
         path: "help",
@@ -90,7 +90,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "logout",
-        element: <LogoutPage/>,
+        element: <LogoutPage />,
       },
     ],
   },

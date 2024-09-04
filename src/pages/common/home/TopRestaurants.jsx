@@ -51,7 +51,7 @@ const TopRestaurants = () => {
     <div className="p-4 md:p-8 mb-8 mt-8">
       <h3 className="font-semibold text-2xl mb-5">Top Restaurants</h3>
       <Slider {...settings}>
-        {restaurants.map((restaurant, index) => (
+        {restaurants?.map((restaurant, index) => (
           <div key={index} className="px-2">
             <RestaurantCard
               image={restaurant.image}

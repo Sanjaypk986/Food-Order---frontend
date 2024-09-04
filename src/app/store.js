@@ -3,6 +3,8 @@ import foodReducer from "../features/food/foodSlice";
 import restaurantReducer from "../features/restaurant/restaurantSlice";
 import userReducer from "../features/user/userSlice";
 import cartReducer from "../features/cart/cartSlice";
+import ordersSlice from "../features/order/ordersSlice";
+
 
 export default configureStore({
   reducer: {
@@ -10,5 +12,6 @@ export default configureStore({
     restaurant: restaurantReducer,
     user: userReducer,
     cart: cartReducer,
+    order: ordersSlice
   },
 });

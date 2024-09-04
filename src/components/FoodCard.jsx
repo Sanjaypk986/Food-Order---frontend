@@ -10,7 +10,7 @@ const FoodCard = ({ foods }) => {
     
   return (
     <Link to={isUserLoggedIn?`/user/order-now/${foods._id}`:`/order-now/${foods._id}`} className="block w-full max-w-xs mx-auto">
-      <div className="border border-gray-200 bg-white rounded-lg shadow-md p-4 flex flex-col items-center h-80">
+      <div className="border border-gray-200 food-card rounded-lg shadow-md p-4 flex flex-col items-center h-80">
         <img
           src={foods.image}
           alt="food"
@@ -18,11 +18,11 @@ const FoodCard = ({ foods }) => {
         />
 
         <div className="flex flex-col justify-center items-center mt-4 text-center">
-          <h4 className="text-md sm:text-lg font-semibold text-gray-800 mb-1">{foods.name}</h4>
-          <p className="text-sm text-gray-500 mb-1">{foods.category[0]} , {foods.category[1]}</p>
-          <p className="text-sm text-gray-700 mb-2">{foods.restaurant.name}</p>
+          <h4 className="text-md sm:text-lg font-semibold  mb-1">{foods.name}</h4>
+          <p className="text-sm  mb-1">{foods.category[0]} , {foods.category[1]}</p>
+          <p className="text-sm  mb-2">{foods.restaurant.name}</p>
           <p className="text-lg font-semibold primary-text">
-            {foods.price} <span className="text-base text-gray-700">/ ₹</span>
+            {foods.price} <span className="text-base ">/ ₹</span>
           </p>
         </div>
       </div>

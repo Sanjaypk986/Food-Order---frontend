@@ -31,7 +31,7 @@ const FoodItems = () => {
     <div className="p-4 md:p-8 mb-8 mt-8">
       <h3 className="font-semibold text-2xl mb-5">What's on your mind?</h3>
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6">
-        {foods.map((food) => (
+        {foods?.map((food) => (
           <div
             key={food._id}
             className="flex flex-col shadow-lg justify-center items-center gap-2 "
