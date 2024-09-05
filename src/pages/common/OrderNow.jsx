@@ -81,12 +81,6 @@ const OrderNow = () => {
 
   return (
     <main className="p-4 md:p-8 container mx-auto">
-      {loading && (
-        <div className="flex justify-center items-center min-h-96">
-          <span className="loading loading-ring loading-lg"></span>
-          <p className="ml-4">Loading...</p>
-        </div>
-      )}
       <section>
         <div className="flex md:w-1/2 mx-auto items-center space-x-2 border border-gray-300 rounded-lg p-2">
           <form onSubmit={handleSearchSubmit} className="flex w-full items-center space-x-2">
@@ -135,7 +129,6 @@ const OrderNow = () => {
           </select>
         </div>
       </section>
-
       {actionLoading && (
         <div className="flex justify-center items-center my-8">
           <span className="loading loading-ring loading-lg"></span>
@@ -143,7 +136,7 @@ const OrderNow = () => {
         </div>
       )}
 
-      {!loading && (
+      {!loading ? (
         <section className="mt-8">
           {foods.length > 0 ? (
             <div className="grid lg:w-3/4 mx-auto grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -155,6 +148,11 @@ const OrderNow = () => {
             <div className="text-center text-gray-500">Food item not found.</div>
           )}
         </section>
+      ):(
+        <div className="flex justify-center items-center my-8">
+          <span className="loading loading-ring loading-lg"></span>
+          <p className="ml-4">loading...</p>
+        </div>
       )}
     </main>
   );
