@@ -8,6 +8,8 @@ const FoodItems = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const foods = useSelector((state) => state.food.data);
+  const user = useSelector((state) => state.user.user);
+  const isUserLoggedIn = user && Object.keys(user).length > 0;
   useEffect(() => {
     const fetchFoodSearch = async () => {
       try {
@@ -23,7 +25,10 @@ const FoodItems = () => {
   const handleSearch = (name) => {
     const searchParams = new URLSearchParams();
     searchParams.set("search", name);
-    const url = `/order-now?${searchParams.toString()}`;
+    const url = isUserLoggedIn
+      ? `/user/order-now?${searchParams.toString()}`
+      : `/order-now?${searchParams.toString()}`;
+
     navigate(url);
   };
 

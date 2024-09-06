@@ -19,23 +19,25 @@ import EmptyCart from "./EmptyCart";
 
 const CartPage = () => {
   const dispatch = useDispatch();
+  const address = useSelector((state) => state.address.data);
+  console.log(address);
+
   const { items: cartItems, total: cartTotal } = useSelector(
     (state) => state.cart
   );
   const [loading, setLoading] = useState(false);
   const [actionLoading, setActionLoading] = useState(false); // For actions like remove, increment, decrement
-  const [appliedCoupon, setAppliedCoupon] = useState(null);
+  const [appliedCoupon, setAppliedCoupon] = useState(false);
 
   useEffect(() => {
     const fetchCart = async () => {
       try {
         setLoading(true);
         const response = await viewCartDetails();
-        console.log(response.data.items);
         dispatch(
           getCart({ items: response.data.items, total: response.data.total })
         );
-        setAppliedCoupon(response.data.appliedCoupon); // Update applied coupon
+        setAppliedCoupon(response.data.couponApplied); // Update applied coupon
         setLoading(false);
       } catch (error) {
         console.error("Error fetching cart:", error);
@@ -84,21 +86,6 @@ const CartPage = () => {
     }
   };
 
-  const handleRemoveCoupon = async () => {
-    try {
-      // Call your API to remove the coupon from the cart
-      const response = await removeCoupon(); 
-
-      
-      dispatch(getCart({ items: response.data.items, total: response.data.total }));
-      setAppliedCoupon(null);
-      toast.success("Coupon removed successfully!");
-    } catch (error) {
-      console.error("Error removing coupon:", error);
-      toast.error("Failed to remove coupon.");
-    }
-  };
-
   if (loading) {
     return (
       <main className="flex justify-center items-center min-h-96">
@@ -134,29 +121,25 @@ const CartPage = () => {
               <AddressPage />
 
               {/* coupon section  */}
-              <CouponSection />
-
-              {/* Remove coupon button */}
-              {appliedCoupon && (
-                <button
-                  type="button"
-                  onClick={handleRemoveCoupon}
-                  className="secondary-bg font-semibold text-white py-2 px-4 rounded mt-4"
-                >
-                  Remove Applied Coupon
-                </button>
-              )}
+              <CouponSection
+                isCouponApplied={appliedCoupon}
+                setIsCouponApplied={setAppliedCoupon}
+              />
 
               {/* total amount section */}
               <div className="text-right">
                 <p className="font-bold">Total: ₹{cartTotal}</p>
               </div>
-              <Link
-                to="/user/cart/check-out"
-                className="primary-bg font-semibold text-white py-2 px-4 rounded text-center"
-              >
-                Proceed to Checkout
-              </Link>
+              {address ? (
+                <Link
+                  to="/user/cart/check-out"
+                  className="primary-bg font-semibold text-white py-2 px-4 rounded text-center"
+                >
+                  Proceed to Checkout
+                </Link>
+              ):
+              <span className="text-red-600 text-center">Add address to continue</span>
+              }
             </div>
           )}
         </section>
