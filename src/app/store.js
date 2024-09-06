@@ -4,6 +4,7 @@ import restaurantReducer from "../features/restaurant/restaurantSlice";
 import userReducer from "../features/user/userSlice";
 import cartReducer from "../features/cart/cartSlice";
 import ordersSlice from "../features/order/ordersSlice";
+import addressSlice from "../features/address/addressSlice";
 
 
 export default configureStore({
@@ -12,6 +13,7 @@ export default configureStore({
     restaurant: restaurantReducer,
     user: userReducer,
     cart: cartReducer,
-    order: ordersSlice
+    order: ordersSlice,
+    address: addressSlice
   },
 });

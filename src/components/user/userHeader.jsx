@@ -6,6 +6,7 @@ import { ShoppingBag } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { userProfile } from "../../services/userApi";
 import { setUser } from "../../features/user/userSlice";
+import { setAddress } from "../../features/address/addressSlice";
 
 const UserHeader = () => {
     const dispatch = useDispatch()
@@ -17,7 +18,8 @@ const UserHeader = () => {
    const fetchProfile = async ()=>{
     try {
         const response = await userProfile()       
-        dispatch(setUser(response.data))
+        dispatch(setUser(response.data))   
+        dispatch(setAddress(response.data.address))
     } catch (error) {
         console.log(error);
         
