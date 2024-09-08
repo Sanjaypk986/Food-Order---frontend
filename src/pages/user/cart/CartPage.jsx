@@ -16,15 +16,20 @@ import {
 import CouponSection from "./CouponSection";
 import AddressPage from "./AddressPage";
 import EmptyCart from "./EmptyCart";
+import { loadStripe } from "@stripe/stripe-js";
+import { axiosInstance } from "../../../config/axiosInstance";
+
+
 
 const CartPage = () => {
   const dispatch = useDispatch();
   const address = useSelector((state) => state.address.data);
-  console.log(address);
 
   const { items: cartItems, total: cartTotal } = useSelector(
     (state) => state.cart
   );
+
+  
   const [loading, setLoading] = useState(false);
   const [actionLoading, setActionLoading] = useState(false); // For actions like remove, increment, decrement
   const [appliedCoupon, setAppliedCoupon] = useState(false);
@@ -86,6 +91,27 @@ const CartPage = () => {
     }
   };
 
+ const makePayment = async() => {
+  try {
+    // created instance with stripe
+    const stripe = await loadStripe(import.meta.env.VITE_STRIPE_publishable_key);
+    // backend request
+    const response = await axiosInstance.post('/payment/create-checkout-session', {
+      cartItems: cartItems,
+      cartTotal: cartTotal, 
+    });
+
+    const sessionId = response?.data?.sessionId;
+    // Redirect to Stripe payment page
+    const result = await stripe.redirectToCheckout({
+      sessionId: sessionId,
+    });
+  } catch (error) {
+    console.log(error);
+    
+  }
+ }
+
   if (loading) {
     return (
       <main className="flex justify-center items-center min-h-96">
@@ -131,12 +157,12 @@ const CartPage = () => {
                 <p className="font-bold">Total: ₹{cartTotal}</p>
               </div>
               {address ? (
-                <Link
-                  to="/user/cart/check-out"
+                <button
+                  onClick={makePayment}
                   className="primary-bg font-semibold text-white py-2 px-4 rounded text-center"
                 >
                   Proceed to Checkout
-                </Link>
+                </button>
               ):
               <span className="text-red-600 text-center">Add address to continue</span>
               }

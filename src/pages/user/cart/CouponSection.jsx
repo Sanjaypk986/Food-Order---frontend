@@ -10,8 +10,6 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { getCart } from "../../../features/cart/cartSlice";
 
-
-
 const CouponSection = ({ isCouponApplied, setIsCouponApplied }) => {
   const { register, handleSubmit, setValue } = useForm();
   const dispatch = useDispatch();
@@ -19,12 +17,12 @@ const CouponSection = ({ isCouponApplied, setIsCouponApplied }) => {
     (state) => state.cart
   );
   const [appliedCoupon, setAppliedCoupon] = useState(null);
-
+  const [loading, setLoading] = useState(false);
 
   const onSubmit = async (data) => {
     try {
       const response = await applyCoupon(data);
-
+      setLoading(true);
       if (response.success) {
         // Only update the total amount with the coupon discount
         dispatch(
@@ -35,9 +33,11 @@ const CouponSection = ({ isCouponApplied, setIsCouponApplied }) => {
         );
         setIsCouponApplied(true);
         setAppliedCoupon(data.code); // Set the applied coupon
+        setLoading(false);
         toast.success(response.message || "Coupon applied successfully!");
       } else {
         toast.error(response.message || "Failed to apply coupon.");
+        setLoading(false);
       }
     } catch (error) {
       console.log(error);
@@ -91,7 +91,11 @@ const CouponSection = ({ isCouponApplied, setIsCouponApplied }) => {
           type="submit"
           className="secondary-bg font-semibold text-white py-2 px-2 rounded"
         >
-          Apply Coupon
+          {loading ? (
+            <span className="loading loading-dots loading-md"></span>
+          ) : (
+            "Apply Coupon"
+          )}
         </button>
       </form>
 

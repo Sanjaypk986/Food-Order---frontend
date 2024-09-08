@@ -6,14 +6,15 @@ import UserLayout from "../layout/UserLayout";
 import OrderNow from "../pages/common/OrderNow";
 import HelpPage from "../pages/common/HelpPage";
 import MyOrders from "../pages/user/MyOrders";
-import CartPage from "../pages/user/cart/CartPage";
 import UserAuth from "./proectedRoutes/UserAuth";
 import SignupPage from "../pages/user/SignupPage";
 import LoginPage from "../pages/user/LoginPage";
 import LogoutPage from "../pages/user/LogoutPage";
 import FoodDetails, { loader as foodLoader } from "../pages/common/FoodDetails";
-import ContactPage from "./../pages/common/ContactPage";
-import CheckOutPage from "../pages/user/CheckOutPage";
+import CartPage from "../pages/user/cart/CartPage";
+import ContactPage from "../pages/common/ContactPage";
+import PaymentSuccess from "../pages/user/PaymentSuccess";
+import PaymentCancel from "../pages/user/PaymentCancel";
 
 export const router = createBrowserRouter([
   {
@@ -73,10 +74,6 @@ export const router = createBrowserRouter([
         element: <CartPage />,
       },
       {
-        path: "cart/check-out",
-        element: <CheckOutPage />,
-      },
-      {
         path: "order-now",
         element: <OrderNow />,
       },
@@ -96,6 +93,14 @@ export const router = createBrowserRouter([
       {
         path: "logout",
         element: <LogoutPage />,
+      },
+      {
+        path: "payment/success",
+        element: <PaymentSuccess />,
+      },
+      {
+        path: "payment/cancel",
+        element: <PaymentCancel/>,
       },
     ],
   },
