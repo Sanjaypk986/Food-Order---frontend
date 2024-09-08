@@ -92,8 +92,8 @@ const CartPage = () => {
   };
 
  const makePayment = async() => {
+  console.log(import.meta.env.VITE_STRIPE_publishable_key);
   try {
-    console.log(VITE_STRIPE_publishable_key);
     
     // created instance with stripe
     const stripe = await loadStripe(import.meta.env.VITE_STRIPE_publishable_key);
