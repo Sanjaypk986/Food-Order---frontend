@@ -10,7 +10,7 @@ const PaymentSuccess = () => {
     const fetchCreateOrder = async () => {
       try {
         const response = await addToOrder();
-        // navigate('/user/my-orders');
+        navigate('/user/my-orders');
       } catch (error) {
         console.log(error);
       }

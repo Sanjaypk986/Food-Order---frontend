@@ -92,7 +92,6 @@ const CartPage = () => {
   };
 
  const makePayment = async() => {
-  console.log(import.meta.env.VITE_STRIPE_publishable_key);
   try {
     
     // created instance with stripe
