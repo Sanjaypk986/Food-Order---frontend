@@ -18,6 +18,7 @@ import AddressPage from "./AddressPage";
 import EmptyCart from "./EmptyCart";
 import { loadStripe } from "@stripe/stripe-js";
 import { axiosInstance } from "../../../config/axiosInstance";
+import toast from "react-hot-toast";
 
 
 
@@ -28,7 +29,8 @@ const CartPage = () => {
   const { items: cartItems, total: cartTotal } = useSelector(
     (state) => state.cart
   );
-
+  console.log(cartItems);
+  
   
   const [loading, setLoading] = useState(false);
   const [actionLoading, setActionLoading] = useState(false); // For actions like remove, increment, decrement
@@ -93,6 +95,10 @@ const CartPage = () => {
 
  const makePayment = async() => {
   try {
+
+    if (cartTotal < 100) {
+      toast.error("Your cart total must be at least ₹100 to proceed with the order.");
+    }
     
     // created instance with stripe
     const stripe = await loadStripe(import.meta.env.VITE_STRIPE_publishable_key);

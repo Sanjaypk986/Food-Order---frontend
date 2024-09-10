@@ -20,10 +20,16 @@ const SignupForm = () => {
     setLoading(true);
     const formData = new FormData();
   
+    // Ensure the mobile number includes the +91 prefix
+    let mobileNumber = data.mobile;
+    if (!mobileNumber.startsWith('+91')) {
+      mobileNumber = `+91${mobileNumber.replace(/^\+91/, '')}`;
+    }
+  
     // Append form fields to the FormData object
     formData.append("name", data.name);
     formData.append("email", data.email);
-    formData.append("mobile", data.mobile);
+    formData.append("mobile", mobileNumber); // Updated mobile number
     formData.append("password", data.password);
     formData.append("confirmPassword", data.confirmPassword);
   
@@ -48,6 +54,7 @@ const SignupForm = () => {
       toast.error(errorMessage);
     }
   };
+  
 
   return (
     <form
@@ -77,20 +84,23 @@ const SignupForm = () => {
         <label className="label">
           <span className="label-text">Mobile No</span>
         </label>
-        <input
-          type="tel"
-          placeholder="Enter your mobile number"
-          className={`input input-bordered text-sm ${
-            errors.mobile ? "input-error" : ""
-          }`}
-          {...register("mobile", {
-            required: "Mobile number is required",
-            pattern: {
-              value: /^[0-9]{10}$/, // Example pattern for a 10-digit number
-              message: "Invalid mobile number.",
-            },
-          })}
-        />
+        <div className="flex items-center">
+          <span className="p-2 bg-gray-200 rounded-l-md">+91</span>
+          <input
+            type="tel"
+            placeholder="Enter your mobile number"
+            className={`input input-bordered text-sm flex-grow ${
+              errors.mobile ? "input-error" : ""
+            } rounded-l-none`}
+            {...register("mobile", {
+              required: "Mobile number is required",
+              pattern: {
+                value: /^[0-9]{10}$/, // Validate 10 digits
+                message: "Invalid mobile number. Enter 10 digits.",
+              },
+            })}
+          />
+        </div>
         {errors.mobile && (
           <span className="text-red-500 text-sm">{errors.mobile.message}</span>
         )}

@@ -9,32 +9,30 @@ import { setUser } from "../../features/user/userSlice";
 import { setAddress } from "../../features/address/addressSlice";
 
 const UserHeader = () => {
-    const dispatch = useDispatch()
-    const user = useSelector((state) => state.user.user);
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user.user);
+  const { items: cartItems } = useSelector((state) => state.cart);
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   useEffect(() => {
-   const fetchProfile = async ()=>{
-    try {
-        const response = await userProfile()       
-        dispatch(setUser(response.data))   
-        dispatch(setAddress(response.data.address))
-    } catch (error) {
+    const fetchProfile = async () => {
+      try {
+        const response = await userProfile();
+        dispatch(setUser(response.data));
+        dispatch(setAddress(response.data.address));
+      } catch (error) {
         console.log(error);
-        
-    }
-   }
-   fetchProfile()
-  }, [])
-  
-
+      }
+    };
+    fetchProfile();
+  }, []);
+  // Get the number of items in the cart
+const CartItemsTotal = cartItems.length;
   const toggleNav = () => setIsNavOpen(!isNavOpen);
   const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
-  
 
   return (
-
     <header>
       <nav className="py-2 px-2 border-gray-200 shadow-lg">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -49,8 +47,11 @@ const UserHeader = () => {
               <div className="hidden lg:flex">
                 <ThemeUi />
               </div>
-              <Link to={'/user/cart'}>
-                <ShoppingBag />
+              <Link to={"/user/cart"} className="relative inline-block">
+                <div className="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-red-600 text-white rounded-full h-4 w-4 flex items-center justify-center text-xs font-bold">
+                  {CartItemsTotal}
+                </div>
+                <ShoppingBag className="text-3xl text-gray-800" />
               </Link>
               <button
                 type="button"
@@ -72,12 +73,19 @@ const UserHeader = () => {
                 id="user-dropdown"
               >
                 <div className="px-2 py-2">
-                  <span className="block text-sm text-gray-900">{user.name}</span>
-                  <span className="block text-sm text-gray-500 truncate">{user.email}</span>
+                  <span className="block text-sm text-gray-900">
+                    {user.name}
+                  </span>
+                  <span className="block text-sm text-gray-500 truncate">
+                    {user.email}
+                  </span>
                 </div>
                 <ul className="py-2">
                   <li>
-                    <Link to="/user/logout" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                    <Link
+                      to="/user/logout"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >
                       Logout
                     </Link>
                   </li>
@@ -116,27 +124,42 @@ const UserHeader = () => {
           >
             <ul className="font-medium flex flex-col p-4 lg:p-0 mt-4 border rounded-lg lg:flex-row lg:space-x-8 lg:mt-0 lg:border-0 lg:bg-transparent">
               <li>
-                <Link to="/user/#why-spicezy" className="block py-1 px-3 font-semibold primary-text relative after:absolute after:left-0 after:bottom-0 after:w-0 after:rounded after:h-[3px] after:bg-[#EB0029] after:transition-[width] after:duration-500 hover:after:w-full">
+                <Link
+                  to="/user/#why-spicezy"
+                  className="block py-1 px-3 font-semibold primary-text relative after:absolute after:left-0 after:bottom-0 after:w-0 after:rounded after:h-[3px] after:bg-[#EB0029] after:transition-[width] after:duration-500 hover:after:w-full"
+                >
                   Why Spicezy?
                 </Link>
               </li>
               <li>
-                <Link to="/user/order-now" className="relative block py-1 px-3 after:absolute after:left-0 after:bottom-0 after:w-0 after:rounded after:h-[3px] after:bg-[#EB0029] after:transition-[width] after:duration-500 hover:after:w-full">
+                <Link
+                  to="/user/order-now"
+                  className="relative block py-1 px-3 after:absolute after:left-0 after:bottom-0 after:w-0 after:rounded after:h-[3px] after:bg-[#EB0029] after:transition-[width] after:duration-500 hover:after:w-full"
+                >
                   Order Now
                 </Link>
               </li>
               <li>
-                <Link to="/user/my-orders" className="relative block py-1 px-3 after:absolute after:left-0 after:bottom-0 after:w-0 after:rounded after:h-[3px] after:bg-[#EB0029] after:transition-[width] after:duration-500 hover:after:w-full">
+                <Link
+                  to="/user/my-orders"
+                  className="relative block py-1 px-3 after:absolute after:left-0 after:bottom-0 after:w-0 after:rounded after:h-[3px] after:bg-[#EB0029] after:transition-[width] after:duration-500 hover:after:w-full"
+                >
                   My Orders
                 </Link>
               </li>
               <li>
-                <Link to="/user/help" className="relative block py-1 px-3 after:absolute after:left-0 after:bottom-0 after:w-0 after:rounded after:h-[3px] after:bg-[#EB0029] after:transition-[width] after:duration-500 hover:after:w-full">
+                <Link
+                  to="/user/help"
+                  className="relative block py-1 px-3 after:absolute after:left-0 after:bottom-0 after:w-0 after:rounded after:h-[3px] after:bg-[#EB0029] after:transition-[width] after:duration-500 hover:after:w-full"
+                >
                   Help
                 </Link>
               </li>
               <li>
-                <Link to="/user/contact" className="relative block py-1 px-3 after:absolute after:left-0 after:bottom-0 after:w-0 after:rounded after:h-[3px] after:bg-[#EB0029] after:transition-[width] after:duration-500 hover:after:w-full">
+                <Link
+                  to="/user/contact"
+                  className="relative block py-1 px-3 after:absolute after:left-0 after:bottom-0 after:w-0 after:rounded after:h-[3px] after:bg-[#EB0029] after:transition-[width] after:duration-500 hover:after:w-full"
+                >
                   Contact
                 </Link>
               </li>

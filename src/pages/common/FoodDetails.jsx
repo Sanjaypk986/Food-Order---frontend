@@ -3,7 +3,8 @@ import { useLoaderData, useNavigate } from "react-router-dom";
 import { fetchFoodsById } from "../../services/foodApi";
 import { addToCart } from "../../services/cartApi";
 import toast from "react-hot-toast";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getCart } from "../../features/cart/cartSlice";
 
 // loader
 export async function loader({ params }) {
@@ -13,25 +14,30 @@ export async function loader({ params }) {
 }
 
 const FoodDetails = () => {
+  const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
-    const user = useSelector((state) => state.user.user);
-    const isUserLoggedIn = user && Object.keys(user).length > 0;
-    const navigate = useNavigate()
+  const user = useSelector((state) => state.user.user);
+  const isUserLoggedIn = user && Object.keys(user).length > 0;
+  const navigate = useNavigate();
 
   const handleAddToCart = async (foodId) => {
     try {
-        if (isUserLoggedIn) {
-          setLoading(true)
-            const quantity = 1;
-            const response = await addToCart(foodId, quantity);
-            setLoading(false)
-            toast.success(response.message);
-            console.log();
-        }else{
-          setLoading(false)
-            navigate('/login')
+      if (isUserLoggedIn) {
+        setLoading(true);
+        const quantity = 1;
+        const response = await addToCart(foodId, quantity);
+        console.log(response);
+
+        if (!response.cart) {
+          toast.error(response.message);
         }
-     
+        setLoading(false);
+        dispatch(getCart(response.cart));
+        toast.success(response.message);
+      } else {
+        setLoading(false);
+        navigate("/login");
+      }
     } catch (error) {
       console.log(error.message);
     }
@@ -41,7 +47,7 @@ const FoodDetails = () => {
   return (
     <main className="container mx-auto p-4 md:p-8">
       <section className=" rounded-lg shadow md:my-10 p-8">
-      <button
+        <button
           onClick={() => navigate(-1)}
           className="mb-4 text-primary hover:underline my-2"
         >
@@ -72,10 +78,10 @@ const FoodDetails = () => {
                 className="secondary-bg  font-semibold text-white px-6 py-3 rounded-lg shadow-md  transition duration-300"
               >
                 {loading ? (
-            <span className="loading loading-dots loading-md"></span>
-          ) : (
-            "Add to Cart"
-          )}
+                  <span className="loading loading-dots loading-md"></span>
+                ) : (
+                  "Add to Cart"
+                )}
               </button>
               <button className="primary-bg  font-semibold text-white px-6 py-3 rounded-lg shadow-md  transition duration-300">
                 Buy Now

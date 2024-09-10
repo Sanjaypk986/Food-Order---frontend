@@ -12,7 +12,6 @@ const ThemeUi = () => {
           checked={theme === "halloween"}
           onChange={toggleTheme}
         />
-
         <svg
           className="swap-off h-10 w-10 fill-current"
           xmlns="http://www.w3.org/2000/svg"
