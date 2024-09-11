@@ -33,12 +33,10 @@ const MyOrders = () => {
       const response = await cancelOrder(orderId);
       dispatch(cancelItem(orderId));
       setActionLoading(false);
-      console.log(response);
     } catch (error) {
       console.log(error);
       setActionLoading(false);
     }
-    console.log("Order canceled:", orderId);
   };
 
   return (

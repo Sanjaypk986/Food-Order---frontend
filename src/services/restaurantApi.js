@@ -10,3 +10,14 @@ export const fetchAllRestaurant = async () => {
     return [];
   }
 };
+
+// get restaurnt by id 
+export const fetchRestaurantProfile = async (restaurantId) => {
+  try {
+    const response = await axiosInstance.get(`/restaurant//profile/${restaurantId}`);
+    return response?.data?.data;
+  } catch (error) {
+    console.log("Error fetching all Restaurant:", error.message);
+    return [];
+  }
+};

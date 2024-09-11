@@ -4,6 +4,7 @@ import RestaurantCard from "../../../components/restaurant/RestaurantCard";
 import { fetchAllRestaurant } from "../../../services/restaurantApi";
 import { setAllRestaurants } from "../../../features/restaurant/restaurantSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const TopRestaurants = () => {
   const dispatch = useDispatch();
@@ -53,12 +54,14 @@ const TopRestaurants = () => {
       <Slider {...settings}>
         {restaurants?.map((restaurant, index) => (
           <div key={index} className="px-2">
+            <Link to={`/restaurant/${restaurant._id}`}>
             <RestaurantCard
               image={restaurant.image}
               name={restaurant.name}
               location={restaurant.location}
               description={restaurant.description}
             />
+            </Link>
           </div>
         ))}
       </Slider>

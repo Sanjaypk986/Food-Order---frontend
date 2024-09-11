@@ -15,6 +15,7 @@ import CartPage from "../pages/user/cart/CartPage";
 import ContactPage from "../pages/common/ContactPage";
 import PaymentSuccess from "../pages/user/PaymentSuccess";
 import PaymentCancel from "../pages/user/PaymentCancel";
+import RestaurantPage,{loader as restaurantLoader} from "../pages/common/RestaurantPage";
 
 export const router = createBrowserRouter([
   {
@@ -50,6 +51,11 @@ export const router = createBrowserRouter([
       {
         path: "login",
         element: <LoginPage />,
+      },
+      {
+        path: "restaurant/:restaurantId",
+        element: <RestaurantPage />,
+        loader: restaurantLoader
       },
     ],
   },
@@ -101,6 +107,10 @@ export const router = createBrowserRouter([
       {
         path: "payment/cancel",
         element: <PaymentCancel/>,
+      },
+      {
+        path: "restaurant/:restaurantId",
+        element: <RestaurantPage />,
       },
     ],
   },
