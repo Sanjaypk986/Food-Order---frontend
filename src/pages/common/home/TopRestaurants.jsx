@@ -9,6 +9,8 @@ import { Link } from "react-router-dom";
 const TopRestaurants = () => {
   const dispatch = useDispatch();
   const restaurants = useSelector((state) => state.restaurant.data);
+  const user = useSelector((state) => state.user.user);
+  const isUserLoggedIn = user && Object.keys(user).length > 0;
   useEffect(() => {
     const fetchRestaurants = async () => {
       try {
@@ -54,7 +56,7 @@ const TopRestaurants = () => {
       <Slider {...settings}>
         {restaurants?.map((restaurant, index) => (
           <div key={index} className="px-2">
-            <Link to={`/restaurant/${restaurant._id}`}>
+            <Link to={isUserLoggedIn  ? `/user/restaurant/${restaurant._id}` : `/restaurant/${restaurant._id}`}>
             <RestaurantCard
               image={restaurant.image}
               name={restaurant.name}

@@ -20,6 +20,7 @@ const RestaurantPage = () => {
       {/* Restaurant Profile Section */}
       
       <section className="mb-2 p-6">
+      <div>
       <button
           onClick={() => navigate(-1)}
           className="mb-4 text-primary hover:underline my-2"
@@ -29,6 +30,7 @@ const RestaurantPage = () => {
         <h2 className="text-2xl font-bold mb-4 text-center">
           Restaurant Overview
         </h2>
+      </div>
         <div
           className="relative bg-cover bg-center bg-gray-50 rounded-lg shadow-lg p-4 "
           style={{ backgroundImage: `url('${restaurant.image}')` }}

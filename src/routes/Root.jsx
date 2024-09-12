@@ -111,6 +111,7 @@ export const router = createBrowserRouter([
       {
         path: "restaurant/:restaurantId",
         element: <RestaurantPage />,
+        loader: restaurantLoader
       },
     ],
   },

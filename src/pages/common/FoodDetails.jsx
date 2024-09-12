@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useLoaderData, useNavigate } from "react-router-dom";
+import { Link, useLoaderData, useNavigate } from "react-router-dom";
 import { fetchFoodsById } from "../../services/foodApi";
 import { addToCart } from "../../services/cartApi";
 import toast from "react-hot-toast";
@@ -94,6 +94,7 @@ const FoodDetails = () => {
         <h2 className="text-2xl font-bold mb-4 text-center">
           Restaurant Overview
         </h2>
+        <Link to={isUserLoggedIn ? `/user/restaurant/${food.restaurant._id}` : `/restaurant/${food.restaurant._id}`}>
         <div
           className="relative bg-cover bg-center bg-gray-50 rounded-lg shadow-lg p-4 "
           style={{ backgroundImage: `url('${food.restaurant.image}')` }}
@@ -125,6 +126,7 @@ const FoodDetails = () => {
             </div>
           </div>
         </div>
+        </Link>
       </section>
     </main>
   );
