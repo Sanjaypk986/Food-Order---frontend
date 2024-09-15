@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import { useDispatch} from "react-redux";
 import { setUser } from "../../features/user/userSlice";
 import { RestaurantLogin } from "../../services/restaurantApi";
+import { setRestaurant } from "../../features/restaurant/restaurantSlice";
 
 
 const RestaurantLoginForm = () => {
@@ -30,7 +31,7 @@ const RestaurantLoginForm = () => {
 
       setLoading(false);
       toast.success("Login successful");
-      dispatch(setUser(response.data));
+      dispatch(setRestaurant(response.data));
       navigate("/restaurants");
     } catch (error) {
       setLoading(false);

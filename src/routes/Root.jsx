@@ -22,6 +22,7 @@ import RestaurantLogin from "../pages/restaurant/RestaurantLogin";
 import RestaurantLayout from "../layout/RestaurantLayout";
 import RestaurantAuth from "./proectedRoutes/RestaurantAuth";
 import RestaurantSignupPage from "../pages/restaurant/RestaurantSignupPage";
+import RestaurantLogoutPage from "../pages/restaurant/RestaurantLogout";
 
 export const router = createBrowserRouter([
   {
@@ -148,6 +149,10 @@ export const router = createBrowserRouter([
       {
         path: "contact",
         element: <ContactPage />,
+      },
+      {
+        path: "logout",
+        element: <RestaurantLogoutPage />,
       },
     ],
   },

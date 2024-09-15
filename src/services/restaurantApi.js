@@ -43,3 +43,25 @@ export const RestaurantCreate = async (data) => {
     return [];
   }
 };
+
+// restaurant logout
+export const RestaurantLogout = async () => {
+  try {
+    const response = await axiosInstance.get('/restaurant/logout');
+    return response?.data;
+  } catch (error) {
+    console.log("Error fetching all Restaurant:", error.message);
+    return [];
+  }
+};
+
+// restaurant profile
+export const AuthRestaurantProfile = async () => {
+  try {
+    const response = await axiosInstance.get('/restaurant/restaurant/profile'); 
+    return response?.data;
+  } catch (error) {
+    console.log("Error fetching all Restaurant:", error.message);
+    throw error;;
+  }
+};

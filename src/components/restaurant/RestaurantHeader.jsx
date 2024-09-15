@@ -1,15 +1,33 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import ThemeUi from "../ui/ThemeUi";
-import { ShoppingBag } from "lucide-react";
+import { AuthRestaurantProfile } from "../../services/restaurantApi";
+import { setRestaurant } from "../../features/restaurant/restaurantSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const RestaurantHeader = () => {
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dispatch = useDispatch()
+  const restaurant = useSelector((state) => state.restaurant.restaurant);
+  
 
   const toggleNav = () => setIsNavOpen(!isNavOpen);
   const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const response = await AuthRestaurantProfile();  
+        dispatch(setRestaurant(response.data));
+        
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchProfile();
+  }, []);
 
   return (
     <header>
@@ -35,7 +53,7 @@ const RestaurantHeader = () => {
               >
                 <img
                   className="w-8 h-8 rounded-full"
-                  src="https://flowbite.com/docs/images/people/profile-picture-3.jpg"
+                  src={restaurant?.restaurant?.image}
                   alt="restaurant photo"
                 />
               </button>
@@ -46,14 +64,14 @@ const RestaurantHeader = () => {
                 id="restaurant-dropdown"
               >
                 <div className="px-2 py-2">
-                  <span className="block text-sm text-gray-900">Bonnie Green</span>
-                  <span className="block text-sm text-gray-500 truncate">name@flowbite.com</span>
+                  <span className="block text-sm text-gray-900">{restaurant?.restaurant?.name}</span>
+                  <span className="block text-sm text-gray-500 truncate">{restaurant?.restaurant?.email}</span>
                 </div>
                 <ul className="py-2">
                   <li>
-                    <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                    <Link to={'/restaurants/logout'} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                       Logout
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </div>
