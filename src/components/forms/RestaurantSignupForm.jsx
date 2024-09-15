@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import { userCreate } from "../../services/userApi";
+import { RestaurantCreate } from "../../services/restaurantApi";
 
-const SignupForm = () => {
+const RestaurantSignupForm = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const {
@@ -30,16 +30,18 @@ const SignupForm = () => {
     formData.append("name", data.name);
     formData.append("email", data.email);
     formData.append("mobile", mobileNumber); // Updated mobile number
+    formData.append("location", data.location);
+    formData.append("description", data.description);
     formData.append("password", data.password);
     formData.append("confirmPassword", data.confirmPassword);
 
     // Append file if it exists
     if (data.image && data.image[0]) {
-      formData.append("userImage", data.image[0]);
+        formData.append("restaurantImage", data.image[0]);
     }
 
     try {
-      const response = await userCreate(formData);
+      const response = await RestaurantCreate(formData);
       setLoading(false);
       if (response.success) {
         toast.success(response.message || "Signup successful");
@@ -68,7 +70,7 @@ const SignupForm = () => {
         </label>
         <input
           type="text"
-          placeholder="Enter your name"
+          placeholder="Restaurant Name"
           className={`input input-bordered text-sm ${
             errors.name ? "input-error" : ""
           }`}
@@ -77,35 +79,39 @@ const SignupForm = () => {
           })}
         />
         {errors.name && (
-          <span className="text-red-500 text-sm mt-1">{errors.name.message}</span>
+          <span className="text-red-500 text-sm mt-1">
+            {errors.name.message}
+          </span>
         )}
       </div>
 
       <div className="form-control">
-  <label className="label">
-    <span className="label-text">Mobile Number</span>
-  </label>
-  <div className="flex">
-    <span className="p-2 bg-gray-200 rounded-l-md">+91</span>
-    <input
-      type="tel"
-      placeholder="Enter your mobile number"
-      className={`input input-bordered text-sm w-full ${
-        errors.mobile ? "input-error" : ""
-      } rounded-l-none`}
-      {...register("mobile", {
-        required: "Mobile number is required",
-        pattern: {
-          value: /^[0-9]{10}$/, // Validate 10 digits
-          message: "Invalid mobile number. Enter 10 digits.",
-        },
-      })}
-    />
-  </div>
-  {errors.mobile && (
-    <span className="text-red-500 text-sm  mt-1">{errors.mobile.message}</span>
-  )}
-</div>
+        <label className="label">
+          <span className="label-text">Mobile Number</span>
+        </label>
+        <div className="flex">
+          <span className="p-2 bg-gray-200 rounded-l-md">+91</span>
+          <input
+            type="tel"
+            placeholder="Enter your mobile number"
+            className={`input input-bordered text-sm w-full ${
+              errors.mobile ? "input-error" : ""
+            } rounded-l-none`}
+            {...register("mobile", {
+              required: "Mobile number is required",
+              pattern: {
+                value: /^[0-9]{10}$/, // Validate 10 digits
+                message: "Invalid mobile number. Enter 10 digits.",
+              },
+            })}
+          />
+        </div>
+        {errors.mobile && (
+          <span className="text-red-500 text-sm mt-1">
+            {errors.mobile.message}
+          </span>
+        )}
+      </div>
 
       <div className="form-control">
         <label className="label">
@@ -137,7 +143,9 @@ const SignupForm = () => {
           })}
         />
         {errors.email && (
-          <span className="text-red-500 text-sm mt-1">{errors.email.message}</span>
+          <span className="text-red-500 text-sm mt-1">
+            {errors.email.message}
+          </span>
         )}
       </div>
 
@@ -183,6 +191,46 @@ const SignupForm = () => {
           </span>
         )}
       </div>
+      <div className="form-control">
+        <label className="label">
+          <span className="label-text">Location</span>
+        </label>
+        <input
+          type="text"
+          placeholder="Restaurant Location"
+          className={`input input-bordered text-sm ${
+            errors.location ? "input-error" : ""
+          }`}
+          {...register("location", {
+            required: "Location is required",
+          })}
+        />
+        {errors.location && (
+          <span className="text-red-500 text-sm mt-1">
+            {errors.location.message}
+          </span>
+        )}
+      </div>
+      <div className="form-control">
+        <label className="label">
+          <span className="label-text">Description</span>
+        </label>
+        <textarea
+          type="text"
+          placeholder="Description"
+          className={`input input-bordered text-sm ${
+            errors.name ? "input-error" : ""
+          }`}
+          {...register("description", {
+            required: "description is required",
+          })}
+        />
+        {errors.description && (
+          <span className="text-red-500 text-sm mt-1">
+            {errors.description.message}
+          </span>
+        )}
+      </div>
 
       {/* Submit Button */}
       <div className="form-control mt-6 md:col-span-2">
@@ -201,4 +249,4 @@ const SignupForm = () => {
   );
 };
 
-export default SignupForm;
+export default RestaurantSignupForm;

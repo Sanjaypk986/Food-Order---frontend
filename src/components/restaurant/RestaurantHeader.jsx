@@ -4,7 +4,7 @@ import logo from "../../assets/logo.png";
 import ThemeUi from "../ui/ThemeUi";
 import { ShoppingBag } from "lucide-react";
 
-const UserHeader = () => {
+const RestaurantHeader = () => {
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -26,27 +26,24 @@ const UserHeader = () => {
               <div className="hidden lg:flex">
                 <ThemeUi />
               </div>
-              <Link to={'/user/cart'}>
-                <ShoppingBag />
-              </Link>
               <button
                 type="button"
                 className="flex text-sm bg-gray-800 rounded-full lg:me-0 focus:ring-4 focus:ring-gray-300"
-                id="user-menu-button"
+                id="restaurant-menu-button"
                 aria-expanded={isDropdownOpen}
                 onClick={toggleDropdown}
               >
                 <img
                   className="w-8 h-8 rounded-full"
                   src="https://flowbite.com/docs/images/people/profile-picture-3.jpg"
-                  alt="user photo"
+                  alt="restaurant photo"
                 />
               </button>
             </div>
             {isDropdownOpen && (
               <div
                 className="absolute top-8 right-5 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg"
-                id="user-dropdown"
+                id="restaurant-dropdown"
               >
                 <div className="px-2 py-2">
                   <span className="block text-sm text-gray-900">Bonnie Green</span>
@@ -65,7 +62,7 @@ const UserHeader = () => {
               type="button"
               className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
               onClick={toggleNav}
-              aria-controls="navbar-user"
+              aria-controls="navbar-restaurant"
               aria-expanded={isNavOpen}
             >
               <svg
@@ -89,7 +86,7 @@ const UserHeader = () => {
             className={`w-full lg:w-auto ${
               isNavOpen ? "block" : "hidden"
             } lg:block lg:flex lg:items-center`}
-            id="navbar-user"
+            id="navbar-restaurant"
           >
             <ul className="font-medium flex flex-col p-4 lg:p-0 mt-4 border rounded-lg lg:flex-row lg:space-x-8 lg:mt-0 lg:border-0 lg:bg-transparent">
               <li>
@@ -98,22 +95,17 @@ const UserHeader = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/user/order-now" className="block py-2 px-3 rounded hover:bg-gray-100 lg:p-0">
-                  Order Now
+                <Link to="/restaurants/orders" className="block py-2 px-3 rounded hover:bg-gray-100 lg:p-0">
+                  Orders
                 </Link>
               </li>
               <li>
-                <Link to="/user/my-orders" className="block py-2 px-3 rounded hover:bg-gray-100 lg:p-0">
-                  My Orders
+                <Link to="/restaurants/foods" className="block py-2 px-3 rounded hover:bg-gray-100 lg:p-0">
+                  Foods
                 </Link>
               </li>
               <li>
-                <Link to="/user/help" className="block py-2 px-3 rounded hover:bg-gray-100 lg:p-0">
-                  Help
-                </Link>
-              </li>
-              <li>
-                <Link to="/user/contact" className="block py-2 px-3 rounded hover:bg-gray-100 lg:p-0">
+                <Link to="/restaurants/contact" className="block py-2 px-3 rounded hover:bg-gray-100 lg:p-0">
                   Contact
                 </Link>
               </li>
@@ -128,4 +120,4 @@ const UserHeader = () => {
   );
 };
 
-export default UserHeader;
+export default RestaurantHeader;

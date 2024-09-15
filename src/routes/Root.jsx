@@ -15,7 +15,13 @@ import CartPage from "../pages/user/cart/CartPage";
 import ContactPage from "../pages/common/ContactPage";
 import PaymentSuccess from "../pages/user/PaymentSuccess";
 import PaymentCancel from "../pages/user/PaymentCancel";
-import RestaurantPage,{loader as restaurantLoader} from "../pages/common/RestaurantPage";
+import RestaurantPage, {
+  loader as restaurantLoader,
+} from "../pages/common/RestaurantPage";
+import RestaurantLogin from "../pages/restaurant/RestaurantLogin";
+import RestaurantLayout from "../layout/RestaurantLayout";
+import RestaurantAuth from "./proectedRoutes/RestaurantAuth";
+import RestaurantSignupPage from "../pages/restaurant/RestaurantSignupPage";
 
 export const router = createBrowserRouter([
   {
@@ -53,9 +59,17 @@ export const router = createBrowserRouter([
         element: <LoginPage />,
       },
       {
+        path: "restaurant/login",
+        element: <RestaurantLogin />,
+      },
+      {
+        path: "restaurant/signup",
+        element: <RestaurantSignupPage />,
+      },
+      {
         path: "restaurant/:restaurantId",
         element: <RestaurantPage />,
-        loader: restaurantLoader
+        loader: restaurantLoader,
       },
     ],
   },
@@ -106,12 +120,34 @@ export const router = createBrowserRouter([
       },
       {
         path: "payment/cancel",
-        element: <PaymentCancel/>,
+        element: <PaymentCancel />,
       },
       {
         path: "restaurant/:restaurantId",
         element: <RestaurantPage />,
-        loader: restaurantLoader
+        loader: restaurantLoader,
+      },
+    ],
+  },
+  {
+    path: "restaurants",
+    element: (
+      <RestaurantAuth>
+        <RestaurantLayout />
+      </RestaurantAuth>
+    ),
+    children: [
+      {
+        path: "",
+        element: <HomePage />,
+      },
+      {
+        path: "orders",
+      },
+
+      {
+        path: "contact",
+        element: <ContactPage />,
       },
     ],
   },
