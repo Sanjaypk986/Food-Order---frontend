@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 
 const OrderCard = ({ orders, onCancel }) => {
-    console.log(orders);
     
   const [isAccordionOpen, setIsAccordionOpen] = useState(false);
 

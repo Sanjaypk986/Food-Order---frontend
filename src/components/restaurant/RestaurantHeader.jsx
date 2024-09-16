@@ -108,22 +108,22 @@ const RestaurantHeader = () => {
           >
             <ul className="font-medium flex flex-col p-4 lg:p-0 mt-4 border rounded-lg lg:flex-row lg:space-x-8 lg:mt-0 lg:border-0 lg:bg-transparent">
               <li>
-                <Link to="/restaurants/#why-spicezy" className="block py-2 px-3 font-semibold rounded hover:bg-gray-100 lg:p-0 primary-text">
+                <Link to="/restaurants/#why-spicezy" className="block py-1 px-3 font-semibold primary-text relative after:absolute after:left-0 after:bottom-0 after:w-0 after:rounded after:h-[3px] after:bg-[#EB0029] after:transition-[width] after:duration-500 hover:after:w-full primary-text">
                   Why Spicezy?
                 </Link>
               </li>
               <li>
-                <Link to="/restaurants/orders" className="block py-2 px-3 rounded hover:bg-gray-100 lg:p-0">
+                <Link to="/restaurants/orders" className="block py-1 px-3 font-semibold primary-text relative after:absolute after:left-0 after:bottom-0 after:w-0 after:rounded after:h-[3px] after:bg-[#EB0029] after:transition-[width] after:duration-500 hover:after:w-full">
                   Orders
                 </Link>
               </li>
               <li>
-                <Link to="/restaurants/foods" className="block py-2 px-3 rounded hover:bg-gray-100 lg:p-0">
+                <Link to="/restaurants/foods" className="block py-1 px-3 font-semibold primary-text relative after:absolute after:left-0 after:bottom-0 after:w-0 after:rounded after:h-[3px] after:bg-[#EB0029] after:transition-[width] after:duration-500 hover:after:w-full">
                   Foods
                 </Link>
               </li>
               <li>
-                <Link to="/restaurants/contact" className="block py-2 px-3 rounded hover:bg-gray-100 lg:p-0">
+                <Link to="/restaurants/contact" className="block py-1 px-3 font-semibold primary-text relative after:absolute after:left-0 after:bottom-0 after:w-0 after:rounded after:h-[3px] after:bg-[#EB0029] after:transition-[width] after:duration-500 hover:after:w-full">
                   Contact
                 </Link>
               </li>

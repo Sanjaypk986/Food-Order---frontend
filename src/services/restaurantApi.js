@@ -65,3 +65,25 @@ export const AuthRestaurantProfile = async () => {
     throw error;;
   }
 };
+
+// restaurant orders
+export const RestaurantOrders = async () => {
+  try {
+    const response = await axiosInstance.get('/restaurant/orders'); 
+    return response?.data;
+  } catch (error) {
+    console.log("Error fetching all Restaurant:", error.message);
+    throw error;;
+  }
+};
+
+// Confirm order
+export const ConfirmOrder = async (orderId, status) => {
+  try {
+    const response = await axiosInstance.patch(`/restaurant/orders/${orderId}`, { status });
+    return response?.data;
+  } catch (error) {
+    console.log("Error updating order status:", error.message);
+    throw error;
+  }
+};

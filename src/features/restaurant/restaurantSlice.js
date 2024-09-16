@@ -4,6 +4,7 @@ export const restaurantSlice = createSlice({
   name: "restaurant",
   initialState: {
     restaurant: [],
+    orders: [],
   },
   reducers: {
     setAllRestaurants: (state, action) => {
@@ -15,6 +16,7 @@ export const restaurantSlice = createSlice({
     resetRestaurant: (state) => {
       state.restaurant = [];
     },
+
   },
 });
 

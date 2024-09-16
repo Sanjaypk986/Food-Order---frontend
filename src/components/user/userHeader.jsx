@@ -51,7 +51,7 @@ const CartItemsTotal = cartItems.length;
                 <div className="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-red-600 text-white rounded-full h-4 w-4 flex items-center justify-center text-xs font-bold">
                   {CartItemsTotal}
                 </div>
-                <ShoppingBag className="text-3xl text-gray-800" />
+                <ShoppingBag className="text-3xl" />
               </Link>
               <button
                 type="button"
