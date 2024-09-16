@@ -23,6 +23,7 @@ import RestaurantLayout from "../layout/RestaurantLayout";
 import RestaurantAuth from "./proectedRoutes/RestaurantAuth";
 import RestaurantSignupPage from "../pages/restaurant/RestaurantSignupPage";
 import RestaurantLogoutPage from "../pages/restaurant/RestaurantLogout";
+import RestaurantHome from "../pages/restaurant/RestaurantHome";
 
 export const router = createBrowserRouter([
   {
@@ -140,7 +141,7 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "",
-        element: <HomePage />,
+        element: <RestaurantHome/>,
       },
       {
         path: "orders",

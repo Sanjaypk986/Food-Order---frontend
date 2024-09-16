@@ -33,7 +33,7 @@ const RestaurantHeader = () => {
     <header>
       <nav className="py-2 px-2 border-gray-200 shadow-lg">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-          <Link to="/user" className="flex items-center gap-1">
+          <Link to="/restaurants" className="flex items-center gap-1">
             <img src={logo} className="h-10" alt="logo" />
             <span className="self-center text-xl sm:text-2xl font-bold whitespace-nowrap primary-text">
               Spicezy
@@ -108,7 +108,7 @@ const RestaurantHeader = () => {
           >
             <ul className="font-medium flex flex-col p-4 lg:p-0 mt-4 border rounded-lg lg:flex-row lg:space-x-8 lg:mt-0 lg:border-0 lg:bg-transparent">
               <li>
-                <Link to="/user" className="block py-2 px-3 font-semibold rounded hover:bg-gray-100 lg:p-0 primary-text">
+                <Link to="/restaurants/#why-spicezy" className="block py-2 px-3 font-semibold rounded hover:bg-gray-100 lg:p-0 primary-text">
                   Why Spicezy?
                 </Link>
               </li>
