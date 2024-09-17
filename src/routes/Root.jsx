@@ -27,6 +27,7 @@ import RestaurantHome from "../pages/restaurant/RestaurantHome";
 import OrdersPage from "../pages/restaurant/OrdersPage";
 import RestaurantFoodsPage from "../pages/restaurant/RestaurantFoodsPage";
 import UpdateFood from "../pages/restaurant/UpdateFood";
+import CreateFood from "../pages/restaurant/CreateFood";
 
 export const router = createBrowserRouter([
   {
@@ -132,6 +133,7 @@ export const router = createBrowserRouter([
         element: <RestaurantPage />,
         loader: restaurantLoader,
       },
+      
     ],
   },
   {
@@ -167,6 +169,10 @@ export const router = createBrowserRouter([
         path: "update-food/:foodId",
         element: <UpdateFood/>,
       },
+      {
+        path:"create-food",
+        element: <CreateFood />,
+      }
     ],
   },
 ]);

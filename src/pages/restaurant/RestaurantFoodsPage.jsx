@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import RestaurantFoodCard from "../../components/RestaurantFoodCard";
 import { AuthRestaurantProfile } from "../../services/restaurantApi";
 import { setRestaurant } from "../../features/restaurant/restaurantSlice";
+import { Link } from "react-router-dom";
 
 const RestaurantFoodsPage = () => {
   const [loading, setLoading] = useState(false);
@@ -51,6 +52,9 @@ const RestaurantFoodsPage = () => {
         ) : (
           <p>No food items available. Please add some items to the menu.</p>
         )}
+      </section>
+      <section className="my-3 pb-3 flex justify-center items-center">
+        <Link to={'/restaurants/create-food'} className="btn secondary-bg">Add Food Item</Link>
       </section>
     </main>
   );

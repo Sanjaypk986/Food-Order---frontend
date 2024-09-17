@@ -57,4 +57,18 @@ export const DeleteFood = async (foodId) => {
   }
 };
 
+// create food
+export const CreateFood = async (formData) => {
+  try {
+    const response = await axiosInstance.post('/food/create',formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    return response?.data
+  } catch (error) {
+    console.log("Error fetching food by id:", error.message);
+    return null;
+  }
+};
 

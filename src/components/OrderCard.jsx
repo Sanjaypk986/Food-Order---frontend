@@ -32,8 +32,8 @@ const OrderCard = ({ orders, onCancel }) => {
         className="collapse-title text-xl font-medium flex justify-between items-center px-4 py-2 cursor-pointer"
       >
         <div>
-          <h2>{orders.restaurant.name}</h2>
-          <p className="text-sm text-gray-500">{orders.restaurant.location}</p>
+          <h2>{orders?.restaurant?.name}</h2>
+          <p className="text-sm text-gray-500">{orders.restaurant?.location}</p>
         </div>
         <div className="text-right">
           {/* Display total for all items in the header */}

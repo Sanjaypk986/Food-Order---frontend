@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const RestaurantFoodCard = ({ foods }) => {
+
   return (
     <div className="block w-full max-w-xs mx-auto my-2">
       <div className="border border-gray-200 rounded-lg shadow-md p-4 flex flex-col h-80">

@@ -16,6 +16,11 @@ const RestaurantOrderCard = ({ orders, onStatusChange }) => {
             setSelectedStatus(orders.status); // Reset to previous status if cancelled
         }
     };
+          // Calculate total for all items from this restaurant
+  const totalForRestaurant = orders.items.reduce((total, item) => {
+    return total + item.price * item.quantity;
+  }, 0);
+
 
     return (
         <div className="rounded-lg food-card shadow-md mb-4">
@@ -27,7 +32,7 @@ const RestaurantOrderCard = ({ orders, onStatusChange }) => {
                     <h5 className="text-xs sm:text-xl">Order: {orders._id}</h5>
                 </div>
                 <div className="text-right">
-                    <p className="text-lg font-semibold">{orders.total}₹</p>
+                    <p className="text-lg font-semibold">{totalForRestaurant}₹</p>
                     <p
                         className={`text-sm font-semibold ${
                             orders.status === "Delivered" ? "text-green-500" : "text-orange-500"
