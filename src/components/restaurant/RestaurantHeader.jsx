@@ -32,7 +32,7 @@ const RestaurantHeader = () => {
   return (
     <header>
       <nav className="py-2 px-2 border-gray-200 shadow-lg">
-        <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+        <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-5">
           <Link to="/restaurants" className="flex items-center gap-1">
             <img src={logo} className="h-10" alt="logo" />
             <span className="self-center text-xl sm:text-2xl font-bold whitespace-nowrap primary-text">

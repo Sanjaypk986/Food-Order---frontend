@@ -18,13 +18,13 @@ const RestaurantOrderCard = ({ orders, onStatusChange }) => {
     };
 
     return (
-        <div className="rounded-lg foodCard shadow-md mb-4">
+        <div className="rounded-lg food-card shadow-md mb-4">
             <div
                 onClick={toggleAccordion}
                 className="collapse-title text-xl font-medium flex justify-between items-center px-4 py-2 cursor-pointer"
             >
                 <div>
-                    <h5 className="text-sm md:text-xl">Order Id:{orders._id}</h5>
+                    <h5 className="text-xs sm:text-xl">Order: {orders._id}</h5>
                 </div>
                 <div className="text-right">
                     <p className="text-lg font-semibold">{orders.total}₹</p>
@@ -44,7 +44,7 @@ const RestaurantOrderCard = ({ orders, onStatusChange }) => {
                     <select
                         value={orders.status}
                         onChange={handleStatusChange}
-                        className="text-red-500 hover:text-red-700 font-medium px-4"
+                        className="text-primary font-medium px-4 w-32 my-1 mx-1 text-sm md:text-base rounded-md "
                     >
                         <option value="">Select</option>
                         <option value="Confirmed">Confirmed</option>

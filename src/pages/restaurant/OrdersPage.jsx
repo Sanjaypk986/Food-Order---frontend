@@ -78,9 +78,9 @@ const OrdersPage = () => {
          Orders
         </h2>
         <section className="my-8 p-2 md:w-3/4 lg:w-1/2 mx-auto">
-          {orders?.map((order, index) => (
+          {orders?.map((order) => (
             <RestaurantOrderCard
-              key={index}
+              key={order._id}
               orders={order}
               onStatusChange={handleOrderStatus}
             />

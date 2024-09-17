@@ -21,6 +21,9 @@ const LoginPage = () => {
                 Signup
               </Link>
             </p>
+              <Link className="btn my-3 secondary-bg text-white font-semiboldt" to="/restaurant/login">
+              Login as restaurant ?
+              </Link>
           </div>
           <div className="card bg-base-100 w-full max-w-sm shadow-2xl mx-auto lg:mx-0">
             <LoginForm />
