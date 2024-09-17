@@ -32,3 +32,29 @@ export const fetchFoodsById = async (foodId) => {
     return null;
   }
 };
+
+export const UpdateFood = async (formData, foodId) => {
+  try {
+    const response = await axiosInstance.patch(`/food/update/${foodId}`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    return response?.data;
+  } catch (error) {
+    console.log("Error updating food:", error.message);
+    return null;
+  }
+};
+// delete food
+export const DeleteFood = async (foodId) => {
+  try {
+    const response = await axiosInstance.delete(`/food/delete/${foodId}`);
+    return response?.data
+  } catch (error) {
+    console.log("Error fetching food by id:", error.message);
+    return null;
+  }
+};
+
+

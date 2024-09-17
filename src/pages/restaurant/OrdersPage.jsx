@@ -19,7 +19,6 @@ const OrdersPage = () => {
         setLoading(true);
         try {
           const response = await RestaurantOrders();
-          console.log(response.data);
           
           dispatch(getOrders(response.data));
           setLoading(false);
@@ -73,11 +72,12 @@ const OrdersPage = () => {
         </div>
       </section>
     ) : (
-      <>
+      <section className='my-8 lg:w-3/4 mx-auto px-1'>
         <h2 className="font-semibold text-center text-2xl my-5 underline">
          Orders
         </h2>
-        <section className="my-8 p-2 md:w-3/4 lg:w-1/2 mx-auto">
+        <p className='mb-6'>All your placed orders will appear here. Manage and track each order efficiently..</p>
+        <div className="my-8 p-2 ">
           {orders?.map((order) => (
             <RestaurantOrderCard
               key={order._id}
@@ -85,8 +85,8 @@ const OrdersPage = () => {
               onStatusChange={handleOrderStatus}
             />
           ))}
-        </section>
-      </>
+        </div>
+      </section>
     )}
     {actionLoading && (
       <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">

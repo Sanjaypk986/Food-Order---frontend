@@ -113,17 +113,17 @@ const RestaurantHeader = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/restaurants/orders" className="block py-1 px-3 font-semibold primary-text relative after:absolute after:left-0 after:bottom-0 after:w-0 after:rounded after:h-[3px] after:bg-[#EB0029] after:transition-[width] after:duration-500 hover:after:w-full">
+                <Link to="/restaurants/orders" className="block py-1 px-3 font-semibold  relative after:absolute after:left-0 after:bottom-0 after:w-0 after:rounded after:h-[3px] after:bg-[#EB0029] after:transition-[width] after:duration-500 hover:after:w-full">
                   Orders
                 </Link>
               </li>
               <li>
-                <Link to="/restaurants/foods" className="block py-1 px-3 font-semibold primary-text relative after:absolute after:left-0 after:bottom-0 after:w-0 after:rounded after:h-[3px] after:bg-[#EB0029] after:transition-[width] after:duration-500 hover:after:w-full">
+                <Link to="/restaurants/foods" className="block py-1 px-3 font-semibold  relative after:absolute after:left-0 after:bottom-0 after:w-0 after:rounded after:h-[3px] after:bg-[#EB0029] after:transition-[width] after:duration-500 hover:after:w-full">
                   Foods
                 </Link>
               </li>
               <li>
-                <Link to="/restaurants/contact" className="block py-1 px-3 font-semibold primary-text relative after:absolute after:left-0 after:bottom-0 after:w-0 after:rounded after:h-[3px] after:bg-[#EB0029] after:transition-[width] after:duration-500 hover:after:w-full">
+                <Link to="/restaurants/contact" className="block py-1 px-3 font-semibold  relative after:absolute after:left-0 after:bottom-0 after:w-0 after:rounded after:h-[3px] after:bg-[#EB0029] after:transition-[width] after:duration-500 hover:after:w-full">
                   Contact
                 </Link>
               </li>

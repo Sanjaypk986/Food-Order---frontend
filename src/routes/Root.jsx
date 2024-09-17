@@ -25,6 +25,8 @@ import RestaurantSignupPage from "../pages/restaurant/RestaurantSignupPage";
 import RestaurantLogoutPage from "../pages/restaurant/RestaurantLogout";
 import RestaurantHome from "../pages/restaurant/RestaurantHome";
 import OrdersPage from "../pages/restaurant/OrdersPage";
+import RestaurantFoodsPage from "../pages/restaurant/RestaurantFoodsPage";
+import UpdateFood from "../pages/restaurant/UpdateFood";
 
 export const router = createBrowserRouter([
   {
@@ -156,6 +158,14 @@ export const router = createBrowserRouter([
       {
         path: "logout",
         element: <RestaurantLogoutPage />,
+      },
+      {
+        path: "foods",
+        element: <RestaurantFoodsPage/>,
+      },
+      {
+        path: "update-food/:foodId",
+        element: <UpdateFood/>,
       },
     ],
   },

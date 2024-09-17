@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 
 const OrderCard = ({ orders, onCancel }) => {
-    
   const [isAccordionOpen, setIsAccordionOpen] = useState(false);
 
   const toggleAccordion = () => {
@@ -21,6 +20,11 @@ const OrderCard = ({ orders, onCancel }) => {
     }
   };
 
+  // Calculate total for all items from this restaurant
+  const totalForRestaurant = orders.items.reduce((total, item) => {
+    return total + item.price * item.quantity;
+  }, 0);
+
   return (
     <div className="rounded-lg shadow-md mb-4">
       <div
@@ -32,7 +36,8 @@ const OrderCard = ({ orders, onCancel }) => {
           <p className="text-sm text-gray-500">{orders.restaurant.location}</p>
         </div>
         <div className="text-right">
-          <p className="text-lg font-semibold">{orders.total}₹</p>
+          {/* Display total for all items in the header */}
+          <p className="text-lg font-semibold">{totalForRestaurant}₹</p>
           <p
             className={`text-sm font-semibold ${
               orders.status === "Delivered" ? "text-green-500" : "text-orange-500"
@@ -55,28 +60,32 @@ const OrderCard = ({ orders, onCancel }) => {
 
       {isAccordionOpen && (
         <div className="px-4 py-2">
-          {orders.items.map((item) => (
-            <div
-              key={item._id}
-              className="flex items-center justify-between border-b py-2"
-            >
-              <div className="flex items-center space-x-4">
-                <img
-                  src={item.food.image}
-                  alt={item.food.name}
-                  className="w-20 h-20 object-cover rounded-lg"
-                />
-                <div>
-                  <h4 className="font-semibold text-lg">{item.food.name}</h4>
-                  <p className="text-sm text-gray-500">{orders.restaurant.name}</p>
-                  <p className="text-sm text-gray-500">Quantity: {item.quantity}</p>
+          {orders.items.map((item) => {
+            const itemTotal = item.price * item.quantity; // Calculate total for each item
+            return (
+              <div
+                key={item._id}
+                className="flex items-center justify-between border-b py-2"
+              >
+                <div className="flex items-center space-x-4">
+                  <img
+                    src={item.food.image}
+                    alt={item.food.name}
+                    className="w-20 h-20 object-cover rounded-lg"
+                  />
+                  <div>
+                    <h4 className="font-semibold text-lg">{item.food.name}</h4>
+                    <p className="text-sm text-gray-500">{orders.restaurant.name}</p>
+                    <p className="text-sm text-gray-500">Quantity: {item.quantity}</p>
+                  </div>
+                </div>
+                <div className="text-right space-y-1">
+                  {/* Display total for each product */}
+                  <p className="text-lg font-semibold">{itemTotal}₹</p>
                 </div>
               </div>
-              <div className="text-right space-y-1">
-                <p className="text-lg font-semibold">{item.price}₹</p>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       )}
     </div>
