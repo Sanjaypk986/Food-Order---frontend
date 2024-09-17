@@ -8,16 +8,22 @@ import { Link } from "react-router-dom";
 
 const TopRestaurants = () => {
   const dispatch = useDispatch();
-  const restaurants = useSelector((state) => state.restaurant.data);
+  const restaurants = useSelector((state) => state.restaurant.restaurant);
+  const [loading,setLoading] = useState(false)
+  
   const user = useSelector((state) => state.user.user);
   const isUserLoggedIn = user && Object.keys(user).length > 0;
   useEffect(() => {
     const fetchRestaurants = async () => {
+      setLoading(true)
       try {
         const response = await fetchAllRestaurant();
         dispatch(setAllRestaurants(response.data));
+        setLoading(false)
+        
       } catch (error) {
         console.log(error);
+        setLoading(false)
       }
     };
     fetchRestaurants();
@@ -54,15 +60,21 @@ const TopRestaurants = () => {
     <div className="p-4 md:p-8 mb-8 mt-8">
       <h3 className="font-semibold text-2xl mb-5">Top Restaurants</h3>
       <Slider {...settings}>
-        {restaurants?.map((restaurant, index) => (
-          <div key={index} className="px-2">
+        {restaurants?.map((restaurant) => (
+          <div key={restaurant._id} className="px-2">
             <Link to={isUserLoggedIn  ? `/user/restaurant/${restaurant._id}` : `/restaurant/${restaurant._id}`}>
-            <RestaurantCard
-              image={restaurant.image}
-              name={restaurant.name}
-              location={restaurant.location}
-              description={restaurant.description}
+            {loading ? (
+              <div className="flex w-52 flex-col gap-4">
+              <div className="skeleton h-32 w-full"></div>
+              <div className="skeleton h-4 w-28"></div>
+              <div className="skeleton h-4 w-full"></div>
+              <div className="skeleton h-4 w-full"></div>
+            </div>
+            ):(
+              <RestaurantCard
+              restaurant={restaurant}
             />
+            )}
             </Link>
           </div>
         ))}

@@ -37,7 +37,7 @@ body {
   --food-card-bg-color: #2E2E2E; 
 }
 
-h2, h3, h5, {
+h2, h3, h5 {
   color: var(--text-color);
 }
 
