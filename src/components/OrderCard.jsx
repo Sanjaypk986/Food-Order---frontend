@@ -37,7 +37,7 @@ const OrderCard = ({ orders, onCancel }) => {
         </div>
         <div className="text-right">
           {/* Display total for all items in the header */}
-          <p className="text-lg font-semibold">{totalForRestaurant}₹</p>
+          <p className="text-lg font-semibold">{orders.total}₹</p>
           <p
             className={`text-sm font-semibold ${
               orders.status === "Delivered" ? "text-green-500" : "text-orange-500"

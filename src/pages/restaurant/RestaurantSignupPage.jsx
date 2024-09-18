@@ -17,7 +17,7 @@ const RestaurantSignupPage = () => {
               <RestaurantSignupForm/>
               <p className="text-sm text-center my-2 text-blue-500">
                 Already have an account?{" "}
-                <Link className="primary-text" to={"/login"}>
+                <Link className="primary-text" to={"/restaurant/login"}>
                   Login
                 </Link>
               </p>

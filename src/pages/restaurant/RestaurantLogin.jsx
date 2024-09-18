@@ -16,7 +16,7 @@ const RestaurantLogin = () => {
           </p>
           <p className="text-sm text-blue-500">
             Don't have an account?{" "}
-            <Link className="primary-text" to="/signup">
+            <Link className="primary-text" to="/restaurant/signup">
               Signup
             </Link>
           </p>
