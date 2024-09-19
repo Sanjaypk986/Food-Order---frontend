@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 
-const RestaurantOrderCard = ({ orders, onStatusChange }) => {
+const RestaurantOrderCard = ({ orders, onStatusChange }) => {  
+    
+    
     const [isAccordionOpen, setIsAccordionOpen] = useState(false);
     const [selectedStatus, setSelectedStatus] = useState(orders.status);
 
@@ -11,7 +13,7 @@ const RestaurantOrderCard = ({ orders, onStatusChange }) => {
     const handleStatusChange = (event) => {
         const newStatus = event.target.value;
         if (newStatus && window.confirm(`Are you sure you want to mark this order as ${newStatus}?`)) {
-            onStatusChange(orders._id, newStatus); // Call parent handler with new status
+            onStatusChange(orders.orderId, orders._id, newStatus); // Call parent handler with new status
         } else {
             setSelectedStatus(orders.status); // Reset to previous status if cancelled
         }
@@ -34,7 +36,7 @@ const RestaurantOrderCard = ({ orders, onStatusChange }) => {
                 <div className="text-right">
                     <p className="text-lg font-semibold">{totalForRestaurant}₹</p>
                     <p
-                        className={`text-sm font-semibold ${
+                        className={`text-xs sm:text-sm font-semibold  ${
                             orders.status === "Delivered" ? "text-green-500" : "text-orange-500"
                         }`}
                     >

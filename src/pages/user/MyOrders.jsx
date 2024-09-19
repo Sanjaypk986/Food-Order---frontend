@@ -1,46 +1,66 @@
 import React, { useEffect, useState } from "react";
 import OrderCard from "../../components/OrderCard";
-import myOrder from '../../assets/my-order.png';
+import myOrder from '../../assets/my-order.png'
 import { Link } from "react-router-dom";
-import { cancelOrder, getMyOrder } from "../../services/orderApi";
+import { cancelOrder, cancelRestaurantOrder, getMyOrder } from "../../services/orderApi";
 import { useDispatch, useSelector } from "react-redux";
 import { cancelItem, getOrders } from "../../features/order/ordersSlice";
+import { toast } from "react-toastify";
 
 const MyOrders = () => {
   const [loading, setLoading] = useState(false);
   const [actionLoading, setActionLoading] = useState(false);
   const dispatch = useDispatch();
   const orders = useSelector((state) => state.order.items);
-  
+
   useEffect(() => {
-    const fetchMyOrders = async() => {
+    const fetchMyOrders = async () => {
       setLoading(true);
       try {
         const response = await getMyOrder();
         dispatch(getOrders(response));
-        setLoading(false);
       } catch (error) {
         console.log(error);
+        toast.error("Failed to fetch orders.");
+      } finally {
         setLoading(false);
       }
-    }
+    };
     fetchMyOrders();
   }, [dispatch]);
 
-  const handleCancel = async(orderId) => {
+  const handleCancelOrder = async (orderId) => {
     setActionLoading(true);
     try {
-      const response = await cancelOrder(orderId);
-      dispatch(cancelItem(orderId));
-      setActionLoading(false);
+      await cancelOrder(orderId);
+      dispatch(cancelItem({ orderId }));
+      toast.success("Order canceled successfully.");
     } catch (error) {
       console.log(error);
+      toast.error("Failed to cancel the order.");
+    } finally {
       setActionLoading(false);
     }
   };
+  
+
+  const handleCancelRestaurantOrder = async (orderId, restaurantId) => {
+    setActionLoading(true);
+    try {
+      await cancelRestaurantOrder(orderId, restaurantId);
+      dispatch(cancelItem({ orderId, restaurantId }));
+      toast.success("Restaurant order canceled successfully.");
+    } catch (error) {
+      console.log(error);
+      toast.error("Failed to cancel the restaurant order.");
+    } finally {
+      setActionLoading(false);
+    }
+  };
+  
 
   return (
-    <main className="container mx-auto px-2">
+    <main className="container mx-auto px-2 min-h-screen">
       {loading ? (
         <div className="text-center my-8">
           <p>Loading orders...</p>
@@ -74,11 +94,12 @@ const MyOrders = () => {
             My Orders
           </h2>
           <section className="my-8 p-2 md:w-3/4 lg:w-1/2 mx-auto">
-            {orders?.map((order, index) => (
+            {orders.map((order) => (
               <OrderCard
-                key={index}
-                orders={order}
-                onCancel={() => handleCancel(order._id)}
+                key={order._id}
+                order={order}
+                onCancelOrder={handleCancelOrder}
+                onCancelRestaurantOrder={handleCancelRestaurantOrder}
               />
             ))}
           </section>

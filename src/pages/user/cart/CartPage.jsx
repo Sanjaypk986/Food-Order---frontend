@@ -29,7 +29,6 @@ const CartPage = () => {
   const { items: cartItems, total: cartTotal } = useSelector(
     (state) => state.cart
   );
-  console.log(cartItems);
   
   
   const [loading, setLoading] = useState(false);
@@ -129,7 +128,7 @@ const CartPage = () => {
   }
 
   return (
-    <main className="container mx-auto px-2">
+    <main className="container mx-auto px-2 min-h-screen">
       {cartItems.length > 0 ? (
         <section className="my-8">
           <h2 className="text-2xl font-bold text-center mb-6">Your Cart</h2>
