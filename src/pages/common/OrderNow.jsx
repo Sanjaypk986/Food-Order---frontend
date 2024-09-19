@@ -80,7 +80,7 @@ const OrderNow = () => {
   };
 
   return (
-    <main className="p-4 md:p-8 container mx-auto">
+    <main className="p-4 md:p-8 container mx-auto min-h-screen">
       <section>
         <div className="flex md:w-1/2 mx-auto items-center space-x-2 border border-gray-300 rounded-lg p-2">
           <form onSubmit={handleSearchSubmit} className="flex w-full items-center space-x-2">

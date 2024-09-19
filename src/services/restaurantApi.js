@@ -78,9 +78,9 @@ export const RestaurantOrders = async () => {
 };
 
 // Confirm order
-export const ConfirmOrder = async (orderId, status) => {
+export const ConfirmOrder = async (orderId, status) => { 
   try {
-    const response = await axiosInstance.patch(`/restaurant/orders/${orderId}`, { status });
+    const response = await axiosInstance.patch(`/restaurant/orders/${orderId}`, { orderId,status });
     return response?.data;
   } catch (error) {
     console.log("Error updating order status:", error.message);
