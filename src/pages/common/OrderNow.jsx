@@ -5,8 +5,10 @@ import { fetchAllFoods, fetchFoodsBySearch } from "../../services/foodApi";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setAllFoods } from "../../features/food/foodSlice";
+import ScrollAnimation from "../../hooks/ScrollAnimation";
 
 const OrderNow = () => {
+  ScrollAnimation()
   const [sortOption, setSortOption] = useState("");
   const [category, setCategory] = useState("");
   const [search, setSearch] = useState("");
@@ -139,7 +141,7 @@ const OrderNow = () => {
       {!loading ? (
         <section className="mt-8">
           {foods.length > 0 ? (
-            <div className="grid lg:w-3/4 mx-auto grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid lg:w-3/4 mx-auto grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" data-aos="zoom-in-left">
               {foods?.map((food) => (
                 <FoodCard key={food._id} foods={food} />
               ))}
