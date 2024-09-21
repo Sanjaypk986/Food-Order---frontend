@@ -28,6 +28,7 @@ import OrdersPage from "../pages/restaurant/OrdersPage";
 import RestaurantFoodsPage from "../pages/restaurant/RestaurantFoodsPage";
 import UpdateFood from "../pages/restaurant/UpdateFood";
 import CreateFood from "../pages/restaurant/CreateFood";
+import RestaurantDetails from "../pages/common/restaurantPage/RestaurantDetails";
 
 export const router = createBrowserRouter([
   {
@@ -75,6 +76,11 @@ export const router = createBrowserRouter([
       {
         path: "restaurant/:restaurantId",
         element: <RestaurantPage />,
+        loader: restaurantLoader,
+      },
+      {
+        path: "restaurant/details",
+        element: <RestaurantDetails/>,
         loader: restaurantLoader,
       },
     ],
