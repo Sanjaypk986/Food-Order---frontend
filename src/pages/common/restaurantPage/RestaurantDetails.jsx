@@ -2,6 +2,7 @@ import React from "react";
 import RestaurantProfile from "./RestaurantProfile";
 import RestaurantCoupon from "./RestaurantCoupon";
 import MenuRestaurant from "./MenuRestaurant";
+import RecommndedFoods from "./RecommndedFoods";
 
 const RestaurantDetails = () => {
   return (
@@ -9,6 +10,7 @@ const RestaurantDetails = () => {
       <RestaurantProfile />
      <RestaurantCoupon />
      <MenuRestaurant />
+     <RecommndedFoods />
     </main>
   );
 };

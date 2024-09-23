@@ -43,7 +43,7 @@ const SignupForm = () => {
       setLoading(false);
       if (response.success) {
         toast.success(response.message || "Signup successful");
-        navigate("/restaurants");
+        navigate("/user");
       } else {
         toast.error(response.message || "Signup failed");
       }
