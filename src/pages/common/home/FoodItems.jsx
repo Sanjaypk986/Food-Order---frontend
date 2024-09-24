@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
-import { fetchAllFoods } from "../../../services/foodApi";
-import { useDispatch, useSelector } from "react-redux";
-import { setAllFoods } from "../../../features/food/foodSlice";
+import { useSelector } from "react-redux";
 import CategoryImages from '../../../assets/FoodCategoryImages'
 
 

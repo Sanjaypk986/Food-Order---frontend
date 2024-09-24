@@ -1,10 +1,13 @@
-import { GitCommitHorizontal, Search, Vegan } from "lucide-react";
+import { GitCommitHorizontal, Search } from "lucide-react";
 import React from "react";
 
-const MenuRestaurant = () => {
+const MenuRestaurant = ({ foods }) => {
+  // Limit the foods array to the first 3 items
+  const limitedFoods = foods.slice(0, 3);
+
   return (
     <>
-      <section className="p-6 ">
+      <section className="p-6">
         <div className="lg:w-10/12 mx-auto py-2 border-b">
           <h5 className="justify-center text-sm font-semibold flex items-center gap-2 my-3">
             <GitCommitHorizontal />
@@ -26,7 +29,7 @@ const MenuRestaurant = () => {
                   <img
                     className="w-4 h-4"
                     src="https://img.icons8.com/?size=96&id=61083&format=png"
-                    alt="vegitarian"
+                    alt="vegetarian"
                   />
                   Pure-veg
                 </span>
@@ -47,46 +50,30 @@ const MenuRestaurant = () => {
           </div>
         </div>
       </section>
+
       <section className="px-6 border-b lg:w-10/12 mx-auto pb-3">
-        <div >
-          <h4 className=" md:text-lg font-bold mb-4">Top Picks</h4>
+        <div>
+          <h4 className="md:text-lg font-bold mb-4">Top Picks</h4>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-1">
-            <div className="relative">
-              <img
-                className="w-full md:w-56 md:h-56"
-                src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_292,h_300/TopPicks2024/99035402B.png"
-                alt="food"
-              />
-              <div className="absolute bottom-4 left-12 right-0 flex justify-center">
-                <button className="text-green-600 font-semibold text-sm md:text-lg py-1 px-4 md:px-6 rounded-lg bg-white">
-                  Add
-                </button>
+            {limitedFoods?.map((food) => (
+              <div className="relative" key={food._id}>
+                <img
+                  className="w-full h-48 md:w-56 md:h-56 rounded-xl object-cover" 
+                  src={food.image}
+                  alt={food.name}
+                />
+                <div className="absolute top-4 left-0 right-12 flex justify-center">
+                  <span className="text-white text-xs md:text-sm font-bold bg-black bg-opacity-30 px-2 py-1 rounded-md">
+                    {food.name}
+                  </span>
+                </div>
+                <div className="absolute bottom-4 left-12 right-0 flex justify-center">
+                  <button className="text-green-600 font-semibold text-sm md:text-md py-1 px-4 md:px-6 rounded-lg bg-white">
+                    Add
+                  </button>
+                </div>
               </div>
-            </div>
-            <div className="relative">
-              <img
-                className="w-full md:w-56 md:h-56"
-                src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_292,h_300/TopPicks2024/105529141B.png"
-                alt="food"
-              />
-              <div className="absolute bottom-4 left-12 right-0 flex justify-center">
-                <button className="text-green-600 font-semibold text-sm md:text-lg py-1 px-4 md:px-6 rounded-lg bg-white">
-                  Add
-                </button>
-              </div>
-            </div>
-            <div className="relative">
-              <img
-                className="w-full md:w-56 md:h-56"
-                src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_292,h_300/TopPicks2024/105529131B.png"
-                alt="food"
-              />
-              <div className="absolute bottom-4 left-12 right-0 flex justify-center">
-                <button className="text-green-600 font-semibold text-sm md:text-lg py-1 px-4 md:px-6 rounded-lg bg-white">
-                  Add
-                </button>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>

@@ -1,11 +1,11 @@
 import { GitCommitVertical } from "lucide-react";
 import React from "react";
 
-const RestaurantProfile = () => {
+const RestaurantProfile = ({restaurant}) => {
   return (
     <section className=" mt-3 md:mt-7 p-6 mx-auto">
       <div className="lg:w-10/12 mx-auto text-black">
-        <h2 className="text-lg md:text-xl font-bold mb-4">Taste Of Kalpathy</h2>
+        <h2 className="text-lg md:text-xl font-bold mb-4">{restaurant.name}</h2>
 
         <div className="relative px-1 sm:px-2 pb-1 sm:pb-2 w-full">
           <div className="absolute top-4 bg-gray-100 rounded-3xl shadow-[0px_8px_15px_rgba(0,0,0,0.2)] -left-3 -right-3 -bottom-3"></div>
@@ -20,7 +20,7 @@ const RestaurantProfile = () => {
               <GitCommitVertical />
               <div className="flex flex-col gap-3">
                 <p>
-                  Outlet<span className="font-normal ml-2">Kochi</span>
+                  Outlet<span className="font-normal ml-2">{restaurant.location}</span>
                 </p>
                 <span>15-30 mins</span>
               </div>

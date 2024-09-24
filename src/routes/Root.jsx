@@ -75,14 +75,14 @@ export const router = createBrowserRouter([
       },
       {
         path: "restaurant/:restaurantId",
-        element: <RestaurantPage />,
-        loader: restaurantLoader,
-      },
-      {
-        path: "restaurant/details",
         element: <RestaurantDetails/>,
         loader: restaurantLoader,
       },
+      // {
+      //   path: "restaurant/details",
+      //   element: <RestaurantDetails/>,
+      //   loader: restaurantLoader,
+      // },
     ],
   },
   {
