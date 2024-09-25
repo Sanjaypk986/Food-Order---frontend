@@ -26,7 +26,7 @@ const RestaurantCoupon = () => {
     <section className=" p-6">
       <div className="lg:w-10/12 mx-auto">
         <h4 className=" md:text-lg font-bold mb-4">Deals for you</h4>
-        <div className="grid grid-cols-span-1 md:grid-cols-3 gap-2">
+        <div className="grid grid-cols-span-1 md:grid-cols-3 gap-2 cursor-pointer">
           {couponArray?.map((coupon, index) => (
             <div className="p-2 border rounded-3xl" key={index}>
               <div className="flex item-center gap-2 ">

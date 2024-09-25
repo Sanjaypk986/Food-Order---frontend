@@ -136,9 +136,9 @@ export const router = createBrowserRouter([
       },
       {
         path: "restaurant/:restaurantId",
-        element: <RestaurantPage />,
+        element: <RestaurantDetails/>,
         loader: restaurantLoader,
-      },
+      },,
       
     ],
   },

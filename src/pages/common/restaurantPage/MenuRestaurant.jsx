@@ -1,9 +1,21 @@
 import { GitCommitHorizontal, Search } from "lucide-react";
-import React from "react";
+import React, { useState } from "react";
+import { set } from "react-hook-form";
 
-const MenuRestaurant = ({ foods }) => {
+const MenuRestaurant = ({ foods, handleCart }) => {
+  const [loading, setLoading] = useState(false);
   // Limit the foods array to the first 3 items
   const limitedFoods = foods.slice(0, 3);
+  const handleAddCart = (foodId) => {
+    setLoading(true);
+    try {
+      handleCart(foodId);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
+  };
 
   return (
     <>
@@ -23,7 +35,7 @@ const MenuRestaurant = ({ foods }) => {
             <Search className="w-6 h-6 text-gray-500 cursor-pointer" />
           </div>
           <div className="my-3 flex justify-start items-center gap-2">
-            <div className="p-2 border border-gray-300 rounded-3xl inline-block">
+            <div className="p-2 border border-gray-300 rounded-3xl inline-block cursor-pointer">
               <div className="flex items-center gap-2">
                 <span className="text-sm font-semibold text-green-600 flex justify-center items-center gap-1">
                   <img
@@ -35,7 +47,7 @@ const MenuRestaurant = ({ foods }) => {
                 </span>
               </div>
             </div>
-            <div className="p-2 border border-gray-300 rounded-3xl inline-block">
+            <div className="p-2 border border-gray-300 rounded-3xl inline-block cursor-pointer">
               <div className="flex items-center gap-2">
                 <span className="text-sm font-semibold flex justify-center items-center gap-1">
                   <img
@@ -58,7 +70,7 @@ const MenuRestaurant = ({ foods }) => {
             {limitedFoods?.map((food) => (
               <div className="relative" key={food._id}>
                 <img
-                  className="w-full h-48 md:w-56 md:h-56 rounded-xl object-cover" 
+                  className="w-full h-48 md:w-56 md:h-56 rounded-xl object-cover"
                   src={food.image}
                   alt={food.name}
                 />
@@ -68,8 +80,17 @@ const MenuRestaurant = ({ foods }) => {
                   </span>
                 </div>
                 <div className="absolute bottom-4 left-12 right-0 flex justify-center">
-                  <button className="text-green-600 font-semibold text-sm md:text-md py-1 px-4 md:px-6 rounded-lg bg-white">
-                    Add
+                  <button
+                    onClick={() => {
+                      handleAddCart(food._id);
+                    }}
+                    className="text-green-600 font-semibold text-sm md:text-md py-1 px-4 md:px-6 rounded-lg bg-white"
+                  >
+                    {loading ? (
+                      <span className="loading loading-dots loading-md"></span>
+                    ) : (
+                      "Add"
+                    )}
                   </button>
                 </div>
               </div>

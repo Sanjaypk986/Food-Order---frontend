@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import ScrollAnimation from "../../../hooks/ScrollAnimation";
 import RestaurantAccordion from "../../../components/restaurant/RestaurantAccordion";
 
-const RecommendedFoods = ({ foods }) => {
+const RecommendedFoods = ({ foods, handleCart }) => {
   const limitedFoods = foods.slice(0, 3);
   ScrollAnimation();
 
@@ -19,14 +19,22 @@ const RecommendedFoods = ({ foods }) => {
           <div className="collapse collapse-arrow">
             <div
               className="collapse-title md:text-base font-bold mb-4 cursor-pointer"
-              onClick={() => handleToggle(0)} 
+              onClick={() => handleToggle(0)}
             >
               Recommended ({limitedFoods.length})
             </div>
 
-            <div className={`${activeIndex === 0 ? "block" : "hidden"}`} data-aos="fade-up" data-aos-duration="500">
+            <div
+              className={`${activeIndex === 0 ? "block" : "hidden"}`}
+              data-aos="fade-up"
+              data-aos-duration="500"
+            >
               {limitedFoods.map((food, index) => (
-                <RestaurantAccordion key={index} food={food} />
+                <RestaurantAccordion
+                  key={index}
+                  food={food}
+                  handleCart={handleCart}
+                />
               ))}
             </div>
           </div>
@@ -40,9 +48,17 @@ const RecommendedFoods = ({ foods }) => {
               All Items ({foods.length})
             </div>
 
-            <div className={`${activeIndex === 1 ? "block" : "hidden"}`} data-aos="fade-up" data-aos-duration="500">
+            <div
+              className={`${activeIndex === 1 ? "block" : "hidden"}`}
+              data-aos="fade-up"
+              data-aos-duration="500"
+            >
               {foods.map((food, index) => (
-                <RestaurantAccordion key={index} food={food} />
+                <RestaurantAccordion
+                  key={index}
+                  food={food}
+                  handleCart={handleCart}
+                />
               ))}
             </div>
           </div>
