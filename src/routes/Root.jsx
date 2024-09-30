@@ -15,9 +15,6 @@ import CartPage from "../pages/user/cart/CartPage";
 import ContactPage from "../pages/common/ContactPage";
 import PaymentSuccess from "../pages/user/PaymentSuccess";
 import PaymentCancel from "../pages/user/PaymentCancel";
-import RestaurantPage, {
-  loader as restaurantLoader,
-} from "../pages/common/RestaurantPage";
 import RestaurantLogin from "../pages/restaurant/RestaurantLogin";
 import RestaurantLayout from "../layout/RestaurantLayout";
 import RestaurantAuth from "./proectedRoutes/RestaurantAuth";
@@ -28,7 +25,7 @@ import OrdersPage from "../pages/restaurant/OrdersPage";
 import RestaurantFoodsPage from "../pages/restaurant/RestaurantFoodsPage";
 import UpdateFood from "../pages/restaurant/UpdateFood";
 import CreateFood from "../pages/restaurant/CreateFood";
-import RestaurantDetails from "../pages/common/restaurantPage/RestaurantDetails";
+import RestaurantDetails , {loader as restaurantLoader} from "../pages/common/restaurantPage/RestaurantDetails";
 
 export const router = createBrowserRouter([
   {
