@@ -26,8 +26,6 @@ const FoodDetails = () => {
         setLoading(true);
         const quantity = 1;
         const response = await addToCart(foodId, quantity);
-        console.log(response);
-
         if (!response.cart) {
           toast.error(response.message);
         }
@@ -63,9 +61,7 @@ const FoodDetails = () => {
           </div>
           <div className="flex-1 mt-6 md:mt-0 ">
             <h2 className="text-3xl  font-bold mb-3 ">{food.name}</h2>
-            <p className="text-md   mb-3 ">
-              {food.category[0]} , {food.category[1]}
-            </p>
+            <p className="text-md   mb-3 ">{food.category.join(", ")}</p>
             <p className="text-2xl  font-semibold primary-text mb-3">
               {food.price}₹
             </p>
@@ -94,38 +90,44 @@ const FoodDetails = () => {
         <h2 className="text-2xl font-bold mb-4 text-center">
           Restaurant Overview
         </h2>
-        <Link to={isUserLoggedIn ? `/user/restaurant/${food.restaurant._id}` : `/restaurant/${food.restaurant._id}`}>
-        <div
-          className="relative bg-cover bg-center bg-gray-50 rounded-lg shadow-lg p-4 "
-          style={{ backgroundImage: `url('${food.restaurant.image}')` }}
+        <Link
+          to={
+            isUserLoggedIn
+              ? `/user/restaurant/${food.restaurant._id}`
+              : `/restaurant/${food.restaurant._id}`
+          }
         >
-          <div className="absolute inset-0 bg-black bg-opacity-40"></div>
-          <div className="relative z-10 max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-md">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="md:col-span-1">
-                <img
-                  className="w-full h-48 object-cover rounded-lg shadow-md"
-                  src={food.restaurant.image}
-                  alt="Restaurant"
-                />
-              </div>
-              <div className="md:col-span-2">
-                <h3 className="text-xl font-semibold mb-2 text-gray-800">
-                  {food.restaurant.name}
-                </h3>
-                <p className="text-md mb-2 text-gray-600">
-                  {food.restaurant.location}
-                </p>
-                <p className="text-md mb-4 text-gray-600">
-                  {food.restaurant.mobile}
-                </p>
-                <p className="text-sm md:text-md text-gray-700 break-words">
-                  {food.restaurant.description}
-                </p>
+          <div
+            className="relative bg-cover bg-center bg-gray-50 rounded-lg shadow-lg p-4 "
+            style={{ backgroundImage: `url('${food.restaurant.image}')` }}
+          >
+            <div className="absolute inset-0 bg-black bg-opacity-40"></div>
+            <div className="relative z-10 max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-md">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="md:col-span-1">
+                  <img
+                    className="w-full h-48 object-cover rounded-lg shadow-md"
+                    src={food.restaurant.image}
+                    alt="Restaurant"
+                  />
+                </div>
+                <div className="md:col-span-2">
+                  <h3 className="text-xl font-semibold mb-2 text-gray-800">
+                    {food.restaurant.name}
+                  </h3>
+                  <p className="text-md mb-2 text-gray-600">
+                    {food.restaurant.location}
+                  </p>
+                  <p className="text-md mb-4 text-gray-600">
+                    {food.restaurant.mobile}
+                  </p>
+                  <p className="text-sm md:text-md text-gray-700 break-words">
+                    {food.restaurant.description}
+                  </p>
+                </div>
               </div>
             </div>
           </div>
-        </div>
         </Link>
       </section>
     </main>

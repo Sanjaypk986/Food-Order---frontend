@@ -5,13 +5,14 @@ import { fetchAllFoods, fetchFoodsBySearch } from "../../services/foodApi";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setAllFoods } from "../../features/food/foodSlice";
+import ScrollAnimation from "../../hooks/ScrollAnimation";
 
 const OrderNow = () => {
+  ScrollAnimation();
   const [sortOption, setSortOption] = useState("");
   const [category, setCategory] = useState("");
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
-  const [actionLoading, setActionLoading] = useState(false);
   const [debouncedSearch, setDebouncedSearch] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -20,18 +21,33 @@ const OrderNow = () => {
   const user = useSelector((state) => state.user.user);
   const isUserLoggedIn = user && Object.keys(user).length > 0;
 
+  // Update URL with query params based on the current state
+  const navigateWithParams = () => {
+    const basePath = isUserLoggedIn ? "/user/order-now" : "/order-now";
+    const searchParams = new URLSearchParams();
+
+    if (search) searchParams.set("search", search);
+    if (category) searchParams.set("category", category);
+    if (sortOption) searchParams.set("sort", sortOption);
+
+    // Navigate to the new URL with query params
+    navigate(`${basePath}?${searchParams.toString()}`);
+  };
+
   useEffect(() => {
     const fetchFoods = async () => {
       setLoading(true);
       try {
         const params = {
-          sort: sortOption,
-          category,
-          search: debouncedSearch,
+          sort: sortOption || undefined,
+          category: category || undefined,
+          search: debouncedSearch || undefined,
         };
+
         const response = await (sortOption || category || debouncedSearch
           ? fetchFoodsBySearch(params)
           : fetchAllFoods());
+
         dispatch(setAllFoods(response));
       } catch (error) {
         console.error("Error fetching foods:", error.message);
@@ -41,28 +57,37 @@ const OrderNow = () => {
     };
 
     fetchFoods();
-  }, [sortOption, category, debouncedSearch, dispatch]);
-
-  const navigateWithParams = () => {
-    const basePath = isUserLoggedIn ? "/user/order-now" : "/order-now";
-    navigate(
-      `${basePath}?search=${search}&category=${category}&sort=${sortOption}`
-    );
-  };
+    navigateWithParams();
+  }, [debouncedSearch, sortOption, category, dispatch]);
 
   const handleSortChange = (e) => {
-    setSortOption(e.target.value);
+    const value = e.target.value;
+    if (value === "") {
+      // Reset sort and other filters
+      setSortOption("");
+      setCategory("");
+      setSearch("");
+    } else {
+      setSortOption(value);
+    }
     navigateWithParams();
   };
 
   const handleCategoryChange = (e) => {
-    setCategory(e.target.value);
+    const value = e.target.value;
+    if (value === "") {
+      // Reset category and other filters
+      setCategory("");
+      setSortOption("");
+      setSearch("");
+    } else {
+      setCategory(value);
+    }
     navigateWithParams();
   };
 
   const handleSearchChange = (e) => {
     setSearch(e.target.value);
-    setActionLoading(true);
 
     if (debounceTimeout.current) {
       clearTimeout(debounceTimeout.current);
@@ -70,8 +95,7 @@ const OrderNow = () => {
 
     debounceTimeout.current = setTimeout(() => {
       setDebouncedSearch(e.target.value);
-      setActionLoading(false);
-    }, 500); 
+    }, 500);
   };
 
   const handleSearchSubmit = (e) => {
@@ -83,7 +107,10 @@ const OrderNow = () => {
     <main className="p-4 md:p-8 container mx-auto min-h-screen">
       <section>
         <div className="flex md:w-1/2 mx-auto items-center space-x-2 border border-gray-300 rounded-lg p-2">
-          <form onSubmit={handleSearchSubmit} className="flex w-full items-center space-x-2">
+          <form
+            onSubmit={handleSearchSubmit}
+            className="flex w-full items-center space-x-2"
+          >
             <input
               type="text"
               value={search}
@@ -100,7 +127,9 @@ const OrderNow = () => {
 
       <section className="mt-4 flex flex-wrap justify-between items-center md:w-1/2 mx-auto space-y-2 md:space-y-0">
         <div className="flex items-center space-x-2">
-          <label htmlFor="sort" className="text-sm font-semibold">Sort by:</label>
+          <label htmlFor="sort" className="text-sm font-semibold">
+            Sort by:
+          </label>
           <select
             id="sort"
             value={sortOption}
@@ -114,7 +143,9 @@ const OrderNow = () => {
         </div>
 
         <div className="flex items-center space-x-2">
-          <label htmlFor="category" className="text-sm font-semibold">Category:</label>
+          <label htmlFor="category" className="text-sm font-semibold">
+            Category:
+          </label>
           <select
             id="category"
             value={category}
@@ -129,26 +160,25 @@ const OrderNow = () => {
           </select>
         </div>
       </section>
-      {actionLoading && (
-        <div className="flex justify-center items-center my-8">
-          <span className="loading loading-ring loading-lg"></span>
-          <p className="ml-4">Items loading...</p>
-        </div>
-      )}
 
       {!loading ? (
         <section className="mt-8">
           {foods.length > 0 ? (
-            <div className="grid lg:w-3/4 mx-auto grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div
+              className="grid lg:w-3/4 mx-auto grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+              data-aos="zoom-in-left"
+            >
               {foods?.map((food) => (
                 <FoodCard key={food._id} foods={food} />
               ))}
             </div>
           ) : (
-            <div className="text-center text-gray-500">Food item not found.</div>
+            <div className="text-center text-gray-500">
+              Food item not found.
+            </div>
           )}
         </section>
-      ):(
+      ) : (
         <div className="flex justify-center items-center my-8">
           <span className="loading loading-ring loading-lg"></span>
           <p className="ml-4">loading...</p>

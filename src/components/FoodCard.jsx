@@ -9,7 +9,7 @@ const FoodCard = ({ foods }) => {
 
     
   return (
-    <Link to={isUserLoggedIn?`/user/order-now/${foods._id}`:`/order-now/${foods._id}`} className="block w-full max-w-xs mx-auto">
+    <Link to={isUserLoggedIn?`/user/order-now/${foods._id}`:`/order-now/${foods._id}`} className="block w-full max-w-xs mx-auto" data-aos="zoom-in-up" >
       <div className="border border-gray-200 food-card rounded-lg shadow-md p-4 flex flex-col items-center h-80">
         <img
           src={foods.image}
