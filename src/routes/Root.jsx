@@ -1,5 +1,4 @@
 import { createBrowserRouter } from "react-router-dom";
-import ErrorPage from "../error-page";
 import RootLayout from "../layout/RootLayout";
 import HomePage from "../pages/common/home/HomePage";
 import UserLayout from "../layout/UserLayout";
@@ -26,6 +25,7 @@ import RestaurantFoodsPage from "../pages/restaurant/RestaurantFoodsPage";
 import UpdateFood from "../pages/restaurant/UpdateFood";
 import CreateFood from "../pages/restaurant/CreateFood";
 import RestaurantDetails , {loader as restaurantLoader} from "../pages/common/restaurantPage/RestaurantDetails";
+import ErrorPage from './../error-page';
 
 export const router = createBrowserRouter([
   {
@@ -89,6 +89,7 @@ export const router = createBrowserRouter([
         <UserLayout />
       </UserAuth>
     ),
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "",
@@ -146,6 +147,7 @@ export const router = createBrowserRouter([
         <RestaurantLayout />
       </RestaurantAuth>
     ),
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "",
@@ -178,4 +180,5 @@ export const router = createBrowserRouter([
       }
     ],
   },
+  
 ]);
