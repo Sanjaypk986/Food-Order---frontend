@@ -45,7 +45,7 @@ const OrdersPage = () => {
   };
 
   return (
-    <main className="container mx-auto px-2">
+    <main className="container mx-auto px-2 min-h-screen">
       {loading ? (
         <div className="text-center my-8">
           <p>Loading orders...</p>

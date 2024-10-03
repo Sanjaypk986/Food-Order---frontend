@@ -4,8 +4,8 @@ import RestaurantLoginForm from '../../components/forms/RestaurantLoginForm'
 
 const RestaurantLogin = () => {
   return (
-    <main>
-    <section className="px-4 py-7 mx-auto container">
+    <main className="min-h-screen">
+    <section className="px-4 py-7 mt-7 mx-auto container">
       <div className="flex flex-col lg:flex-row items-center lg:w-3/4 mx-auto justify-center lg:justify-between">
         <div className="text-center lg:text-left mb-8 lg:mb-0">
           <h1 className="text-3xl lg:text-5xl font-bold">
