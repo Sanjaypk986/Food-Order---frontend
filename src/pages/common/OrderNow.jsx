@@ -165,7 +165,7 @@ const OrderNow = () => {
         <section className="mt-8">
           {foods.length > 0 ? (
             <div
-              className="grid lg:w-3/4 mx-auto grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+              className="grid lg:w-3/4 mx-auto grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
               data-aos="zoom-in-left"
             >
               {foods?.map((food) => (
