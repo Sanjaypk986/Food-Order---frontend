@@ -26,6 +26,11 @@ import UpdateFood from "../pages/restaurant/UpdateFood";
 import CreateFood from "../pages/restaurant/CreateFood";
 import RestaurantDetails , {loader as restaurantLoader} from "../pages/common/restaurantPage/RestaurantDetails";
 import ErrorPage from './../error-page';
+import AdminLogin from "../pages/admin/AdminLogin";
+import AdminAuth from "./proectedRoutes/AdminAuth";
+import Adminlayout from "../layout/AdminLayout";
+import AdminDashBoard from "../pages/admin/AdminDashBoard";
+import AdminLogoutPage from "../pages/admin/AdminLogout";
 
 export const router = createBrowserRouter([
   {
@@ -75,11 +80,10 @@ export const router = createBrowserRouter([
         element: <RestaurantDetails/>,
         loader: restaurantLoader,
       },
-      // {
-      //   path: "restaurant/details",
-      //   element: <RestaurantDetails/>,
-      //   loader: restaurantLoader,
-      // },
+       {
+         path: "login/admin",
+         element: <AdminLogin/>,
+       },
     ],
   },
   {
@@ -180,5 +184,35 @@ export const router = createBrowserRouter([
       }
     ],
   },
-  
+  {
+    path: "admin",
+    element: (
+      <AdminAuth >
+        <Adminlayout />
+      </AdminAuth>
+    ),
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: "",
+        element: <AdminDashBoard/>,
+      },
+      {
+        path: "orders",
+        element: <OrdersPage/>,
+      },
+
+      {
+        path: "restauarnts",
+        element: <ContactPage />,
+      },
+      {
+        path: "logout",
+        element: <AdminLogoutPage />,
+      },
+      {
+        path: "foods",
+      },
+    ],
+  },
 ]);
