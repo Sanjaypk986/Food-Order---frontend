@@ -71,16 +71,13 @@ const FoodDetails = () => {
             <div className="flex flex-col space-y-4 ">
               <button
                 onClick={() => handleAddToCart(food._id)}
-                className="secondary-bg  font-semibold text-white px-6 py-3 rounded-lg shadow-md  transition duration-300"
+                className="primary-bg  font-semibold text-white px-6 py-3 rounded-lg shadow-md  transition duration-300"
               >
                 {loading ? (
                   <span className="loading loading-dots loading-md"></span>
                 ) : (
                   "Add to Cart"
                 )}
-              </button>
-              <button className="primary-bg  font-semibold text-white px-6 py-3 rounded-lg shadow-md  transition duration-300">
-                Buy Now
               </button>
             </div>
           </div>

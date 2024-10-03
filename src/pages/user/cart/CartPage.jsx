@@ -122,7 +122,7 @@ const CartPage = () => {
 
   if (loading) {
     return (
-      <main className="flex justify-center items-center min-h-96">
+      <main className="flex justify-center items-center min-h-screen">
         <span className="loading loading-ring loading-lg"></span>
         <p className="ml-4">Cart loading...</p>
       </main>

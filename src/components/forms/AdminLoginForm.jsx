@@ -2,14 +2,11 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import { useDispatch} from "react-redux";
-import { RestaurantLogin } from "../../services/restaurantApi";
-import { setRestaurant } from "../../features/restaurant/restaurantSlice";
+import { AdminLogin } from "../../services/adminApi";
 
 
-const RestaurantLoginForm = () => {
+const AdminLoginForm = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const [loading, setLoading] = useState(false);
   const {
@@ -21,17 +18,14 @@ const RestaurantLoginForm = () => {
   const onSubmit = async (data) => {
     try {
       setLoading(true);
-      const response = await RestaurantLogin(data);
+      const response = await AdminLogin(data);
       console.log("Login response:", response);
-
       if (!response.success) {
         throw new Error(response.message || "Login failed");
       }
-
       setLoading(false);
       toast.success("Login successful");
-      dispatch(setRestaurant(response.data));
-      navigate("/restaurants");
+      navigate("/admin");
     } catch (error) {
       setLoading(false);
       console.error("Login error:", error); 
@@ -83,11 +77,6 @@ const RestaurantLoginForm = () => {
             {errors.password.message}
           </span>
         )}
-        <label className="label">
-          <a href="#" className="label-text-alt text-blue-500 link link-hover">
-            Forgot password?
-          </a>
-        </label>
       </div>
       <div className="form-control mt-6">
         <button
@@ -105,4 +94,4 @@ const RestaurantLoginForm = () => {
   );
 };
 
-export default RestaurantLoginForm;
+export default AdminLoginForm;

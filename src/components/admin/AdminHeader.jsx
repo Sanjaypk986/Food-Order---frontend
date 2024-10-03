@@ -2,38 +2,23 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import ThemeUi from "../ui/ThemeUi";
-import { AuthRestaurantProfile } from "../../services/restaurantApi";
-import { setRestaurant } from "../../features/restaurant/restaurantSlice";
-import { useDispatch, useSelector } from "react-redux";
 
-const RestaurantHeader = () => {
+
+const AdminHeader = () => {
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const dispatch = useDispatch()
-  const restaurant = useSelector((state) => state.restaurant.restaurant);
+
   
 
   const toggleNav = () => setIsNavOpen(!isNavOpen);
   const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
 
-  useEffect(() => {
-    const fetchProfile = async () => {
-      try {
-        const response = await AuthRestaurantProfile();  
-        dispatch(setRestaurant(response.data));
-        
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchProfile();
-  }, []);
 
   return (
     <header>
       <nav className="py-2 px-2 border-gray-200 shadow-lg">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-5">
-          <Link to="/restaurants" className="flex items-center gap-1">
+          <Link to="/admin" className="flex items-center gap-1">
             <img src={logo} className="h-10" alt="logo" />
             <span className="self-center text-xl sm:text-2xl font-bold whitespace-nowrap primary-text">
               Spicezy
@@ -47,29 +32,29 @@ const RestaurantHeader = () => {
               <button
                 type="button"
                 className="flex text-sm bg-gray-800 rounded-full lg:me-0 focus:ring-4 focus:ring-gray-300"
-                id="restaurant-menu-button"
+                id="admin-menu-button"
                 aria-expanded={isDropdownOpen}
                 onClick={toggleDropdown}
               >
                 <img
                   className="w-8 h-8 rounded-full"
-                  src={restaurant?.restaurant?.image}
-                  alt="restaurant photo"
+                  src=""
+                  alt="admin photo"
                 />
               </button>
             </div>
             {isDropdownOpen && (
               <div
                 className="absolute top-8 right-5 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg"
-                id="restaurant-dropdown"
+                id="admin-dropdown"
               >
                 <div className="px-2 py-2">
-                  <span className="block text-sm text-gray-900">{restaurant?.restaurant?.name}</span>
-                  <span className="block text-sm text-gray-500 truncate">{restaurant?.restaurant?.email}</span>
+                  <span className="block text-sm text-gray-900">Admin</span>
+                  <span className="block text-sm text-gray-500 truncate">admin@gmail.com</span>
                 </div>
                 <ul className="py-2">
                   <li>
-                    <Link to={'/restaurants/logout'} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                    <Link to={'/admin/logout'} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                       Logout
                     </Link>
                   </li>
@@ -80,7 +65,7 @@ const RestaurantHeader = () => {
               type="button"
               className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
               onClick={toggleNav}
-              aria-controls="navbar-restaurant"
+              aria-controls="navbar-admin"
               aria-expanded={isNavOpen}
             >
               <svg
@@ -104,27 +89,22 @@ const RestaurantHeader = () => {
             className={`w-full lg:w-auto ${
               isNavOpen ? "block" : "hidden"
             } lg:block lg:flex lg:items-center`}
-            id="navbar-restaurant"
+            id="navbar-admin"
           >
             <ul className="font-medium flex flex-col p-4 lg:p-0 mt-4 border rounded-lg lg:flex-row lg:space-x-8 lg:mt-0 lg:border-0 lg:bg-transparent">
               <li>
-                <Link to="/restaurants/#why-spicezy" className="block py-1 px-3 font-semibold primary-text relative after:absolute after:left-0 after:bottom-0 after:w-0 after:rounded after:h-[3px] after:bg-[#EB0029] after:transition-[width] after:duration-500 hover:after:w-full primary-text">
-                  Why Spicezy?
-                </Link>
-              </li>
-              <li>
-                <Link to="/restaurants/orders" className="relative block py-1 px-3 after:absolute after:left-0 after:bottom-0 after:w-0 after:rounded after:h-[3px] after:bg-[#EB0029] after:transition-[width] after:duration-500 hover:after:w-full">
+                <Link to="/admin/orders" className="relative block py-1 px-3 after:absolute after:left-0 after:bottom-0 after:w-0 after:rounded after:h-[3px] after:bg-[#EB0029] after:transition-[width] after:duration-500 hover:after:w-full">
                   Orders
                 </Link>
               </li>
               <li>
-                <Link to="/restaurants/foods" className="relative block py-1 px-3 after:absolute after:left-0 after:bottom-0 after:w-0 after:rounded after:h-[3px] after:bg-[#EB0029] after:transition-[width] after:duration-500 hover:after:w-full">
+                <Link to="/admin/foods" className="relative block py-1 px-3 after:absolute after:left-0 after:bottom-0 after:w-0 after:rounded after:h-[3px] after:bg-[#EB0029] after:transition-[width] after:duration-500 hover:after:w-full">
                   Foods
                 </Link>
               </li>
               <li>
-                <Link to="/restaurants/contact" className="relative block py-1 px-3 after:absolute after:left-0 after:bottom-0 after:w-0 after:rounded after:h-[3px] after:bg-[#EB0029] after:transition-[width] after:duration-500 hover:after:w-full">
-                  Contact
+                <Link to="/admin/contact" className="relative block py-1 px-3 after:absolute after:left-0 after:bottom-0 after:w-0 after:rounded after:h-[3px] after:bg-[#EB0029] after:transition-[width] after:duration-500 hover:after:w-full">
+                  Restaurants
                 </Link>
               </li>
               <li className="flex lg:hidden">
@@ -138,4 +118,4 @@ const RestaurantHeader = () => {
   );
 };
 
-export default RestaurantHeader;
+export default AdminHeader;
