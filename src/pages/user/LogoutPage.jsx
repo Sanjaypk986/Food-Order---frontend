@@ -44,7 +44,7 @@ const LogoutPage = () => {
   }, [navigate, dispatch]);
 
   return (
-    <main>
+    <main className="container mx-auto px-2 min-h-screen">
       <section>
         <h1>Logging out....</h1>
       </section>
