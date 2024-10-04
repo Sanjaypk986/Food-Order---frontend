@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import { AdminLogin } from "../../services/adminApi";
+import { adminLogin } from "../../services/adminApi";
 
 
 const AdminLoginForm = () => {
@@ -18,7 +18,7 @@ const AdminLoginForm = () => {
   const onSubmit = async (data) => {
     try {
       setLoading(true);
-      const response = await AdminLogin(data);
+      const response = await adminLogin(data);
       console.log("Login response:", response);
       if (!response.success) {
         throw new Error(response.message || "Login failed");
