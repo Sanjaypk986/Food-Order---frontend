@@ -29,7 +29,7 @@ import ErrorPage from './../error-page';
 import AdminLogin from "../pages/admin/AdminLogin";
 import AdminAuth from "./proectedRoutes/AdminAuth";
 import Adminlayout from "../layout/AdminLayout";
-import AdminDashBoard from "../pages/admin/AdminDashBoard";
+import AdminDashBoard from "../pages/admin/admin dashboard/AdminDashBoard";
 import AdminLogoutPage from "../pages/admin/AdminLogout";
 
 export const router = createBrowserRouter([

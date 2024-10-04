@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import { AdminLogout } from "../../services/adminApi";
+import { adminLogout } from "../../services/adminApi";
 
 const AdminLogoutPage = () => {
   const navigate = useNavigate();
@@ -9,7 +9,7 @@ const AdminLogoutPage = () => {
   useEffect(() => {
     const logOut = async () => {
       try {
-        const response = await AdminLogout();
+        const response = await adminLogout();
         toast.success("Logout successful");
         navigate("/");
       } catch (error) {
@@ -22,7 +22,7 @@ const AdminLogoutPage = () => {
   }, [navigate]);
 
   return (
-    <main>
+    <main className="container mx-auto px-2 min-h-screen">
       <section>
         <h1>Logging out....</h1>
       </section>

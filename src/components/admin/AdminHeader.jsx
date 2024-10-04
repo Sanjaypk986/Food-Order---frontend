@@ -3,16 +3,12 @@ import { Link } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import ThemeUi from "../ui/ThemeUi";
 
-
 const AdminHeader = () => {
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-  
-
   const toggleNav = () => setIsNavOpen(!isNavOpen);
   const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
-
 
   return (
     <header>
@@ -50,11 +46,16 @@ const AdminHeader = () => {
               >
                 <div className="px-2 py-2">
                   <span className="block text-sm text-gray-900">Admin</span>
-                  <span className="block text-sm text-gray-500 truncate">admin@gmail.com</span>
+                  <span className="block text-sm text-gray-500 truncate">
+                    admin@gmail.com
+                  </span>
                 </div>
                 <ul className="py-2">
                   <li>
-                    <Link to={'/admin/logout'} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                    <Link
+                      to={"/admin/logout"}
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >
                       Logout
                     </Link>
                   </li>
@@ -92,21 +93,6 @@ const AdminHeader = () => {
             id="navbar-admin"
           >
             <ul className="font-medium flex flex-col p-4 lg:p-0 mt-4 border rounded-lg lg:flex-row lg:space-x-8 lg:mt-0 lg:border-0 lg:bg-transparent">
-              <li>
-                <Link to="/admin/orders" className="relative block py-1 px-3 after:absolute after:left-0 after:bottom-0 after:w-0 after:rounded after:h-[3px] after:bg-[#EB0029] after:transition-[width] after:duration-500 hover:after:w-full">
-                  Orders
-                </Link>
-              </li>
-              <li>
-                <Link to="/admin/foods" className="relative block py-1 px-3 after:absolute after:left-0 after:bottom-0 after:w-0 after:rounded after:h-[3px] after:bg-[#EB0029] after:transition-[width] after:duration-500 hover:after:w-full">
-                  Foods
-                </Link>
-              </li>
-              <li>
-                <Link to="/admin/contact" className="relative block py-1 px-3 after:absolute after:left-0 after:bottom-0 after:w-0 after:rounded after:h-[3px] after:bg-[#EB0029] after:transition-[width] after:duration-500 hover:after:w-full">
-                  Restaurants
-                </Link>
-              </li>
               <li className="flex lg:hidden">
                 <ThemeUi />
               </li>
