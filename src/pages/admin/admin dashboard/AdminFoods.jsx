@@ -3,16 +3,19 @@ import { useEffect } from 'react';
 import { fetchAllFoods } from '../../../services/foodApi';
 
 const AdminFoods = () => {
+    const [loading, setLoading] = useState(false);
     const [foods,setFoods] = useState([])
    useEffect(() => {
 
     const fetchFoods = async()=>{
+        setLoading(true)
         try {
             const response = await fetchAllFoods()
-            console.log(response);
             setFoods(response)
+            setLoading(false)
         } catch (error) {
             console.log(error);
+            setLoading(false)
             
         }
     }
@@ -50,13 +53,19 @@ const AdminFoods = () => {
                   <td className="px-4 py-2 border font-semibold">₹{food.price}</td>
                 </tr>
               ))
-            ) : (
-              <tr>
-                <td colSpan="5" className="text-center px-4 py-2 border">
-                  No orders found
-                </td>
-              </tr>
-            )}
+            ) : loading ? (
+                <tr>
+                  <td colSpan="5" className="text-center px-4 py-2 border">
+                    <span className="loading loading-bars loading-md"></span>
+                  </td>
+                </tr>
+              ) : (
+                <tr>
+                  <td colSpan="5" className="text-center px-4 py-2 border">
+                    No data found
+                  </td>
+                </tr>
+              )}
           </tbody>
         </table>
       </div>

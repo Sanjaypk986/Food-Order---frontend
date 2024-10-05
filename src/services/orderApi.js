@@ -14,7 +14,7 @@ export const addToOrder = async () => {
 // add to order
 export const getMyOrder = async () => {
   try {
-    const response = await axiosInstance.get("/order/my-orders");  
+    const response = await axiosInstance.get("/order/my-orders");
     return response?.data?.data;
   } catch (error) {
     console.log("Error fetching to get my orders:", error.message);
@@ -23,23 +23,38 @@ export const getMyOrder = async () => {
 };
 
 // cancel order
-export const cancelRestaurantOrder= async (orderId,restaurantId) => {
-    try {
-      const response = await axiosInstance.patch(`/order/${orderId}/restaurants/${restaurantId}/cancel`);
-      return response?.data;
-    } catch (error) {
-      console.log("Error fetching to get my orders:", error.message);
-      return [];
-    }
-  };
+export const cancelRestaurantOrder = async (orderId, restaurantId) => {
+  try {
+    const response = await axiosInstance.patch(
+      `/order/${orderId}/restaurants/${restaurantId}/cancel`
+    );
+    return response?.data;
+  } catch (error) {
+    console.log("Error fetching to get my orders:", error.message);
+    return [];
+  }
+};
 
-//   cancel complete order 
-export const cancelOrder= async (orderId) => {
-    try {
-      const response = await axiosInstance.patch(`/order/cancel/${orderId}`);
-      return response?.data;
-    } catch (error) {
-      console.log("Error fetching to get my orders:", error.message);
-      return [];
-    }
-  };
+//   cancel complete order
+export const cancelOrder = async (orderId) => {
+  try {
+    const response = await axiosInstance.patch(`/order/cancel/${orderId}`);
+    return response?.data;
+  } catch (error) {
+    console.log("Error fetching to get my orders:", error.message);
+    return [];
+  }
+};
+
+// update order status
+export const updateOrderStatus = async (orderId) => {
+  try {
+    const response = await axiosInstance.patch("/order/update/status", {
+      orderId,
+    });
+    return response?.data;
+  } catch (error) {
+    console.log("Error fetching to get my orders:", error.message);
+    return [];
+  }
+};
