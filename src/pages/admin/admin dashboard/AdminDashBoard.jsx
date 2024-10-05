@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import DashBoardMenu from "./DashBoardMenu";
-import OverviewDashBoard from "./OverviewDashBoard";
+import OverviewDashBoard from "./overview/OverviewDashBoard";
 import AdminOrders from "./AdminOrders";
 import AdminFoods from "./AdminFoods";
 import AdminUsers from "./AdminUsers";
@@ -8,8 +8,6 @@ import AdminRestaurants from "./AdminRestaurants";
 
 const AdminDashboard = () => {
   const [activeTab, setActiveTab] = useState("overview");
-
-  
 
   // condition to show tab view
   const renderActiveTab = () => {

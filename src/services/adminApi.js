@@ -91,3 +91,16 @@ export const deleteRestaurant = async (restaurantId) => {
       return null;
     }
   };
+
+//   get total income
+export const getTotalIncome = async () => {
+    try {
+      const response = await axiosInstance.get(
+        `/admin/orders/total-amount`
+      );
+      return response?.data;
+    } catch (error) {
+      console.log("Error fetching all admin:", error.message);
+      return null;
+    }
+  };
