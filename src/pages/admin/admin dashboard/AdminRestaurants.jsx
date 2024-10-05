@@ -6,17 +6,21 @@ import {
 } from "../../../services/adminApi";
 
 const AdminRestaurants = () => {
+  const [loading, setLoading] = useState(false);
   const [restaurants, setRestaurants] = useState([]);
   const [selectedRestaurant, setSelectedRestaurant] = useState(null);
   const [isDeletePopupVisible, setIsDeletePopupVisible] = useState(false);
 
   useEffect(() => {
     const fetchAllRestaurants = async () => {
+      setLoading(true);
       try {
         const response = await adminAllRestaurants();
         setRestaurants(response.data);
+        setLoading(false);
       } catch (error) {
         console.log(error);
+        setLoading(false);
       }
     };
 
@@ -25,13 +29,11 @@ const AdminRestaurants = () => {
 
   const handleRestaurantStatus = async (restaurantId, newStatus) => {
     try {
-      // Call the API to change the restaurant status
       const response = await changeRestaurantStatus(restaurantId, {
         status: newStatus,
       });
       console.log(response);
 
-      // Update the restaurant status in the local state
       setRestaurants((prevRestaurants) =>
         prevRestaurants.map((restaurant) =>
           restaurant._id === restaurantId
@@ -47,10 +49,12 @@ const AdminRestaurants = () => {
     try {
       if (selectedRestaurant) {
         const response = await deleteRestaurant(selectedRestaurant);
-        console.log(response);
-
-        setRestaurants(restaurants.filter((restaurant) => restaurant._id !== selectedRestaurant)); 
-        closePopup(); 
+        setRestaurants(
+          restaurants.filter(
+            (restaurant) => restaurant._id !== selectedRestaurant
+          )
+        );
+        closePopup();
       }
     } catch (error) {
       console.log(error);
@@ -64,7 +68,7 @@ const AdminRestaurants = () => {
 
   const closePopup = () => {
     setIsDeletePopupVisible(false);
-    setSelectedRestaurant(null); 
+    setSelectedRestaurant(null);
   };
 
   return (
@@ -111,14 +115,25 @@ const AdminRestaurants = () => {
                     </select>
                   </td>
                   <td className="px-4 py-2 border">
-                    <span onClick={() => openDeletePopup(restaurant._id)} className="py-1 px-2 primary-bg text-sm rounded-lg text-white">Delete</span>
+                    <span
+                      onClick={() => openDeletePopup(restaurant._id)}
+                      className="py-1 px-2 primary-bg text-sm rounded-lg text-white"
+                    >
+                      Delete
+                    </span>
                   </td>
                 </tr>
               ))
+            ) : loading ? (
+              <tr>
+                <td colSpan="5" className="text-center px-4 py-2 border">
+                  <span className="loading loading-bars loading-md"></span>
+                </td>
+              </tr>
             ) : (
               <tr>
                 <td colSpan="5" className="text-center px-4 py-2 border">
-                  No restaurants found
+                  No data found
                 </td>
               </tr>
             )}

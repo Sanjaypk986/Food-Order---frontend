@@ -2,15 +2,19 @@ import React, { useEffect, useState } from "react";
 import { adminAllOrders } from "../../../services/adminApi";
 
 const AdminOrders = () => {
+  const [loading, setLoading] = useState(false);
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
     const fetchAllOrders = async () => {
+      setLoading(true);
       try {
         const response = await adminAllOrders();
         setOrders(response.data);
+        setLoading(false);
       } catch (error) {
         console.log(error);
+        setLoading(false);
       }
     };
 
@@ -28,7 +32,7 @@ const AdminOrders = () => {
               <th className="px-4 py-2 border">User</th>
               <th className="px-4 py-2 border">Date</th>
               <th className="px-4 py-2 border">Total Amount</th>
-              <th className="px-4 py-2 border">Stautus</th>
+              <th className="px-4 py-2 border">Status</th>
             </tr>
           </thead>
           <tbody>
@@ -41,13 +45,31 @@ const AdminOrders = () => {
                     {new Date(order.createdAt).toLocaleDateString()}
                   </td>
                   <td className="px-4 py-2 border">₹{order.total}</td>
-                  <td className="px-4 py-2 border">{order.status}</td>
+                  <td
+                    className={`px-4 py-2 border font-semibold ${
+                      order.status === "Delivered"
+                        ? "text-green-600"
+                        : order.status === "Confirmed"
+                        ? "text-yellow-600"
+                        : order.status === "Cancelled"
+                        ? "text-red-600"
+                        : "text-blue-600"
+                    }`}
+                  >
+                    {order.status}
+                  </td>
                 </tr>
               ))
+            ) : loading ? (
+              <tr>
+                <td colSpan="5" className="text-center px-4 py-2 border">
+                  <span className="loading loading-bars loading-md"></span>
+                </td>
+              </tr>
             ) : (
               <tr>
                 <td colSpan="5" className="text-center px-4 py-2 border">
-                  No orders found
+                  No data found
                 </td>
               </tr>
             )}

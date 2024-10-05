@@ -9,6 +9,7 @@ import myOrder from "../../assets/my-order.png";
 import { Link } from "react-router-dom";
 import { ConfirmOrder, RestaurantOrders } from "../../services/restaurantApi";
 import RestaurantOrderCard from "../../components/restaurant/RestaurantOrderCard";
+import { updateOrderStatus } from "../../services/orderApi";
 
 const OrdersPage = () => {
   const [loading, setLoading] = useState(false);
@@ -20,8 +21,7 @@ const OrdersPage = () => {
     const fetchMyOrders = async () => {
       setLoading(true);
       try {
-        const response = await RestaurantOrders();
-
+        const response = await RestaurantOrders();      
         dispatch(getOrders(response.data));
         setLoading(false);
       } catch (error) {
@@ -37,6 +37,13 @@ const OrdersPage = () => {
     try {
       const response = await ConfirmOrder(orderId, status); // Pass the new status to backend
       dispatch(changeOrderStatus({ restaurantOrderId, status }));
+      try {        
+        const response = await updateOrderStatus(orderId)
+        console.log(response);
+        
+      } catch (error) {
+        console.log(error);
+      }
     } catch (error) {
       console.log(error);
     } finally {
