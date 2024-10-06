@@ -32,13 +32,17 @@ const AdminOrders = () => {
     try {
       const search = e.target.value.toLowerCase(); //get search value
       setQuery(search);
+      if (search === "") {
+        setSearchFilter(orders);
+      } else {
       const filtered = orders.filter(
         (order) =>
           order._id.toLowerCase().includes(query) || //order id check using query
           order.user.name.toLowerCase().includes(query) ||
           order.status.toLowerCase().includes(query)
       );
-      setSearchFilter(filtered); // Update the filtered orders
+      setSearchFilter(filtered); 
+    }// Update the filtered orders
       setLoading(false);
     } catch (error) {
       console.log(error);
