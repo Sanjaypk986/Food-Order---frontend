@@ -10,6 +10,8 @@ const AdminRestaurants = () => {
   const [restaurants, setRestaurants] = useState([]);
   const [selectedRestaurant, setSelectedRestaurant] = useState(null);
   const [isDeletePopupVisible, setIsDeletePopupVisible] = useState(false);
+  const [searchFilter, setSearchFilter] = useState([]);
+  const [query, setQuery] = useState([]);
 
   useEffect(() => {
     const fetchAllRestaurants = async () => {
@@ -17,6 +19,7 @@ const AdminRestaurants = () => {
       try {
         const response = await adminAllRestaurants();
         setRestaurants(response.data);
+        setSearchFilter(response.data);
         setLoading(false);
       } catch (error) {
         console.log(error);
@@ -26,6 +29,38 @@ const AdminRestaurants = () => {
 
     fetchAllRestaurants();
   }, []);
+
+  // Search filter
+  const handleSearch = (e) => {
+    const search = e.target.value.toLowerCase();
+    setQuery(search);
+
+    if (search === "") {
+      setSearchFilter(restaurants);
+    } else {
+      const filtered = restaurants.filter(
+        (restaurant) =>
+          restaurant._id.toLowerCase().includes(query) ||
+          restaurant.name.toLowerCase().includes(query) ||
+          restaurant.email.toLowerCase().includes(query)
+      );
+      setSearchFilter(filtered);
+    }
+  };
+
+  //   sort by active or inactive
+  const handleSort = (e) => {
+    try {
+      const sort = e.target.value;
+
+      const filtered = restaurants.filter((restaurant) =>
+        restaurant.status.includes(sort)
+      );
+      setSearchFilter(filtered);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const handleRestaurantStatus = async (restaurantId, newStatus) => {
     try {
@@ -41,15 +76,23 @@ const AdminRestaurants = () => {
             : restaurant
         )
       );
+      setSearchFilter((prevRestaurants) =>
+        prevRestaurants.map((restaurant) =>
+          restaurant._id === restaurantId
+            ? { ...restaurant, status: newStatus }
+            : restaurant
+        )
+      );
     } catch (error) {
       console.log(error);
     }
   };
+
   const handleDeleteRestaurant = async () => {
     try {
       if (selectedRestaurant) {
         const response = await deleteRestaurant(selectedRestaurant);
-        setRestaurants(
+        setSearchFilter(
           restaurants.filter(
             (restaurant) => restaurant._id !== selectedRestaurant
           )
@@ -73,7 +116,25 @@ const AdminRestaurants = () => {
 
   return (
     <div className="p-4 container mx-auto">
-      <h1 className="text-2xl font-bold mb-4">Restaurants</h1>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 items-center mb-4">
+        <div className="flex flex-col sm:flex-row gap-5">
+          <h1 className="text-2xl font-bold">Restaurants</h1>
+          <input
+            type="text"
+            placeholder="Search Restaurants..."
+            className="px-4 py-1 border rounded-xl w-full"
+            onChange={handleSearch}
+          />
+        </div>
+        <div className="flex items-center justify-center  gap-5">
+          <label htmlFor="sort">Sort</label>
+          <select onChange={handleSort} className="border px-4 py-1 rounded-lg">
+            <option value="">Select</option>
+            <option value="Active">Active</option>
+            <option value="Inactive">Inactive</option>
+          </select>
+        </div>
+      </div>
       <div className="overflow-x-auto">
         <table className="table-auto w-full border-collapse border border-gray-300">
           <thead>
@@ -87,8 +148,8 @@ const AdminRestaurants = () => {
             </tr>
           </thead>
           <tbody>
-            {restaurants.length > 0 ? (
-              restaurants.map((restaurant) => (
+            {searchFilter.length > 0 ? (
+              searchFilter.map((restaurant) => (
                 <tr
                   key={restaurant._id}
                   className="hover:bg-gray-100 cursor-pointer"

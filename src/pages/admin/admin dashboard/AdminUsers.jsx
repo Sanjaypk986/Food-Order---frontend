@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { adminAllUsers, deleteUser } from "../../../services/adminApi";
 
 const AdminUsers = () => {
@@ -6,6 +6,8 @@ const AdminUsers = () => {
   const [users, setUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
   const [isDeletePopupVisible, setIsDeletePopupVisible] = useState(false);
+  const [searchFilter, setSearchFilter] = useState([]);
+  const [query, setQuery] = useState([]);
 
   useEffect(() => {
     const fetchAllUsers = async () => {
@@ -13,6 +15,7 @@ const AdminUsers = () => {
       try {
         const response = await adminAllUsers();
         setUsers(response.data);
+        setSearchFilter(response.data);
         setLoading(false);
       } catch (error) {
         console.log(error);
@@ -27,9 +30,8 @@ const AdminUsers = () => {
     try {
       if (selectedUser) {
         const response = await deleteUser(selectedUser);
-        console.log(response);
 
-        setUsers(users.filter((user) => user._id !== selectedUser));
+        setSearchFilter(users.filter((user) => user._id !== selectedUser));
         closePopup();
       }
     } catch (error) {
@@ -47,9 +49,37 @@ const AdminUsers = () => {
     setSelectedUser(null);
   };
 
+  // Search filter
+  const handleSearch = (e) => {
+    const search = e.target.value.toLowerCase();
+    setQuery(search);
+
+    if (search === "") {
+      setSearchFilter(users);
+    } else {
+      const filtered = users.filter(
+        (user) =>
+          user._id.toLowerCase().includes(search) ||
+          user.name.toLowerCase().includes(search) ||
+          user.email.toLowerCase().includes(search)
+      );
+      setSearchFilter(filtered);
+    }
+  };
+
   return (
     <div className="p-4 container mx-auto">
-      <h1 className="text-2xl font-bold mb-4">Users</h1>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 items-center mb-4">
+        <div className="flex flex-col sm:flex-row gap-5">
+          <h1 className="text-2xl font-bold">Users</h1>
+          <input
+            type="text"
+            placeholder="Search Users..."
+            className="px-4 py-1 border rounded-xl w-full"
+            onChange={handleSearch}
+          />
+        </div>
+      </div>
       <div className="overflow-x-auto">
         <table className="table-auto w-full border-collapse border border-gray-300">
           <thead>
@@ -62,8 +92,8 @@ const AdminUsers = () => {
             </tr>
           </thead>
           <tbody>
-            {users.length > 0 ? (
-              users.map((user) => (
+            {searchFilter.length > 0 ? (
+              searchFilter.map((user) => (
                 <tr key={user._id} className="hover:bg-gray-100 cursor-pointer">
                   <td className="px-4 py-2 border">{user._id}</td>
                   <td className="px-4 py-2 border">{user.name}</td>
