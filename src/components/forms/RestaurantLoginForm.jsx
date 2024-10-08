@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useDispatch} from "react-redux";
 import { RestaurantLogin } from "../../services/restaurantApi";
@@ -84,9 +84,9 @@ const RestaurantLoginForm = () => {
           </span>
         )}
         <label className="label">
-          <a href="#" className="label-text-alt text-blue-500 link link-hover">
+          <Link to={'/restaurant/forgot-password'} className="label-text-alt text-blue-500 link link-hover">
             Forgot password?
-          </a>
+          </Link>
         </label>
       </div>
       <div className="form-control mt-6">

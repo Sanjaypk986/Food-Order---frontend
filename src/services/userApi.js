@@ -23,7 +23,7 @@ export const userLogin = async (data) => {
     const response = await axiosInstance({
       url: "/user/login",
       method: "POST",
-      data
+      data,
     });
 
     return response?.data;
@@ -37,11 +37,9 @@ export const userLogout = async () => {
   try {
     const response = await axiosInstance({
       url: "/user/logout",
-      method: "GET"
+      method: "GET",
     });
     return response?.data;
-    
-    
   } catch (error) {
     console.log(error);
     throw error;
@@ -49,15 +47,44 @@ export const userLogout = async () => {
 };
 
 export const userProfile = async () => {
-    try {
-      const response = await axiosInstance({
-        url: "/user/profile",
-        method: "GET",
-      });
-  
-      return response?.data;
-    } catch (error) {
-      console.log(error);
-      throw error;
-    }
-  };
+  try {
+    const response = await axiosInstance({
+      url: "/user/profile",
+      method: "GET",
+    });
+
+    return response?.data;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+export const userResetPasswordRequest = async (data) => {
+  try {
+    const response = await axiosInstance({
+      url: "/user/reset-request",
+      method: "POST",
+      data
+    });
+
+    return response;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
+export const userResetPassword = async (token ,newPassword) => {
+  try {
+    const response = await axiosInstance({
+      url: "/user/reset-password",
+      method: "POST",
+      data:{token ,newPassword}
+    });
+
+    return response;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};

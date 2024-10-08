@@ -31,6 +31,10 @@ import AdminAuth from "./proectedRoutes/AdminAuth";
 import Adminlayout from "../layout/AdminLayout";
 import AdminDashBoard from "../pages/admin/admin dashboard/AdminDashBoard";
 import AdminLogoutPage from "../pages/admin/AdminLogout";
+import ForgotPassword from "../pages/user/ForgotPassword";
+import ResetPassword from "../components/user/ResetPassword";
+import RestaurantForgotPassword from "../pages/restaurant/RestaurantForgotPassword";
+import RestaurantResetPassword from "../components/restaurant/RestaurantResetPassword";
 
 export const router = createBrowserRouter([
   {
@@ -84,6 +88,22 @@ export const router = createBrowserRouter([
          path: "login/admin",
          element: <AdminLogin/>,
        },
+       {
+        path: "forgot-password",
+        element: <ForgotPassword />,
+      },
+      {
+        path: "reset-password",
+        element: <ResetPassword />,
+      },
+      {
+        path: "restaurant/forgot-password",
+        element: <RestaurantForgotPassword/>,
+      },
+      {
+        path: "restaurant/reset-password",
+        element: < RestaurantResetPassword/>,
+      },
     ],
   },
   {
@@ -140,7 +160,7 @@ export const router = createBrowserRouter([
         path: "restaurant/:restaurantId",
         element: <RestaurantDetails/>,
         loader: restaurantLoader,
-      },,
+      },
       
     ],
   },

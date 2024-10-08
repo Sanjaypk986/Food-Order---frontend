@@ -11,10 +11,12 @@ export const fetchAllRestaurant = async () => {
   }
 };
 
-// get restaurnt by id 
+// get restaurnt by id
 export const fetchRestaurantProfile = async (restaurantId) => {
   try {
-    const response = await axiosInstance.get(`/restaurant/profile/${restaurantId}`);
+    const response = await axiosInstance.get(
+      `/restaurant/profile/${restaurantId}`
+    );
     return response?.data?.data;
   } catch (error) {
     console.log("Error fetching all Restaurant:", error.message);
@@ -25,7 +27,7 @@ export const fetchRestaurantProfile = async (restaurantId) => {
 // restaurant login
 export const RestaurantLogin = async (data) => {
   try {
-    const response = await axiosInstance.post('/restaurant/login',data);
+    const response = await axiosInstance.post("/restaurant/login", data);
     return response?.data;
   } catch (error) {
     console.log("Error fetching all Restaurant:", error.message);
@@ -36,7 +38,7 @@ export const RestaurantLogin = async (data) => {
 // restaurant create
 export const RestaurantCreate = async (data) => {
   try {
-    const response = await axiosInstance.post('/restaurant/create',data);
+    const response = await axiosInstance.post("/restaurant/create", data);
     return response?.data;
   } catch (error) {
     console.log("Error fetching all Restaurant:", error.message);
@@ -47,7 +49,7 @@ export const RestaurantCreate = async (data) => {
 // restaurant logout
 export const RestaurantLogout = async () => {
   try {
-    const response = await axiosInstance.get('/restaurant/logout');
+    const response = await axiosInstance.get("/restaurant/logout");
     return response?.data;
   } catch (error) {
     console.log("Error fetching all Restaurant:", error.message);
@@ -58,32 +60,63 @@ export const RestaurantLogout = async () => {
 // restaurant profile
 export const AuthRestaurantProfile = async () => {
   try {
-    const response = await axiosInstance.get('/restaurant/restaurant/profile'); 
+    const response = await axiosInstance.get("/restaurant/restaurant/profile");
     return response?.data;
   } catch (error) {
     console.log("Error fetching all Restaurant:", error.message);
-    throw error;;
+    throw error;
   }
 };
 
 // restaurant orders
 export const RestaurantOrders = async () => {
   try {
-    const response = await axiosInstance.get('/restaurant/orders'); 
+    const response = await axiosInstance.get("/restaurant/orders");
     return response?.data;
   } catch (error) {
     console.log("Error fetching all Restaurant:", error.message);
-    throw error;;
+    throw error;
   }
 };
 
 // Confirm order
-export const ConfirmOrder = async (orderId, status) => { 
+export const ConfirmOrder = async (orderId, status) => {
   try {
-    const response = await axiosInstance.patch(`/restaurant/orders/${orderId}`, { orderId,status });
+    const response = await axiosInstance.patch(
+      `/restaurant/orders/${orderId}`,
+      { orderId, status }
+    );
     return response?.data;
   } catch (error) {
     console.log("Error updating order status:", error.message);
     throw error;
+  }
+};
+
+// restaurant reset request
+export const RestaurantRequestPasswordReset = async (data) => {
+  try {
+    const response = await axiosInstance.post(
+      "/restaurant/reset-request",
+      data
+    );
+    return response;
+  } catch (error) {
+    console.log("Error fetching all Restaurant:", error.message);
+    return null;
+  }
+};
+
+// restaurant reset password
+export const RestaurantReset = async (token, newPassword) => {
+  try {
+    const response = await axiosInstance.post("/restaurant/reset-password", {
+      token,
+      newPassword,
+    });
+    return response;
+  } catch (error) {
+    console.log("Error fetching all Restaurant:", error.message);
+    return null;
   }
 };
