@@ -69,7 +69,7 @@ const CartItemsTotal = cartItems.length;
             </div>
             {isDropdownOpen && (
               <div
-                className="absolute top-8 right-5 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg"
+                className="absolute top-8 right-5 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-50"
                 id="user-dropdown"
               >
                 <div className="px-2 py-2">

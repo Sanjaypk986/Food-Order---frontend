@@ -22,9 +22,11 @@ const RestaurantOrderCard = ({ orders, onStatusChange }) => {
     }
   };
   // Calculate total for all items from this restaurant
-  const totalForRestaurant = orders.items.reduce((total, item) => {
-    return total + item.price * item.quantity;
-  }, 0);
+  const totalForRestaurant = Array.isArray(orders.items)
+    ? orders.items.reduce((total, item) => {
+        return total + item.price * item.quantity;
+      }, 0)
+    : 0;
 
   return (
     <div className="rounded-lg food-card shadow-md mb-4">

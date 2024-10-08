@@ -138,8 +138,8 @@ const AdminOrders = () => {
             </tr>
           </thead>
           <tbody>
-            {searchFilter.length > 0 ? (
-              searchFilter.map((order) => (
+            {searchFilter?.length > 0 ? (
+              searchFilter?.map((order) => (
                 <tr key={order.id} className="hover:bg-gray-100 text-center">
                   <td className="px-4 py-2 border">{order._id}</td>
                   <td className="px-4 py-2 border ">{order.user.name}</td>

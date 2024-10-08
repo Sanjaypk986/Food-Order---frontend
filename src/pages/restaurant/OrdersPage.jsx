@@ -17,11 +17,16 @@ const OrdersPage = () => {
   const dispatch = useDispatch();
   const orders = useSelector((state) => state.order.items);
 
+  console.log(orders);
+  
+
   useEffect(() => {
     const fetchMyOrders = async () => {
       setLoading(true);
       try {
-        const response = await RestaurantOrders();      
+        const response = await RestaurantOrders();
+        console.log(response.data);
+              
         dispatch(getOrders(response.data));
         setLoading(false);
       } catch (error) {
@@ -39,7 +44,6 @@ const OrdersPage = () => {
       dispatch(changeOrderStatus({ restaurantOrderId, status }));
       try {        
         const response = await updateOrderStatus(orderId)
-        console.log(response);
         
       } catch (error) {
         console.log(error);

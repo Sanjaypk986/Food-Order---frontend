@@ -23,7 +23,6 @@ const LoginForm = () => {
     try {
       setLoading(true);
       const response = await userLogin(data);
-      console.log("Login response:", response); // Debug: Log response
 
       if (!response.success) {
         throw new Error(response.message || "Login failed");
