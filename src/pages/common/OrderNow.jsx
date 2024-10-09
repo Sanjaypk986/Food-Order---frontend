@@ -2,7 +2,6 @@ import { Search } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
 import FoodCard from "../../components/FoodCard";
 import { fetchAllFoods, fetchFoodsBySearch } from "../../services/foodApi";
-import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setAllFoods } from "../../features/food/foodSlice";
 import ScrollAnimation from "../../hooks/ScrollAnimation";
@@ -14,25 +13,9 @@ const OrderNow = () => {
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
   const [debouncedSearch, setDebouncedSearch] = useState("");
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const debounceTimeout = useRef(null);
   const foods = useSelector((state) => state.food.data);
-  const user = useSelector((state) => state.user.user);
-  const isUserLoggedIn = user && Object.keys(user).length > 0;
-
-  // Update URL with query params based on the current state
-  const navigateWithParams = () => {
-    const basePath = isUserLoggedIn ? "/user/order-now" : "/order-now";
-    const searchParams = new URLSearchParams();
-
-    if (search) searchParams.set("search", search);
-    if (category) searchParams.set("category", category);
-    if (sortOption) searchParams.set("sort", sortOption);
-
-    // Navigate to the new URL with query params
-    navigate(`${basePath}?${searchParams.toString()}`);
-  };
 
   useEffect(() => {
     const fetchFoods = async () => {
@@ -57,42 +40,16 @@ const OrderNow = () => {
     };
 
     fetchFoods();
-    navigateWithParams();
   }, [debouncedSearch, sortOption, category, dispatch]);
-
-  useEffect(() => {
-  // Check if the user is logged in
-  if (isUserLoggedIn) {
-    navigate('/user/order-now');
-  } else {
-    navigate('/order-now');
-  }
-}, [isUserLoggedIn, navigate]);
 
   const handleSortChange = (e) => {
     const value = e.target.value;
-    if (value === "") {
-      // Reset sort and other filters
-      setSortOption("");
-      setCategory("");
-      setSearch("");
-    } else {
-      setSortOption(value);
-    }
-    navigateWithParams();
+    setSortOption(value);
   };
 
   const handleCategoryChange = (e) => {
     const value = e.target.value;
-    if (value === "") {
-      // Reset category and other filters
-      setCategory("");
-      setSortOption("");
-      setSearch("");
-    } else {
-      setCategory(value);
-    }
-    navigateWithParams();
+    setCategory(value);
   };
 
   const handleSearchChange = (e) => {
@@ -109,7 +66,6 @@ const OrderNow = () => {
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
-    navigateWithParams();
   };
 
   return (
