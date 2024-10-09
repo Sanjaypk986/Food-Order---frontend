@@ -27,7 +27,7 @@ const RestaurantProfile = ({restaurant}) => {
             <div className="border-t w-full px-2 pt-2 flex justify-start items-center">
               <p className="primary-text  flex items-center gap-3 text-xs ">
                 <i className="text-base fa-solid fa-truck"></i>
-                Free delivery on orders above ₹199
+                Special Opening Offer: Free Delivery for All Orders!
               </p>
             </div>
           </div>

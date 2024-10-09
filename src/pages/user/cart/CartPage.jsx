@@ -95,8 +95,8 @@ const CartPage = () => {
         toast.error(
           "Your cart total must be at least ₹100 to proceed with the order."
         );
-      }
-
+      }else{
+        
       // created instance with stripe
       const stripe = await loadStripe(
         import.meta.env.VITE_STRIPE_publishable_key
@@ -115,6 +115,8 @@ const CartPage = () => {
       const result = await stripe.redirectToCheckout({
         sessionId: sessionId,
       });
+      }
+
     } catch (error) {
       console.log(error);
     }
@@ -133,7 +135,7 @@ const CartPage = () => {
     <main className="container mx-auto px-2 min-h-screen">
       {cartItems.length > 0 ? (
         <section className="my-8">
-          <h2 className="text-2xl font-bold text-center mb-6">Your Cart</h2>
+          <h2 className="text-2xl font-bold text-center mb-6 underline">Your Cart</h2>
           {actionLoading ? (
             <div className="flex justify-center mb-4">
               <span className="loading loading-ring loading-lg"></span>
@@ -161,9 +163,37 @@ const CartPage = () => {
               />
 
               {/* total amount section */}
-              <div className="text-right">
-                <p className="font-bold">Total: ₹{cartTotal}</p>
+              <div className="my-4 border border-gray-300 p-4 rounded-md shadow-md">
+                <h4 className="text-lg md:text-xl font-semibold mb-4">
+                  Bill Details
+                </h4>
+                <div className="flex justify-between items-center mb-2">
+                  <p className="text-sm">Discount:</p>
+                  <p
+                    className={`font-bold ${
+                      appliedCoupon ? "text-green-600" : "text-red-600"
+                    }`}
+                  >
+                    {appliedCoupon ? "Applied" : "Nil"}
+                  </p>
+                </div>
+
+                <div className="flex justify-between items-center mb-2">
+                  <p className="text-sm">Delivery Charge:</p>
+                  <p className="font-bold">Free</p>
+                </div>
+                <div className="flex justify-between items-center mb-2">
+                  <p className="text-sm">Total Amount:</p>
+                  <p className="font-bold text-xl">₹ {cartTotal}</p>
+                </div>
+                <div className="border-t w-full px-2 pt-2 flex justify-start items-center">
+              <p className="primary-text font-semibold  flex items-center gap-3 text-xs ">
+                <i className="text-base fa-solid fa-truck"></i>
+                Special Opening Offer: Free Delivery for All Orders!
+              </p>
+            </div>
               </div>
+
               {address ? (
                 <button
                   onClick={makePayment}
