@@ -60,6 +60,15 @@ const OrderNow = () => {
     navigateWithParams();
   }, [debouncedSearch, sortOption, category, dispatch]);
 
+  useEffect(() => {
+  // Check if the user is logged in
+  if (isUserLoggedIn) {
+    navigate('/user/order-now');
+  } else {
+    navigate('/order-now');
+  }
+}, [isUserLoggedIn, navigate]);
+
   const handleSortChange = (e) => {
     const value = e.target.value;
     if (value === "") {
