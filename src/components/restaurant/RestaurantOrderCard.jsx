@@ -52,17 +52,61 @@ const RestaurantOrderCard = ({ orders, onStatusChange }) => {
       </div>
 
       {orders.status !== "Cancelled" && (
-        <div className="mt-2">
-          <select
-            value={orders.status}
-            onChange={handleStatusChange}
-            className="text-primary font-medium px-4 w-32 my-1 mx-1 text-sm md:text-base rounded-md "
-          >
-            <option value="">Select</option>
-            <option value="Confirmed">Confirmed</option>
-            <option value="Delivered">Delivered</option>
-            <option value="Pending">Pending</option>
-          </select>
+        <div className="flex justify-between items-center gap-2 px-1">
+          <div className="mt-2">
+            <select
+              value={orders.status}
+              onChange={handleStatusChange}
+              className="text-primary font-medium px-4 w-32 my-1 mx-1 text-sm md:text-base rounded-md "
+            >
+              <option value="">Select</option>
+              <option value="Confirmed">Confirmed</option>
+              <option value="Delivered">Delivered</option>
+              <option value="Pending">Pending</option>
+            </select>
+          </div>
+          <div className="mt-2">
+            <button
+              className="font-medium px-4 w-28 my-1  mx-1 text-sm md:text-base rounded-md bg-white"
+              onClick={() => document.getElementById("my_modal_3").showModal()}
+            >
+              Address
+            </button>
+            <dialog id="my_modal_3" className="modal">
+              <div className="modal-box">
+                <form method="dialog">
+                  <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                    ✕
+                  </button>
+                </form>
+                <h3 className="font-bold text-base">
+                  {orders.user.address.firstname} {orders.user.address.lastname}
+                </h3>
+                <div className="py-4">
+                  <div className="flex items-center justify-center gap-3 text-xs sm:text-base">
+                    <p>
+                      <span className="font-semibold">City : </span>
+                      {orders.user.address.city}
+                    </p>
+                    <p>
+                      <span className="font-semibold">Mobile :</span>{" "}
+                      {orders.user.address.mobile}
+                    </p>
+                  </div>
+                  <div className="flex flex-col items-center my-2 justify-center gap-3 text-xs sm:text-base">
+                    <p>
+                      <span className="font-semibold">Street : </span>
+                      {orders.user.address.street}
+                    </p>
+                    <p>
+                      <span className="font-semibold">Pincode :</span>{" "}
+                      {orders.user.address.pincode}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </dialog>
+          </div>
         </div>
       )}
 

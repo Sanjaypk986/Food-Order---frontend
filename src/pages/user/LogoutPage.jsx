@@ -1,10 +1,8 @@
 import React, { useEffect } from "react";
-import Cookies from "js-cookie";
 import { userLogout } from "../../services/userApi";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { resetUser } from "../../features/user/userSlice";
 
 const LogoutPage = () => {
   const navigate = useNavigate();
@@ -17,18 +15,6 @@ const LogoutPage = () => {
         console.log("Logout API response:", response);
 
         if (response.success) {
-          // Check if the token cookie exists before attempting to remove it
-          const token = Cookies.get("token");
-          if (token) {
-            console.log("Token cookie before removal:", token);
-            // Clear cookie using js-cookie
-            Cookies.remove("token", { path: "/" });
-            console.log("Token cookie removed");
-          } else {
-            console.log("No token cookie to remove");
-          }
-
-          dispatch(resetUser()); // Clear the user state in Redux
           toast.success("Logout successful");
           navigate("/");
         } else {

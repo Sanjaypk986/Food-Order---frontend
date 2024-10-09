@@ -17,16 +17,12 @@ const OrdersPage = () => {
   const dispatch = useDispatch();
   const orders = useSelector((state) => state.order.items);
 
-  console.log(orders);
-  
-
   useEffect(() => {
     const fetchMyOrders = async () => {
       setLoading(true);
       try {
         const response = await RestaurantOrders();
-        console.log(response.data);
-              
+
         dispatch(getOrders(response.data));
         setLoading(false);
       } catch (error) {
@@ -42,9 +38,8 @@ const OrdersPage = () => {
     try {
       const response = await ConfirmOrder(orderId, status); // Pass the new status to backend
       dispatch(changeOrderStatus({ restaurantOrderId, status }));
-      try {        
-        const response = await updateOrderStatus(orderId)
-        
+      try {
+        const response = await updateOrderStatus(orderId);
       } catch (error) {
         console.log(error);
       }
