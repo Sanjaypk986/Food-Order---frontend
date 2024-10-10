@@ -72,40 +72,42 @@ const RestaurantOrderCard = ({ orders, onStatusChange }) => {
             >
               Address
             </button>
-            <dialog id="my_modal_3" className="modal">
-              <div className="modal-box">
-                <form method="dialog">
-                  <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
-                    ✕
-                  </button>
-                </form>
-                <h3 className="font-bold text-base">
-                  {orders.user.address.firstname} {orders.user.address.lastname}
-                </h3>
-                <div className="py-4">
-                  <div className="flex items-center justify-center gap-3 text-xs sm:text-base">
-                    <p>
-                      <span className="font-semibold">City : </span>
-                      {orders.user.address.city}
-                    </p>
-                    <p>
-                      <span className="font-semibold">Mobile :</span>{" "}
-                      {orders.user.address.mobile}
-                    </p>
-                  </div>
-                  <div className="flex flex-col items-center my-2 justify-center gap-3 text-xs sm:text-base">
-                    <p>
-                      <span className="font-semibold">Street : </span>
-                      {orders.user.address.street}
-                    </p>
-                    <p>
-                      <span className="font-semibold">Pincode :</span>{" "}
-                      {orders.user.address.pincode}
-                    </p>
-                  </div>
+           {
+            orders &&  <dialog id="my_modal_3" className="modal">
+            <div className="modal-box">
+              <form method="dialog">
+                <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                  ✕
+                </button>
+              </form>
+              <h3 className="font-bold text-base">
+                {orders.user.address.firstname} {orders.user.address.lastname}
+              </h3>
+              <div className="py-4">
+                <div className="flex items-center justify-center gap-3 text-xs sm:text-base">
+                  <p>
+                    <span className="font-semibold">City : </span>
+                    {orders.user.address.city}
+                  </p>
+                  <p>
+                    <span className="font-semibold">Mobile :</span>{" "}
+                    {orders.user.address.mobile}
+                  </p>
+                </div>
+                <div className="flex flex-col items-center my-2 justify-center gap-3 text-xs sm:text-base">
+                  <p>
+                    <span className="font-semibold">Street : </span>
+                    {orders.user.address.street}
+                  </p>
+                  <p>
+                    <span className="font-semibold">Pincode :</span>{" "}
+                    {orders.user.address.pincode}
+                  </p>
                 </div>
               </div>
-            </dialog>
+            </div>
+          </dialog>
+           }
           </div>
         </div>
       )}
