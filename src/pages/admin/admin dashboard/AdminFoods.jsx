@@ -44,7 +44,7 @@ const AdminFoods = () => {
                   <td className="px-4 py-2 border">
                     {food.category.join(" ,  ")}
                   </td>
-                  <td className="px-4 py-2 border font-semibold">
+                  <td className="px-4 py-2 border font-semibold text-red-500">
                     ₹{food.price}
                   </td>
                 </tr>
